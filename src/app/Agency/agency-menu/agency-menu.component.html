@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand navbar-dark bg-custom topbar mb-4 static-top">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse mx-auto" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/agency-details" routerlinkactive="Active">Agency Details<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/agency-contact-detail',{agentId:0,countryId:0}]">Contact Person </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/agency-list">Agency List</a>
+            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" routerLink="/agency-help">Help & Support</a>
+            </li> -->
+        </ul>
+    </div>    
+    <!-- Topbar Navbar -->
+    <div class="collapse navbar-collapse ml-auto" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-2 d-none d-lg-inline ">User Information</span>
+                    <i class="fas fa-search fa-fw"></i>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div class="dropdown-menu dropdown-menu-right p-3  animated--grow-in" aria-labelledby="searchDropdown">
+                    <form class="form-inline mr-auto w-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    
+    </div>
+    
+</nav>
+<router-outlet></router-outlet>
+<!-- <app-agency-details></app-agency-details> -->

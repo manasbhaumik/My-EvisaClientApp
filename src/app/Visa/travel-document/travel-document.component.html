@@ -1,0 +1,127 @@
+<app-member></app-member>
+<!-- Begin Page Content -->
+<div class="container-fluid">              
+
+    <div class="row py-5">
+        <div class="col-md-2 order-md-1">
+        </div>
+        <div class="col-md-8 order-md-1">
+            <div class="py-2">
+                <!--<img class="d-block mx-auto mb-4" src="assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
+                <h3>{{title}}</h3>
+                <hr class="mb-4">
+            </div>
+            <div class="row">
+                <div class="col-md-4 order-md-2 mb-4">
+                    <p>
+                        Please enter valid information . After passport information is filled up , a My-Evisa Refferenceno will be generated for the visa application registartion No.<br />
+                        <b>
+                            My-EVisa RefNo.<br />
+                            CN/20/04/00/0001
+                        </b>
+                    </p>
+                    <p>
+                        Note :<br />
+                        <br />
+                        CN  : China<br />
+                        20  : Year<br />
+                        04  : Month<br />
+                        00  : Embasy ID <br />
+                        001 : Visa no.
+                    </p>
+                    <p>
+                        My-EVisa Ref No Is for Checking Visa Status , printing visa and further verification.
+
+                    </p>
+                </div>
+                <div class="col-md-8 order-md-1">
+                    <!--<h4 class="mb-3">Personal information</h4>
+                    <hr class="mb-4">-->
+                    <form class="needs-validation" [formGroup]="traveldocForm"  (ngSubmit)="SaveTravelDoc()">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">International Passport Number </label>
+                                <input type="text" formControlName="PassportNo" class="form-control" id="PassportNo" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.PassportNo.errors }">
+                                <div class="invalid-feedback">
+                                    Please enter pasport number
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName">Passport Issue Country</label>
+                                <input type="text" formControlName="IssuingCountry" class="form-control" id="IssuingCountry" [ngClass]="{ 'is-invalid': isSubmitted && f.IssuingCountry.errors }">
+                                <!-- <select class="custom-select d-block w-100" id="country" required>
+                                    <option value="">Choose...</option>
+                                    <option>China</option>
+                                </select> -->
+                                <div class="invalid-feedback">
+                                    Please enter passport issue country
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">Father's Name</label>
+                                <input type="text" formControlName="fatherName" class="form-control" id="firstName" placeholder="" value="" >
+                                <div class="invalid-feedback">
+                                    Valid first name is required.
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName">Mother's Name</label>
+                                <input type="text" formControlName="motherName" class="form-control" id="firstName" placeholder="" value="" >
+                                <div class="invalid-feedback">
+                                    Valid first name is required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email">Passport Issue Authority</label>
+                            <input type="email" formControlName="IssuingAuthority" class="form-control" id="IssuingAuthority" [ngClass]="{ 'is-invalid': isSubmitted && f.IssuingAuthority.errors }">
+                            <input type="hidden" formControlName="Applicant"  class="form-control"> 
+                            <div class="invalid-feedback">
+                                Please enter passport issue authority
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">Issue Date</label>
+                                <div class="input-group">
+                                    <input class="form-control" formControlName="IssuingDate" placeholder=""
+                                           name="issuedate"  ngbDatepicker #d="ngbDatepicker" [ngClass]="{ 'is-invalid': isSubmitted && f.IssuingDate.errors }">
+                                    <div class="input-group-append">
+                                      <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">📅</button>
+                                    </div>
+                                </div>
+                                <!-- <input type="text" formControlName="IssuingDate" class="form-control" id="IssuingDate" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.IssuingDate.errors }"> -->
+                                <div class="invalid-feedback">
+                                    Please select issue date
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName">Expiry Date</label>
+                                <div class="input-group">
+                                    <input class="form-control" formControlName="ExpiryDate" placeholder=""
+                                           name="expirydate"  ngbDatepicker #d1="ngbDatepicker" [ngClass]="{ 'is-invalid': isSubmitted && f.ExpiryDate.errors }">
+                                    <div class="input-group-append">
+                                      <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button">📅</button>
+                                    </div>
+                                </div>
+                                <!-- <input type="text" formControlName="ExpiryDate" class="form-control" id="lastName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.ExpiryDate.errors }"> -->
+                                <div class="invalid-feedback">
+                                    please select expiry date
+                                </div>
+                               
+                            </div>
+                        </div>
+
+                        
+                        <button class="btn btn-primary btn-md" type="submit">Save & Continue</button>&nbsp;
+                        <button class="btn btn-danger btn-md" type="submit">Cancel</button>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+
+</div>
+<!-- /.container-fluid -->

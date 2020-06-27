@@ -1,0 +1,169 @@
+<app-agency-menu></app-agency-menu>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <div class="row py-5">
+        <div class="col-md-2 order-md-1">
+        </div>
+        <div class="col-md-8 order-md-2">
+            <div class="py-2">
+                <!--<img class="d-block mx-auto mb-4" src="assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
+                <h3>{{title}}</h3>
+                <hr class="mb-4">
+            </div>
+            <form class="needs-validation" [formGroup]="agencyRegisterForm"  (ngSubmit)="SaveAgency()" >
+                <div class="row">
+                    <div class="col-md-4 order-md-2 mb-4">
+                        <span><b>Group Application :</b></span>
+                        <!--<hr class="mb-4" />-->
+                        <p>
+                            Group application type selection for a group of peoples with same visa duration or same visa type application.
+                            (E.G: Tour group , Company Delegates or Family Memebers who are going to Malaysia for a same periodof of time for bussiness or visting purpose.)
+                        </p>
+                        <span><b>Individual Application :</b></span>
+                        <!--<hr class="mb-4" />-->
+                        <p>
+                            Individual application type  selection for single person who is visting malaysia or going to reside in malaysia with sponsorship of Malaysian individual or
+                            Comapny.
+                            (E.G: Tourist, Student,Employee of a company  or visting malaysia for bussiness purpose)
+                        </p>
+
+                    </div>
+                    <div class="col-md-8 order-md-1 mb-4">
+                        <div class="mb-3">
+                            <label for="country">Country/Region</label>
+                            <select  formControlName="Region" (change)="regionChange($event)" class="custom-select d-block w-100" id="country" [ngClass]="{ 'is-invalid': isSubmitted && f.Region.errors }">
+                                <option value="">Choose Country</option>
+                                <option *ngFor="let Region of RegionList" [value]="Region.CountryID" (click)=click($event,Region.CountryID)>
+                                    {{Region.CountryName}}
+                                </option>
+                            </select>
+                            <!-- <select  formControlName="Region" (change)="regionChange($event)" class="custom-select d-block w-100" id="country" [ngClass]="{ 'is-invalid': isSubmitted && f.Region.errors }">
+                                <option value="">Choose Country</option>
+                                <option *ngFor="let Region of RegionList" >
+                                    {{Region}}
+                                </option>
+                            </select> -->
+                            <div *ngIf="isSubmitted && f.Region.errors" class="invalid-feedback">
+                                <div *ngIf="f.Region.errors.required">Please select Country</div>                                    
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="email">Agency Type</label>
+                                <select class="custom-select d-block w-100" formControlName="AgencyType" (change)="agencyChange($event)" id="agencytype" [ngClass]="{ 'is-invalid': isSubmitted && f.AgencyType.errors }" >
+                                    <option value="">Choose Agent Type</option>
+                                    <option *ngFor="let Agency of AgencyTypeList">{{Agency}}</option>
+                                    <!-- <option>Tours &Aacute; Travel Agency</option>
+                                    <option>Visa Agency</option>
+                                    <option>Individual Agent</option> -->
+                                </select>
+                                <div *ngIf="isSubmitted && f.AgencyType.errors" class="invalid-feedback">
+                                    <div *ngIf="f.AgencyType.errors.required">Type is required</div>
+                                </div>
+                            </div>       
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">Registration No.</label>
+                                <input type="text" formControlName="RegistrationNo" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.RegistrationNo.errors }" id="nrid" placeholder="" [value]="" >
+                                <div *ngIf="isSubmitted && f.RegistrationNo.errors" class="invalid-feedback">
+                                    <div *ngIf="f.RegistrationNo.errors.required">Registration No Required</div>                                    
+                                </div> 
+                            </div>
+                                                 
+                        </div>
+                        <div class="mb-3">
+                            <label for="email">Agency Name</label>
+                            <input type="text" formControlName="AgencyName" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.AgencyName.errors }" id="nrid" placeholder="" value="AgentList.AgentName" required>
+                            <div *ngIf="isSubmitted && f.AgencyName.errors" class="invalid-feedback">
+                                <div *ngIf="f.AgencyName.errors.required">Agency Name Required</div>                                    
+                            </div> 
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastName">Contact Person Name</label>
+                            <input type="text" formControlName="ContactPerson" class="form-control" id="dob" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.ContactPerson.errors }">
+                            <div *ngIf="isSubmitted && f.ContactPerson.errors" class="invalid-feedback">
+                                <div *ngIf="f.ContactPerson.errors.required">Contact name Required</div>                                    
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">Telephone No.</label>
+                                <input type="text" formControlName="ContactNo" class="form-control" id="ContactNo" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.ContactNo.errors }">
+                                <div *ngIf="isSubmitted && f.ContactNo.errors" class="invalid-feedback">
+                                    <div *ngIf="f.ContactNo.errors.required">Contact no Required</div>                                    
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName">Facsimile No.</label>
+                                <input type="text" formControlName="Fax" class="form-control" id="FaxNo" placeholder="" value="" >
+                                <div class="invalid-feedback">
+                                    Valid last name is required.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email">Email Address</label>
+                            <input type="email" formControlName="Email" class="form-control" id="email" placeholder="" [ngClass]="{ 'is-invalid': isSubmitted && f.Email.errors }">
+                            <div *ngIf="isSubmitted && f.Email.errors" class="invalid-feedback">
+                                <div *ngIf="f.Email.errors.required">Email Required</div> 
+                                <div *ngIf="f.Email.errors.email">Must be a valid email address</div>                                   
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address">Address</label>
+                            <input type="text" formControlName="Address" class="form-control" id="address" placeholder="1234 Main St" [ngClass]="{ 'is-invalid': isSubmitted && f.Address.errors }">
+                            <div *ngIf="isSubmitted && f.Address.errors" class="invalid-feedback">
+                                <div *ngIf="f.Address.errors.required">Address Required</div>                                    
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+                            <input type="text" formControlName="Address1" class="form-control" id="address2" placeholder="Apartment or suite">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="country">Country</label>
+                                <select formControlName="City" (change)="selectChange($event)" class="custom-select d-block w-100" id="country" >
+                                    <!-- <option value="">Choose...</option> -->
+                                    <option *ngFor="let Country of CountryList" >
+                                        {{Country}}
+                                    </option>
+                                </select>
+                                <div *ngIf="isSubmitted && f.City.errors" class="invalid-feedback">
+                                    <div *ngIf="f.City.errors.required">Please select Country</div>                                    
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="state">Provinces/State</label>
+                                <input type="text" formControlName="State" class="form-control" id="Pincode" placeholder="" >                               
+                                <!-- <select formControlName="State" class="custom-select d-block w-100" id="state" required>
+                                    <option value="">Choose...</option>
+                                    <option *ngFor="let State of StateList">{{State}}</option>
+                                </select> -->
+                                <div *ngIf="isSubmitted && f.State.errors" class="invalid-feedback">
+                                    <div *ngIf="f.State.errors.required">Please select Country</div>                                    
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="zip">Postcode</label>
+                                <input type="text" formControlName="Pincode" class="form-control" id="Pincode" placeholder="" >                               
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                </div>
+
+
+                <button class="btn btn-primary btn-md" type="submit">Continue to Contact Information</button>&nbsp;
+                <button class="btn btn-danger btn-md" type="submit">Cancel</button>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->

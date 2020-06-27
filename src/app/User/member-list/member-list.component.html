@@ -1,0 +1,119 @@
+<app-member></app-member>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 order-md-1">
+            <!-- DataTales Example -->
+            <div class="card  mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Visa Application(s)</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th >Applicant Reference No</th>
+                                    <th>Process Type</th>
+                                    <th>Purpose of Journey</th>
+                                    <th>Duration of visit(In weeks)</th>
+                                    <th>Application Date</th>
+                                    <th>No Of Applicants</th>
+                                   
+
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Applicant Reference No</th>
+                                    <th>Process Type</th>
+                                    <th>Purpose of Journey</th>
+                                    <th>Duration of visit(In weeks)</th>
+                                    <th>Application Date</th>
+                                    <th>No Of Applicants</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                               
+                                <tr *ngFor="let application of applicationsList; let i = index">
+                                    <td>
+                                        <div *ngIf="application.Applicants[0] && application.Applicants[0].VisaApplications[0]; else showFirstName">
+                                            <a class="nav-link" [routerLink]="['/submit-application',{applicationId:application.ApplicationID}]">{{application.Applicants[0].VisaApplications[0].MyEVisaRefNo}}</a>
+                                        </div>                                        
+                                        <ng-template #showFirstName> - 
+                                            <!-- <a class="nav-link" [routerLink]="['/submit-application',{applicationId:application.ApplicationID}]">-</a> -->
+                                        </ng-template>
+                                    </td>                                    
+                                    <td>{{application.ApplicationType.ApplicationType1}}</td>
+                                    <td>{{application.PurposeOfVisit}}</td>
+                                    <td>{{application.DurationOfVisit}}</td>
+                                    <td>{{application.SubmisisionDate}}</td>                                   
+                                    <td>{{application.TotalApplicant}}</td>
+                                    
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 order-md-2">
+            <div class="card  mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Application Status</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="chart-pie pt-4">
+                        <!-- <canvas id="myPieChart"></canvas> -->
+                        <canvas
+                        baseChart
+                        [chartType]="'doughnut'"
+                        [datasets]="pieChartData"
+                        [labels]="pieChartLabels"
+                        [options]="pieChartOptions"
+                        [legend]="true">
+                    </canvas>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Heading -->
+    <!-- /.container-fluid -->
+    <div class="row">
+        <!-- <div class="col-md-12 order-md-1">
+            <div class="card  mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Application Success</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="myAreaChart"></canvas>
+                    </div>
+                    <hr>
+
+                </div>
+            </div>
+        </div> -->
+        <!-- <div class="col-md-4 order-md-2">
+            <div class="card  mb-4">
+                
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Application Status</h6>
+                </div>
+              
+                <div class="card-body">
+                    <div class="chart-pie pt-4">
+                        <canvas id="myPieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+<!-- End of Main Content -->
+<router-outlet></router-outlet>

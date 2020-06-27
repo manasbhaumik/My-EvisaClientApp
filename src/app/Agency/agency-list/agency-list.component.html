@@ -1,0 +1,48 @@
+<app-agency-menu></app-agency-menu>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 order-md-1">
+            <!-- DataTales Example -->
+            <div class="card  mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">{{title}}</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Agent ID</th>
+                                    <th>Agenct Type</th>
+                                    <th>Agency Name</th>
+                                    <th>Contact Person</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Agent Name</th>
+                                    <th>Agenct Type</th>
+                                    <th>Contact Person</th>
+                                    <th>Contact No</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <tr *ngFor="let agent of AgentList">
+                                    <td> <a class="nav-link" [routerLink]="['/agency-details',{agentId:agent.AgencyID,countryId:agent.CountryID}]">{{agent.AgencyName}}</a></td>
+                                    <td>{{agent.AgencyType}}</td>                                   
+                                    <td>{{agent.ContactPerson}}</td>
+                                    <td>{{agent.ContacNo}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+</div>
+<!-- End of Main Content -->
+<router-outlet></router-outlet>

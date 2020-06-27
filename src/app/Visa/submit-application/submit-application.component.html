@@ -1,0 +1,266 @@
+<app-member></app-member>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 order-md-1">
+        </div>
+        <div class="col-md-8 order-md-1">
+            <div class="py-1">                
+                <h3>{{title}}</h3>
+                <!-- <hr class="mb-4"> -->
+            </div>
+        </div>        
+    </div>
+    <div class="row">
+        
+        <div class="col-md-6 order-md-1">
+            <!-- DataTales Example -->
+            <div class="card  mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary" style="font-size: 12px;">A. PARTICULAR APPLICANT</h6>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-sm-3">First Name</label>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Applicants[0].FullName}}</label>
+                                <!-- <input type="label" class="form-control-plaintext" [value]="applicationList.Applicants[0].FullName"> -->
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3">Given Name</label>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Applicants[0].FirstName}}</label>
+                                <!-- <input type="label" class="form-control-plaintext" [value]="applicationList.Applicants[0].FirstName"> -->
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3">Family Name</label>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Applicants[0].FamlilyName}}</label>
+                                <!-- <input type="label" class="form-control-plaintext" [value]="applicationList.Applicants[0].FamlilyName"> -->
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3">Date of Birth</label>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{dFormat}}</label>
+                                <!-- <input type="label" class="form-control-plaintext" [value]="applicationList.Applicants[0].DOB"> -->
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3">Gender</label>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Applicants[0].Gender}}</label>
+                                <!-- <input type="label" class="form-control-plaintext" [value]="applicationList.Applicants[0].Gender"> -->
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Nationality</div>
+                            <div class="col-sm-1">:</div>
+                            <!-- <label class="col-sm-4 col-form-label">Nationality</label> -->
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Center.Country1.CountryName}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Permanent Address</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Applicants[0].Address1}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Address 1</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Applicants[0].Address2}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Address 2</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Applicants[0].Address3}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Postcode</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Applicants[0].PostCode}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">City</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Applicants[0].City}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">State / Provence</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Applicants[0].State}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Telephone No</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Applicants[0].ContactNo}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Email Address</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Applicants[0].Email}}</label>
+                            </div>                            
+                        </div>
+                    </form>
+                    
+                    <div class="row">
+                        
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 order-md-2">
+            <div class="card  mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary" style="font-size: 12px;">B. PARTICULAR OF PASSPORT / TRAVEL DOCUMENT</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                   <form>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Passport Number</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Applicants[0].TravelDocuments[0].PassportNo}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Place / Country of Issue</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Applicants[0].TravelDocuments[0].IssuingCountry}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Issue  Date</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{issueDate}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Expiry  Date</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{expiryDate}}</label>
+                            </div>                            
+                        </div>
+                    
+                   </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Heading -->
+    <!-- /.container-fluid -->
+    <div class="row">
+        <div class="col-md-6 order-md-1">
+            <div class="card  mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary" style="font-size: 12px;">C. PARTICULAR OF ORGANIZER OR SPONSOR</h6>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Full Name (Capital Letter – as per in Passport)</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Contact.Name}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Passport Number</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Contact.IDNumber}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Address</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Contact.Address}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Postcode</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Contact.PostCode}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">City</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Contact.City}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">State / Provence</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Contact.State}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Telephone No</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Contact.ContactNo}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Email Address</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Contact.Email}}</label>
+                            </div>                            
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <div class="row" style="text-align: center;">
+        <div class="col-md-12 order-md-4">
+            <div class="mb-4">
+                <!-- <button class="btn btn-primary " type="submit" (click)="onClick($event)">Back to list(s)</button>&nbsp; -->
+                <button class="btn btn-primary " type="submit" (click)="onClick($event)">Back to list(s)</button>&nbsp;
+                <!-- <button class="btn btn-primary " type="submit" (click)="onBioClick($event)">Submit BioMetric Information</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Main Content -->
+<!-- /.container-fluid -->
+<router-outlet></router-outlet>

@@ -1,0 +1,192 @@
+<!-- <div class="bg-custom topbar mb-4 static-top" style="min-height:150px">
+    <div class="row h-100" >
+        <div class="col-lg-2 order-md-1"></div>
+        <div class="col-lg-8 my-auto order-md-2">
+            <div class="row">
+                <div class="col-md-3 mx-auto">   
+                    <a routerLink="/agency-details" routerlinkactive="Active">
+                        <img class="bd-placeholder-img rounded-circle" src="assets/img/30sp_visa.jpg" width="100" height="100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 100x100" />
+                    </a>
+                </div>
+                <div class="col-md-3 mx-auto">
+                    <img class="bd-placeholder-img rounded-circle" src="assets/img/01_preview.__large_preview.jpg" width="100" height="100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 100x100" />
+                </div>
+                <div class="col-md-3 mx-auto">
+                    <img class="bd-placeholder-img rounded-circle" src="assets/img/download.jpg" width="100" height="100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 100x100" />
+                </div>
+                <div class="col-md-3 mx-auto">
+                    <img class="bd-placeholder-img rounded-circle" src="assets/img/istockphoto-479842074-612x612.jpg" width="100" height="100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 100x100" />
+                </div>
+            </div>            
+        </div>
+        <div class="col-md-2 order-md-3"></div>
+    </div>
+</div>  -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+            <div class="p-5">
+                <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">Registered User Login</h1>
+                </div>
+                <form name="form" class="user" #f="ngForm" (ngSubmit)="f.form.valid && login()" novalidate>
+                    <!-- <div [hidden]="userForm.submitted"></div> -->
+                    <div class="form-group">
+                        <input type="email" class="form-control form-control-user" id="txtEmail" name="txtEmail"
+                            aria-describedby="emailHelp" placeholder="Enter Email Address..."
+                            [(ngModel)]="user.email" #txtEmail="ngModel" [ngClass]="{ 'is-invalid': f.submitted && txtEmail.invalid }" required email >
+                        <!-- <span *ngIf="txtEmail.invalid && (txtEmail.dirty || txtEmail.touched)" style="color:red;">
+                            <span *ngIf="txtEmail.errors.required">Email is required</span>
+                            <span *ngIf="txtEmail.errors.email">Email must be a valid email address</span>
+                        </span>  -->
+                        <div *ngIf="f.submitted && txtEmail.invalid" class="invalid-feedback">
+                            <div *ngIf="txtEmail.errors.required">Email is required</div>
+                            <div *ngIf="txtEmail.errors.email">Must be a valid email address</div>
+                        </div> 
+                    </div>   
+                    <div class="form-group">
+                        <input type="password" class="form-control form-control-user" id="txtpassword" name="txtpassword"
+                            placeholder="Password" [(ngModel)]="user.password" #txtpassword="ngModel"
+                            [ngClass]="{ 'is-invalid': f.submitted && txtpassword.invalid }" required password>
+                        <div *ngIf="f.submitted && txtpassword.invalid" class="invalid-feedback">
+                         <div *ngIf="txtpassword.errors.required">Password is required</div>
+                        </div>    
+                        <!-- <span *ngIf="txtpassword.invalid && (txtpassword.dirty || txtpassword.touched)" style="color:red;">
+                            <span *ngIf="txtpassword.errors.required">Password is required.</span>
+                        </span> -->
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox small">
+                            <input type="checkbox" class="custom-control-input" id="customCheck">
+                            <label class="custom-control-label" for="customCheck">Remember Me</label>
+                        </div>
+                    </div>
+                   
+                    
+                    <!-- <button type="button" class="btn btn-primary btn-user btn-block" (click)="userForm.form.invalid && login()">Login</button> -->
+                    <button type="submit"  class="btn btn-primary btn-user btn-block"  >Login</button>                
+                    <hr>
+                </form>
+                <!--<hr>-->
+                <div class="text-primary">
+                    <a class="small" [routerLink]="['/forgot-password']">Forgot Password?</a>
+                </div>
+                <div class="form-group">
+                    <div class="text-primary">
+                        <a class="small" [routerLink]="['/agency-contact-detail',{agentId:0,countryId:0}]">Register as Individual</a><br/>
+                        <a class="small" routerLink='agency-details'>Register as Agency/Group</a>                        
+                       
+                    </div>
+                    
+                </div>
+                <!-- <div class="text-primary">
+                    <a class="small" href="register.html">Create an Account!</a>
+                </div> -->
+           </div>
+        </div>
+        <div class="col-md-8 order-md-1">
+            <!--<h4 class="mb-3">Personal information</h4>
+            <hr class="mb-4">-->
+            <div class="row">
+                <div class="col-xl-11 col-md-11 mb-4 mx-auto">
+                    <div class="row">
+                        <div class="col-md-12 mb-4">
+                            <h5>
+                                <i class="fa fa-bullhorn fa-lg" aria-hidden="true"></i>
+                                Announcements
+                            </h5>
+                            <hr class="mb-4">
+                            <span><b>Group Application :</b></span>
+                            <!--<hr class="mb-4" />-->
+                            <p>
+                                Group application type selection for a group of peoples with same visa duration or same visa type application.
+                                (E.G: Tour group , Company Delegates or Family Memebers who are going to Malaysia for a same periodof of time for bussiness or visting purpose.)
+                            </p>
+                            <span><b>Individual Application :</b></span>
+                            <!--<hr class="mb-4" />-->
+                            <p>
+                                Individual application type  selection for single person who is visting malaysia or going to reside in malaysia with sponsorship of Malaysian individual or
+                                Comapny.
+                                (E.G: Tourist, Student,Employee of a company  or visting malaysia for bussiness purpose)
+                            </p>
+
+                        </div>
+                        <hr class="mb-4">
+                    </div>
+                   
+                </div>
+                <div class="row">
+
+
+                </div>
+
+            </div>
+            <div class="row mb-4">
+                <div class="col-xl-11 col-md-11 mb-4 mx-auto">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h5>
+                                <i class="fa fa-newspaper fa-lg" aria-hidden="true"></i>
+                                News
+                            </h5>
+                            <hr class="mb-4">
+                            <span><b>Group Application :</b></span>
+                            <!--<hr class="mb-4" />-->
+                            <p>
+                                Group application type selection for a group of peoples with same visa duration or same visa type application.
+                                (E.G: Tour group , Company Delegates or Family Memebers who are going to Malaysia for a same periodof of time for bussiness or visting purpose.)
+                            </p>
+                            <span><b>Individual Application :</b></span>
+                            <!--<hr class="mb-4" />-->
+                            <p>
+                                Individual application type  selection for single person who is visting malaysia or going to reside in malaysia with sponsorship of Malaysian individual or
+                                Comapny.
+                                (E.G: Tourist, Student,Employee of a company  or visting malaysia for bussiness purpose)
+                            </p>
+
+                        </div>
+
+                        <div class="col-lg-6">
+                            <h5>
+                                <i class="fa fa-gavel fa-lg" aria-hidden="true"></i>
+                                Legal Notice
+                            </h5>
+                            <hr class="mb-4">
+                            <span><b>Group Application :</b></span>
+                            <!--<hr class="mb-4" />-->
+                            <p>
+                                Group application type selection for a group of peoples with same visa duration or same visa type application.
+                                (E.G: Tour group , Company Delegates or Family Memebers who are going to Malaysia for a same periodof of time for bussiness or visting purpose.)
+                            </p>
+                            <span><b>Individual Application :</b></span>
+                            <!--<hr class="mb-4" />-->
+                            <p>
+                                Individual application type  selection for single person who is visting malaysia or going to reside in malaysia with sponsorship of Malaysian individual or
+                                Comapny.
+                                (E.G: Tourist, Student,Employee of a company  or visting malaysia for bussiness purpose)
+                            </p>
+
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+<router-outlet></router-outlet>
+<!-- <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      This is example from ItSolutionStuff.com
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+    </div>
+  </ng-template> -->
