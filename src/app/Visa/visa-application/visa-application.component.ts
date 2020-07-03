@@ -17,7 +17,7 @@ export class VisaApplicationComponent implements OnInit {
   title="New Visa Application";
   totalApplicantsTitle:string;
   submissionTypeList:any =[{ID:'1',Name:'Group of My E-Visa'},{ID:'2',Name:'Individual’s MyE-Visa'}];
-  durationOfVisitList =[{ID:'1',Name:'One Week'},{ID:'2',Name:'Two Weeks'},{ID:'3',Name:'Three Weeks'},{ID:'4',Name:'Four Weeks'}];
+  durationOfVisitList =[{ID:'7',Name:'One Week'},{ID:'14',Name:'Two Weeks'},{ID:'21',Name:'Three Weeks'},{ID:'28',Name:'Four Weeks'}];
   JourneyList:any=["Business","Conference","Employment","Holiday","Medical / Medical Tourism","Official Trip","Study","Tourist/Social Visit","Transit","Visiting Friend / Relative"];
   visaProcessTypeList:any;
   applicationSelectedText:string;

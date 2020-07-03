@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
           console.log('The dialog was closed',result);
           this.returnUrl = result;
           //this.ngOnInit();
-          this.router.navigate(['/member-list']);
+          this.router.navigate(['/visa-application']);
         });      
     },
     error=>{

@@ -34,6 +34,7 @@ export class AgencyDetailsComponent implements OnInit {
   strAgencyId : string;
   countryId:number;
   totalAgent:number;
+  agentByRegisterNoList : any;
   
   
   // RegionList : any = ["China","Australia","Taiwan","Indonesia","Bangladesh","Nepal","Pakistan","India"
@@ -83,12 +84,33 @@ export class AgencyDetailsComponent implements OnInit {
       this.strAgencyId=agencyId;
       this.countryId=Country; 
 
-      this.dataService.getAgentById(this.AgencyID).subscribe(res => 
-        {
-          this.AgentList = res;
-          console.log(this.AgentList); 
-          console.log(this.AgentList.RegistrationNo);
-        });
+      if(this.AgencyID!==undefined){
+        this.dataService.getAgentById(this.AgencyID).subscribe(res => 
+          {
+            this.AgentList = res;
+            console.log(this.AgentList); 
+            console.log(this.AgentList.RegistrationNo);
+            console.log(this.AgentList.Country.CountryName);
+            this.RegionList=this.AgentList.CountryID;
+            this.RegionList = Array.of(this.RegionList);
+            
+            this.agencyRegisterForm.get('Region').setValue(this.AgentList.CountryID);
+            this.agencyRegisterForm.get('RegistrationNo').setValue(this.AgentList.RegistrationNo);
+            this.agencyRegisterForm.get('AgencyType').setValue(this.AgentList.AgencyType);
+            this.agencyRegisterForm.get('AgencyName').setValue(this.AgentList.AgencyName);
+            this.agencyRegisterForm.get('ContactPerson').setValue(this.AgentList.ContactPerson);
+            this.agencyRegisterForm.get('ContactNo').setValue(this.AgentList.ContacNo);
+            this.agencyRegisterForm.get('Fax').setValue(this.AgentList.Fax);
+            this.agencyRegisterForm.get('Email').setValue(this.AgentList.Email);
+            this.agencyRegisterForm.get('Address').setValue(this.AgentList.Address);
+            this.agencyRegisterForm.get('Address1').setValue(this.AgentList.Address1);
+            this.CountryList=[this.AgentList.Country.CountryName];
+            this.agencyRegisterForm.get('City').disable();
+            this.agencyRegisterForm.get('State').setValue(this.AgentList.State);
+            this.agencyRegisterForm.get('Pincode').setValue(this.AgentList.Pincode);
+          });
+
+      }
     });
    
    this.dataService.getAllCountries().subscribe(res => {this.RegionList = res});
@@ -114,8 +136,14 @@ export class AgencyDetailsComponent implements OnInit {
     this.dataService.getTotalAgents().subscribe(id=>{
       this.totalAgent = id;
       this.registerNo = this.countryCode+ this.agentCodeNo +this.dFormat+'/000'+(this.totalAgent+1);
-    this.agencyRegisterForm.get('RegistrationNo').setValue(this.registerNo);
+      this.agencyRegisterForm.get('RegistrationNo').setValue(this.registerNo);
     });
+
+    // this.dataService.getAgentByRegisterNo(this.registerNo).subscribe(res=>{
+    //   this.agentByRegisterNoList = res;
+    //   this.registerNo = this.countryCode+ this.agentCodeNo +this.dFormat+'/000'+(this.totalAgent+1);
+    //   this.agencyRegisterForm.get('RegistrationNo').setValue(this.registerNo);
+    // });
     
     
     
@@ -127,7 +155,10 @@ export class AgencyDetailsComponent implements OnInit {
     var selectElementText = selectedOptions[selectedIndex].text;
     this.selectCountryText=selectElementText;
     console.log(selectElementText);
+
     this.agentTypeNo(selectElementText);
+    this.countryIsCode(this.AgentList.Country.CountryName);
+    this.dFormat = this.datePipe.transform(this.myDate, 'yyMM');
 
     this.dataService.getTotalAgents().subscribe(id=>{
       this.totalAgent = id;

@@ -25,7 +25,8 @@
                             <label class="col-sm-3">First Name</label>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-8">
-                                <label>{{applicationList.Applicants[0].FullName}}</label>
+                                <!-- <label>{{applicationList.Applicants[0].FullName}}</label> -->
+                                <label><a  [routerLink]="['/applicant-information',{applicantId:applicationList.Applicants[0].ApplicantID}]">{{applicationList.Applicants[0].FullName}}</a></label>
                                 <!-- <input type="label" class="form-control-plaintext" [value]="applicationList.Applicants[0].FullName"> -->
                             </div>                            
                         </div>
@@ -148,7 +149,8 @@
                             <div class="col-sm-3">Passport Number</div>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-8">
-                                <label>{{applicationList.Applicants[0].TravelDocuments[0].PassportNo}}</label>
+                                <!-- <label>{{applicationList.Applicants[0].TravelDocuments[0].PassportNo}}</label> -->
+                                <a [routerLink]="['/travel-document',{applicantId:applicationList.Applicants[0].ApplicantID}]">{{applicationList.Applicants[0].TravelDocuments[0].PassportNo}}</a>
                             </div>                            
                         </div>
                         <div class="form-group row">

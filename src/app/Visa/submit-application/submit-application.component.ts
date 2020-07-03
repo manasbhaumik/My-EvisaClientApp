@@ -14,7 +14,7 @@ import {ModalComponent} from 'src/app/modal/modal.component';
 })
 export class SubmitApplicationComponent implements OnInit {
 
-  title="Submission Application - Preview"
+  title="Submission Application - Preview (IM 47 –Pin 1/97)"
   applicationId:number;
   applicationList:any;
   myDate = new Date();

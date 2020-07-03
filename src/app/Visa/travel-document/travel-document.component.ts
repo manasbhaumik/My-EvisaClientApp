@@ -23,6 +23,8 @@ export class TravelDocumentComponent implements OnInit {
   applicantID:number;
   dobDate: NgbDate | null;
   travelList:any;
+  isEdited = false;
+  travelDocId : number;
 
 
   constructor(
@@ -41,6 +43,32 @@ export class TravelDocumentComponent implements OnInit {
       this.applicantID=applicantID; 
       });  
       this.traveldocForm.get('Applicant').setValue(this.applicantID);
+
+      if(this.applicantID !== undefined){
+        this.dataService.getTravelDocumentByApplicantId(this.applicantID).subscribe(res=>
+          {
+            this.travelList = res;
+            //console.log(this.travelList);
+            this.isEdited = true;
+            this.travelDocId = this.travelList.DocumentID;
+            this.traveldocForm.get('PassportNo').setValue(this.travelList.PassportNo);
+            this.traveldocForm.get('IssuingCountry').setValue(this.travelList.IssuingCountry);
+            this.traveldocForm.get('IssuingAuthority').setValue(this.travelList.IssuingAuthority);
+            var yearIssue = Number(this.datePipe.transform(this.travelList.IssuingDate, 'yyyy'));
+            var monthIssue = Number(this.datePipe.transform(this.travelList.IssuingDate, 'MM'));
+            var dayIssue = Number(this.datePipe.transform(this.travelList.IssuingDate, 'dd'));
+            this.traveldocForm.get('IssuingDate').setValue({year: yearIssue, month: monthIssue, day: dayIssue});
+            var yearExpiry = Number(this.datePipe.transform(this.travelList.ExpiryDate, 'yyyy'));
+            var monthExpiry = Number(this.datePipe.transform(this.travelList.ExpiryDate, 'MM'));
+            var dayExpiry = Number(this.datePipe.transform(this.travelList.ExpiryDate, 'dd'));
+            this.traveldocForm.get('ExpiryDate').setValue({year: yearExpiry, month: monthExpiry, day: dayExpiry});
+          },
+          error=>{
+            this.error="Message: " + error.message + "<br/>Status: " +error.status;
+            //console.log(this.error);
+            this.isEdited = false;
+          });
+      }
   }
 
   get f(){ return this.traveldocForm.controls; }
@@ -57,62 +85,77 @@ export class TravelDocumentComponent implements OnInit {
   });
 
   SaveTravelDoc(){
-    console.log(this.traveldocForm.getRawValue());
-   // console.log('date:'+this.dobDate);
+    //console.log(this.traveldocForm.getRawValue());
+    // console.log('date:'+this.dobDate);
     //console.log(this.dobDate.day+"/"+this.dobDate.month+"/"+this.dobDate.year);
+
     this.isSubmitted = true;
     if(this.traveldocForm.invalid){      
      return;
     }
 
-    this.dataService.saveTravelDocument(this.traveldocForm.getRawValue())
-    .subscribe((data:any)=>{
-      console.log(data);
-     // console.log("Visa1 "+data.Applicant.Application.PurposeOfVisit);
-      //this.getTravelDocByID(data.DocumentID);     
-      
-      var dialogRef= this.dialog.open(ModalComponent,{ data: {
-        message : "Applicant registered Successfully",
-        title : "Success",
-        buttonText : "Ok"
-      }});  
-      dialogRef.afterClosed().subscribe(
-        result => {
-         console.log('The dialog was closed',result);
-         this.returnUrl = result;
-         var travelDoclist:any;
-        
-         
-        //  var visaApplication={
-        //   ApplicantID:this.traveldocForm.get('Applicant').value,
-        //   DurationOfVisit:travelDoclist.Applicant.Application.PurposeOfVisit,
-        //   PurposeOfVisit:travelDoclist.Applicant.Application.DurationOfVisit,
-        //   VisaTypeID:travelDoclist.Applicant.Application.VisaTypeID,
-        //   ApprovalDate:""          
-        // }
-        // this.dataService.saveVisaApplication(visaApplication).subscribe((vdata:any)=>{console.log(vdata);});
-         //this.ngOnInit();
-         this.router.navigate(['/member-list']);
-        }
-      ); 
-    },
-    error=>{
-      this.error=error.error.Message;
-      console.log(error.error.Message);
-      var dialogRef =this.dialog.open(ModalComponent,{ data: {
-        message : this.error,
-        title : "Alert!",
-        buttonText : "Cancel"
+    var passportno = this.traveldocForm.get('PassportNo').value;
+
+    if(this.isEdited == true){
+      this.dataService.updateTravelDocument(this.traveldocForm.getRawValue(),this.travelDocId).subscribe((data:any)=>{      
+        var dialogRef= this.dialog.open(ModalComponent,{ data: {
+          message : "Travel document updated Successfully",
+          title : "Success",
+          buttonText : "Ok"
+        }});  
+        dialogRef.afterClosed().subscribe(
+          result => {
+          console.log('The dialog was closed',result);
+          this.returnUrl = result;
+          var travelDoclist:any;        
+          this.router.navigate(['/travel-document',{applicantId:this.applicantID}]);
+        }); 
+      },
+      error=>{
+        this.error=error.error.Message;
+        console.log(error.error.Message);
+        var dialogRef =this.dialog.open(ModalComponent,{ data: {
+          message : this.error,
+          title : "Alert!",
+          buttonText : "Cancel"
         }});
         dialogRef.afterClosed().subscribe(result => {
           console.log('The dialog was closed',result);
           this.returnUrl = result;
           result ? this.router.navigate(['/home']): this.router.navigate(['/travel-document',{applicantId:this.applicantID}]);
         });
-
+      });
     }
-
-    );
+    else{
+      this.dataService.saveTravelDocument(this.traveldocForm.getRawValue()).subscribe((data:any)=>{      
+        var dialogRef= this.dialog.open(ModalComponent,{ data: {
+          message : "Applicant registered Successfully",
+          title : "Success",
+          buttonText : "Ok"
+        }});  
+        dialogRef.afterClosed().subscribe(
+          result => {
+          console.log('The dialog was closed',result);
+          this.returnUrl = result;
+          var travelDoclist:any;        
+          this.router.navigate(['/member-list']);
+        }); 
+      },
+      error=>{
+        this.error=error.error.Message;
+        console.log(error.error.Message);
+        var dialogRef =this.dialog.open(ModalComponent,{ data: {
+          message : this.error,
+          title : "Alert!",
+          buttonText : "Cancel"
+        }});
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed',result);
+          this.returnUrl = result;
+          result ? this.router.navigate(['/home']): this.router.navigate(['/travel-document',{applicantId:this.applicantID}]);
+        });
+      });
+    }
   }
 
   getTravelDocByID(id:number):void{

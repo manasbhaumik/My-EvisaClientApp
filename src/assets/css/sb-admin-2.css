@@ -592,6 +592,10 @@ pre code {
   padding-left: 0.75rem;
   margin-right: auto;
   margin-left: auto;
+  /* background:url(https://www.google.co.in/images/srpr/logo11w.png); */
+  /* opacity: 0.2; */
+  /* position: absolute; */
+  /* z-index: -1; */
 }
 
 .row {
@@ -6292,7 +6296,8 @@ button.bg-dark:focus {
   background-color: #fff !important;
 }
 .bg-custom {
-    background-color: rgba(28, 157, 176, 0.50) !important;
+   /* background-color: rgba(28, 157, 176, 0.50) !important;*/
+   background-color: rgba(0, 123, 255, 1) !important; 
 }
 
 .bg-transparent {

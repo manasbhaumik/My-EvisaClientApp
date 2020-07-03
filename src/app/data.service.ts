@@ -15,8 +15,8 @@ export class DataService {
   public apiData$ = this.apiData.asObservable();
 
   private API_LOCAL_SERVER = "https://localhost:44372/api/Account";
-  private API_TEST_SERVER1  = "http://192.168.0.10/ARB-Service";
-  private API_TEST_SERVER = "https://localhost:44372";   
+  private API_TEST_SERVER  = "http://192.168.0.10/ARB-Service";
+  private API_TEST_SERVER1 = "https://localhost:44372";   
                         
 
   constructor(private httpClient: HttpClient) { }
@@ -87,6 +87,10 @@ export class DataService {
 
   getTotalAgents(){
     return this.httpClient.get<number>(this.API_TEST_SERVER+ '/api/TotalAgency').pipe(map(response => response));;
+  }
+
+  getAgentByRegisterNo(registerNo){
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/AgentByRegistrtionId/'+registerNo).pipe(map(response => response));;
   }
 
   agentRegister(agent){    
@@ -212,8 +216,6 @@ export class DataService {
   }
 
   saveAplicant(applicant):Observable<any>{
-    console.log(applicant);
-    console.log(applicant.DOB.day+"/"+applicant.DOB.month+"/"+applicant.DOB.year);
     var dob1=applicant.DOB.year+"/"+applicant.DOB.month+"/"+applicant.DOB.day;
     var httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -243,8 +245,43 @@ export class DataService {
         map(res => res),  
         catchError((error: HttpErrorResponse) => {  
           return throwError(error);  
-        }));
+        })
+      );
+  }
 
+  updateAplicant(applicant,applicantId,applicationId):Observable<any>{
+    var dob1=applicant.DOB.year+"/"+applicant.DOB.month+"/"+applicant.DOB.day;
+    var httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+    
+    return this.httpClient.put(this.API_TEST_SERVER + '/api/Applicants/'+applicantId, 
+      {
+        "ApplicantID":applicantId,
+        "ApplicationID":applicationId,
+        "FullName":applicant.FullName,
+        "FamlilyName":applicant.FamlilyName,
+        "FirstName":applicant.FirstName,
+        "NickName":applicant.NickName,
+        "Gender":applicant.Gender,
+        "IDNumber":applicant.IDNumber,
+        "DOB":dob1,
+        "Address1":applicant.Address1,
+        "Address2":applicant.Address2,
+        "Address3":applicant.Address3,
+        "PostCode":applicant.PostCode,
+        "City":applicant.City,
+        "State":applicant.State,
+        "ContactNo":applicant.ContactNo,
+        "Email":applicant.Email,
+        "Photo":""
+      } ,httpOptions)
+      .pipe(  
+        map(res => res),  
+        catchError((error: HttpErrorResponse) => {  
+          return throwError(error);  
+        })
+      );
   }
 
   saveTravelDocument(travelDocument):Observable<any>{
@@ -256,6 +293,31 @@ export class DataService {
     
     return this.httpClient.post(this.API_TEST_SERVER + '/api/TravelDocuments', 
       {
+        "ApplicantID":travelDocument.Applicant,
+        "PassportNo":travelDocument.PassportNo,
+        "IssuingCountry":travelDocument.IssuingCountry,
+        "IssuingAuthority":travelDocument.IssuingAuthority,
+        "IssuingDate":issueDate,
+        "ExpiryDate":expiryDate       
+      } ,httpOptions)
+      .pipe(  
+        map(res => res),  
+        catchError((error: HttpErrorResponse) => {  
+          return throwError(error);  
+        }));
+
+  }
+
+  updateTravelDocument(travelDocument,DocumentId):Observable<any>{
+    var issueDate=travelDocument.IssuingDate.year+"/"+travelDocument.IssuingDate.month+"/"+travelDocument.IssuingDate.day;
+    var expiryDate=travelDocument.ExpiryDate.year+"/"+travelDocument.ExpiryDate.month+"/"+travelDocument.ExpiryDate.day;
+    var httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+    
+    return this.httpClient.put(this.API_TEST_SERVER + '/api/TravelDocuments/'+DocumentId, 
+      {
+        "DocumentID" : DocumentId,
         "ApplicantID":travelDocument.Applicant,
         "PassportNo":travelDocument.PassportNo,
         "IssuingCountry":travelDocument.IssuingCountry,
@@ -327,4 +389,17 @@ export class DataService {
        }));
 
  }
+
+  getApplicantsById(applicantId:number):Observable<any>{
+   return this.httpClient.get(this.API_TEST_SERVER+ '/api/Applicants/'+applicantId).pipe(map(response => response));
+  }
+
+  getTravelDocumentByApplicantId(applicantId):Observable<any>{
+    var params=new HttpParams();
+    params=params.append('applicantid',applicantId);
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/TravelDocumentByApplicantID', {params: params}).pipe(map(response => response),catchError((error: HttpErrorResponse) => {  
+      return throwError(error);  
+    }));
+
+  }
 }

@@ -40,8 +40,14 @@
                                         <div *ngIf="application.Applicants[0] && application.Applicants[0].VisaApplications[0]; else showFirstName">
                                             <a class="nav-link" [routerLink]="['/submit-application',{applicationId:application.ApplicationID}]">{{application.Applicants[0].VisaApplications[0].MyEVisaRefNo}}</a>
                                         </div>                                        
-                                        <ng-template #showFirstName> - 
+                                        <ng-template #showFirstName> 
+                                            <div *ngIf="application.Applicants[0];else showEmpty">
+                                                <a class="nav-link" [routerLink]="['/travel-document',{applicantId:application.Applicants[0].ApplicantID}]">Continue to fillup travel information</a>
+                                            </div>
                                             <!-- <a class="nav-link" [routerLink]="['/submit-application',{applicationId:application.ApplicationID}]">-</a> -->
+                                        </ng-template>
+                                        <ng-template #showEmpty>
+                                            <a class="nav-link" [routerLink]="['/applicant-information',{applicationId:application.ApplicationID}]">Continue to fillup applicant information</a>
                                         </ng-template>
                                     </td>                                    
                                     <td>{{application.ApplicationType.ApplicationType1}}</td>
