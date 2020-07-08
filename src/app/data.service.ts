@@ -67,7 +67,7 @@ export class DataService {
     var params=new HttpParams();
     params=params.append('countryid',countryId);
 
-    return this.httpClient.get(this.API_TEST_SERVER+ '/api/CentersByCountryId', {params: params});
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/CentersByCountryId', {params: params}).pipe(map(response => response));
   }
 
   public getCenter() {
@@ -100,6 +100,38 @@ export class DataService {
     }
     return this.httpClient.post(this.API_TEST_SERVER + '/api/Agencies', 
       {
+        "RegistrationNo":agent.RegistrationNo,
+        "AgencyType":agent.AgencyType,
+        "AgencyName":agent.AgencyName,
+        "ContactPerson":agent.ContactPerson,
+        "ContacNo":agent.ContactNo,
+        "Address":agent.Address,
+        "Address1":agent.Address1,
+        "Address2":agent.Address2,
+        "CountryID":agent.Region,
+        "State":agent.State,
+        "City":agent.City,
+        "Pincode":agent.Pincode,
+        "Email":agent.Email,
+        "Fax":agent.Fax,
+        "ActiveStatus":"Y"
+      } ,httpOptions)
+      //.pipe(catchError(this.handleError));
+      .pipe(  
+        map(res => res),  
+        catchError((error: HttpErrorResponse) => {  
+          return throwError(error);  
+        }));
+
+  }
+
+  updateAgent(agent,agencyId){   
+    var httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+    return this.httpClient.put(this.API_TEST_SERVER + '/api/Agencies/'+agencyId, 
+      {
+        "AgencyID":agencyId,
         "RegistrationNo":agent.RegistrationNo,
         "AgencyType":agent.AgencyType,
         "AgencyName":agent.AgencyName,
@@ -160,8 +192,8 @@ export class DataService {
   }
 
   getContact():Observable<any>{
-   var accessToken=  localStorage.getItem('accessToken');
-   console.log(accessToken);    
+   var accessToken=  localStorage.getItem('auth-token');
+    console.log(accessToken);    
     var httpOptions = {
       headers: new HttpHeaders().set('Authorization', `Bearer ${accessToken}` )
     } 
@@ -190,7 +222,36 @@ export class DataService {
         "DurationOfVisit":application.DurationOfVisit,
         "VisaTypeID":"1",
         "SubmitedBy":application.SubmitedBy,
-        "SubmisisionDate":application.SubmisisionDate,
+        "SubmissionDate":application.SubmisisionDate,
+        "AcceptedBy":application.AcceptedBy,
+        "Status":"Y"
+      } ,httpOptions)
+      .pipe(  
+        map(res => res),  
+        catchError((error: HttpErrorResponse) => {  
+          return throwError(error);  
+        }));
+
+  }
+
+  updateAplication(application,applicationID):Observable<any>{
+    console.log(application);
+    var httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+    return this.httpClient.put(this.API_TEST_SERVER + '/api/Applications/'+applicationID, 
+      {
+        "ApplicationID":applicationID,
+        "ApplicationTypeID":application.ApplicationTypeID,
+        "SubmissionType":application.submissionType,
+        "CenterID":application.centerId,
+        "ContactID":application.ContactID,
+        "TotalApplicant":application.TotalApplicant,
+        "PurposeOfVisit":application.PurposeOfVisit,
+        "DurationOfVisit":application.DurationOfVisit,
+        "VisaTypeID":"1",
+        "SubmitedBy":application.SubmitedBy,
+        "SubmissionDate":application.SubmisisionDate,
         "AcceptedBy":application.AcceptedBy,
         "Status":"Y"
       } ,httpOptions)
@@ -205,14 +266,27 @@ export class DataService {
   getApplications():Observable<any>{   
      return this.httpClient
      .get(this.API_TEST_SERVER+ '/api/ApplicationsByUser')
-     .pipe(map(response => response));
- 
-   }
+     .pipe(
+       map(response => response),
+        catchError((error: HttpErrorResponse) => {  
+        return throwError(error);  
+        })
+      );
+ }
 
-   getApplicationType(){
+   getApplicationType():Observable<any>{
     return this.httpClient
-    .get(this.API_TEST_SERVER+ '/api/ApplicationTypes');
+    .get(this.API_TEST_SERVER+ '/api/ApplicationTypes')
+    .pipe(map(response => response),
+    catchError((error: HttpErrorResponse) => {  
+      return throwError(error);  
+      }));
+  }
+
+  getApplicationById(appId):Observable<any>{ 
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/Applications/'+appId);
     //.pipe(map(response => response));
+
   }
 
   saveAplicant(applicant):Observable<any>{
@@ -295,6 +369,8 @@ export class DataService {
       {
         "ApplicantID":travelDocument.Applicant,
         "PassportNo":travelDocument.PassportNo,
+        "FatherName":travelDocument.fatherName,
+        "MotherName":travelDocument.motherName,
         "IssuingCountry":travelDocument.IssuingCountry,
         "IssuingAuthority":travelDocument.IssuingAuthority,
         "IssuingDate":issueDate,
@@ -320,6 +396,8 @@ export class DataService {
         "DocumentID" : DocumentId,
         "ApplicantID":travelDocument.Applicant,
         "PassportNo":travelDocument.PassportNo,
+        "FatherName":travelDocument.fatherName,
+        "MotherName":travelDocument.motherName,
         "IssuingCountry":travelDocument.IssuingCountry,
         "IssuingAuthority":travelDocument.IssuingAuthority,
         "IssuingDate":issueDate,

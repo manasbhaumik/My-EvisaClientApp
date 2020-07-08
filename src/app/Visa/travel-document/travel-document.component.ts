@@ -52,6 +52,8 @@ export class TravelDocumentComponent implements OnInit {
             this.isEdited = true;
             this.travelDocId = this.travelList.DocumentID;
             this.traveldocForm.get('PassportNo').setValue(this.travelList.PassportNo);
+            this.traveldocForm.get('fatherName').setValue(this.travelList.FatherName);
+            this.traveldocForm.get('motherName').setValue(this.travelList.MotherName);
             this.traveldocForm.get('IssuingCountry').setValue(this.travelList.IssuingCountry);
             this.traveldocForm.get('IssuingAuthority').setValue(this.travelList.IssuingAuthority);
             var yearIssue = Number(this.datePipe.transform(this.travelList.IssuingDate, 'yyyy'));

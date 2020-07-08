@@ -14,7 +14,7 @@ import {ModalComponent} from 'src/app/modal/modal.component';
 })
 export class SubmitApplicationComponent implements OnInit {
 
-  title="Submission Application - Preview (IM 47 –Pin 1/97)"
+  title="Application Submission - Preview (IM 47 –Pin 1/97)"
   applicationId:number;
   applicationList:any;
   myDate = new Date();
@@ -22,6 +22,7 @@ export class SubmitApplicationComponent implements OnInit {
   dob=new Date();
   issueDate:string;
   expiryDate:string;
+  applicationDesc:string;
 
   constructor(
     private fb: FormBuilder,
@@ -39,12 +40,20 @@ export class SubmitApplicationComponent implements OnInit {
 
       this.dataService.getApplicationsById(this.applicationId).subscribe(res => 
         {
-          this.applicationList = res;
+          this.applicationList = res;console.log(this.applicationList);
           this.dob=this.applicationList.Applicants[0].DOB;
           this.dFormat = this.datePipe.transform(this.dob, 'dd/MM/yyyy');
           this.issueDate=this.datePipe.transform(this.applicationList.Applicants[0].TravelDocuments[0].IssuingDate, 'dd/MM/yyyy')
           this.expiryDate=this.datePipe.transform(this.applicationList.Applicants[0].TravelDocuments[0].ExpiryDate, 'dd/MM/yyyy')
-          // console.log(this.applicationList); 
+          var applicationType:number;
+          applicationType=this.applicationList.ApplicationTypeID;
+          if(applicationType == 1){
+            this.applicationDesc="Group of My E-Visa";
+          }
+          else{
+            this.applicationDesc="Individual’s MyE-Visa";
+          }
+
         });
     });
   }
@@ -55,6 +64,10 @@ export class SubmitApplicationComponent implements OnInit {
 
   onBioClick(event: Event) {
     this.router.navigate(['/bio-metric-info']);
+  }
+
+  coderIdIsReserved(): boolean {
+    return this.applicationList.Groups.filter(i => i.ApplicationTypeID === 1).length > 0 ;
   }
 
 }

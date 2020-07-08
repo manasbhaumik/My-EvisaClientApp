@@ -12,12 +12,80 @@
         </div>        
     </div>
     <div class="row">
-        
         <div class="col-md-6 order-md-1">
             <!-- DataTales Example -->
             <div class="card  mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary" style="font-size: 12px;">A. PARTICULAR APPLICANT</h6>
+                    <h6 class="m-0 font-weight-bold text-primary" style="font-size: 12px;">A. DETAIL INFORMATION OF APPLICATION</h6>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-sm-3">Application Type</label>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label><a  [routerLink]="['/visa-application',{applicationId:applicationList.Applicants[0].ApplicationID}]">{{applicationDesc}}</a></label>
+                                <!-- <div *ngIf="coderIdIsReserved() ; else showOtherAppType">
+                                    <label><a  [routerLink]="['/applicant-information',{applicantId:applicationList.Applicants[0].ApplicantID}]">Group of My E-Visa</a></label>
+                                </div> 
+                                <ng-template #showOtherAppType>
+                                    <label><a  [routerLink]="['/applicant-information',{applicantId:applicationList.Applicants[0].ApplicantID}]"> Individual’s MyE-Visa </a></label>
+                                </ng-template> -->
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3">Designated Embassy/Consulate</label>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Center.CenterName}}</label>                                
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3">No.of passengers</label>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.TotalApplicant}}</label>                                
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3">Duration of stay</label>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.DurationOfVisit}}</label>                                
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3">Visa Type</label>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.ApplicationType.ApplicationType1}}</label>
+                                <!-- <input type="label" class="form-control-plaintext" [value]="applicationList.Applicants[0].Gender"> -->
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Purposed of journey</div>
+                            <div class="col-sm-1">:</div>
+                            <!-- <label class="col-sm-4 col-form-label">Nationality</label> -->
+                            <div class="col-sm-8">
+                                <label>{{applicationList.PurposeOfVisit}}</label>
+                            </div>                            
+                        </div>                          
+                    </form>
+                    
+                    <div class="row">
+                        
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 order-md-2">
+            <!-- DataTales Example -->
+            <div class="card  mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary" style="font-size: 12px;">B. DETAIL INFORMATION OF APPLICANT</h6>
                 </div>
                 <div class="card-body">
                     <form>
@@ -135,12 +203,16 @@
                     
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 order-md-2">
+        </div>        
+    </div>
+    <!-- Page Heading -->
+    <!-- /.container-fluid -->
+    <div class="row">
+        <div class="col-md-6 order-md-1">
             <div class="card  mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary" style="font-size: 12px;">B. PARTICULAR OF PASSPORT / TRAVEL DOCUMENT</h6>
+                    <h6 class="m-0 font-weight-bold text-primary" style="font-size: 12px;">C. PARTICULAR OF PASSPORT / TRAVEL DOCUMENT</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -158,6 +230,20 @@
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-8">
                                 <label>{{applicationList.Applicants[0].TravelDocuments[0].IssuingCountry}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Father Name</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Applicants[0].TravelDocuments[0].FatherName}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">Mother Name</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <label>{{applicationList.Applicants[0].TravelDocuments[0].MotherName}}</label>
                             </div>                            
                         </div>
                         <div class="form-group row">
@@ -179,14 +265,10 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Page Heading -->
-    <!-- /.container-fluid -->
-    <div class="row">
-        <div class="col-md-6 order-md-1">
+        <div class="col-md-6 order-md-2">
             <div class="card  mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary" style="font-size: 12px;">C. PARTICULAR OF ORGANIZER OR SPONSOR</h6>
+                    <h6 class="m-0 font-weight-bold text-primary" style="font-size: 12px;">D. DETAIL INFORMATION OF AGENT OR SPONSOR</h6>
                 </div>
                 <div class="card-body">
                     <form>

@@ -35,7 +35,7 @@ export class AgencyDetailsComponent implements OnInit {
   countryId:number;
   totalAgent:number;
   agentByRegisterNoList : any;
-  
+  isEdited=false;
   
   // RegionList : any = ["China","Australia","Taiwan","Indonesia","Bangladesh","Nepal","Pakistan","India"
   //                       ,"Cambodia","Myanmar","Philippines","Vietnam","Nigeria","Sri Lanka","Saudi Arabia"
@@ -88,6 +88,7 @@ export class AgencyDetailsComponent implements OnInit {
         this.dataService.getAgentById(this.AgencyID).subscribe(res => 
           {
             this.AgentList = res;
+            this.isEdited=true;
             console.log(this.AgentList); 
             console.log(this.AgentList.RegistrationNo);
             console.log(this.AgentList.Country.CountryName);
@@ -331,40 +332,69 @@ export class AgencyDetailsComponent implements OnInit {
     if(this.agencyRegisterForm.invalid){
       return;
     }
-    this.dataService.agentRegister(this.agencyRegisterForm.getRawValue())
-    .subscribe((data:any)=>{
-      console.log(data);
-     // this.AgentList(data);
-      //this.dataService.setData(data);
-     var dialogRef= this.dialog.open(ModalComponent,{ data: {
-        message : "Agent registered Successfully",
-        title : "Success",
-        buttonText : "Ok"
-        }});  
-        dialogRef.afterClosed().subscribe(
-          result => {
-          console.log('The dialog was closed',result);
-          this.returnUrl = result;
-          //this.ngOnInit();
-          this.router.navigate(['/agency-contact-detail',{agentId:data.AgencyID,countryId:data.CountryID}]);
-        });      
-    },
-    error=>{
-      this.error=error.error.Message;
-      console.log(error.error.Message);
-      var dialogRef =this.dialog.open(ModalComponent,{ data: {
-        message : this.error,
-        title : "Alert!",
-        buttonText : "Cancel"
-        }});
-        dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed',result);
-          this.returnUrl = result;
-          result ? this.router.navigate(['/agency-details']): this.router.navigate(['/agency-details']);
-        });    
-    });
-   
-   // this.router.navigateByUrl('/agency-contact-detail');
+
+    if(this.isEdited == true){
+      this.dataService.updateAgent(this.agencyRegisterForm.getRawValue(),this.AgencyID)
+      .subscribe((data:any)=>{
+       var dialogRef= this.dialog.open(ModalComponent,{ data: {
+          message : "Agent information updated Successfully",
+          title : "Success",
+          buttonText : "Ok"
+          }});  
+          dialogRef.afterClosed().subscribe(
+            result => {
+            console.log('The dialog was closed',result);
+            this.returnUrl = result;
+            //this.ngOnInit();
+            this.router.navigate(['/agency-details',{agentId:this.AgencyID,countryId:this.countryId}]);
+          });      
+      },
+      error=>{
+        this.error=error.error.Message;
+        console.log(error.error.Message);
+        var dialogRef =this.dialog.open(ModalComponent,{ data: {
+          message : this.error,
+          title : "Alert!",
+          buttonText : "Cancel"
+          }});
+          dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed',result);
+            this.returnUrl = result;
+            result ? this.router.navigate(['/agency-details']): this.router.navigate(['/agency-details',{agentId:this.AgencyID,countryId:this.countryId}]);
+          });    
+      });
+    }
+    else{
+      this.dataService.agentRegister(this.agencyRegisterForm.getRawValue())
+      .subscribe((data:any)=>{
+       var dialogRef= this.dialog.open(ModalComponent,{ data: {
+          message : "Agent registered Successfully",
+          title : "Success",
+          buttonText : "Ok"
+          }});  
+          dialogRef.afterClosed().subscribe(
+            result => {
+            console.log('The dialog was closed',result);
+            this.returnUrl = result;
+            //this.ngOnInit();
+            this.router.navigate(['/agency-contact-detail',{agentId:data.AgencyID,countryId:data.CountryID}]);
+          });      
+      },
+      error=>{
+        this.error=error.error.Message;
+        console.log(error.error.Message);
+        var dialogRef =this.dialog.open(ModalComponent,{ data: {
+          message : this.error,
+          title : "Alert!",
+          buttonText : "Cancel"
+          }});
+          dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed',result);
+            this.returnUrl = result;
+            result ? this.router.navigate(['/agency-details']): this.router.navigate(['/agency-details']);
+          });    
+      });
+    }
   }
 
 }

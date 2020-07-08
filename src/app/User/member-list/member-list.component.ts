@@ -2,6 +2,7 @@ import { Component, OnInit ,AfterViewInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient,HttpErrorResponse } from '@angular/common/http';
 import { DataService } from 'src/app/data.service';
+import { DatePipe } from '@angular/common';
 // import 'src/assets/vendor/datatables/jquery.dataTables.min.js';
 // import 'src/assets/vendor/datatables/dataTables.bootstrap4.min';
 // import 'src/assets/vendor/jquery/jquery.min.js';
@@ -26,12 +27,15 @@ declare var $: any;
 @Component({
   selector: 'app-member-list',
   templateUrl: './member-list.component.html',
-  styleUrls: ['./member-list.component.css']
+  styleUrls: ['./member-list.component.css'],
+  providers: [DatePipe]
 })
 export class MemberListComponent implements OnInit {
 
   applicationsList:any;
-  
+  error ='';
+  dFormat:string;
+  submissionDate:string;
   // var ctx = document.getElementById("myPieChart");
   // var myPieChart = new Chart(ctx, {
   //   type: 'doughnut',
@@ -67,6 +71,7 @@ export class MemberListComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private dataService:DataService,
+    private datePipe: DatePipe,
     ) { }
 
     // ADD CHART OPTIONS. 
@@ -125,14 +130,15 @@ export class MemberListComponent implements OnInit {
     //$("#dataTable").datatable();
 
     this.dataService.getApplications()
-      .subscribe((data:any)=>{
-        
+      .subscribe(data=>{
         this.applicationsList=data;
-        console.log(this.applicationsList);
-        //var appList:[];
-       // appList=this.applicationsList.Applicants;
-        //console.log(data.Applicants);
+        //console.log(this.applicationsList);
+        this.submissionDate = this.datePipe.transform(this.applicationsList[0].SubmissionDate, 'dd/MM/yyyy');       
 
+      },
+      error=>{
+        this.error = error;
+        console.log(this.error);
       }
 
     )
