@@ -42,7 +42,6 @@
               "node_modules/chart.js/dist/Chart.min.js",
               "src/assets/js/demo/chart-pie-demo.js",
               "src/assets/js/demo/chart-bar-demo.js"
-            
             ]
           },
           "configurations": {
@@ -139,5 +138,8 @@
       }
     }
   },
-  "defaultProject": "myevisa"
+  "defaultProject": "myevisa",
+  "cli": {
+    "analytics": "1e818c77-d902-4bd8-af48-e3aaf97ed3ff"
+  }
 }

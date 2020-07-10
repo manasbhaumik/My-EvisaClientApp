@@ -15,9 +15,9 @@ export class DataService {
   public apiData$ = this.apiData.asObservable();
 
   private API_LOCAL_SERVER = "https://localhost:44372/api/Account";
-  private API_TEST_SERVER  = "http://192.168.0.10/ARB-Service";
-  private API_TEST_SERVER1 = "https://localhost:44372";   
-                        
+  private API_TEST_SERVER  = "https://my-evisa.azurewebsites.net";
+  private API_TEST_SERVER1 = "https://localhost:44372";
+
 
   constructor(private httpClient: HttpClient) { }
   public errorMessage: string = '';
@@ -44,7 +44,7 @@ export class DataService {
     return this.httpClient.get(this.API_TEST_SERVER).pipe(catchError(this.handleError));
   }
 
-  setData(data) { 
+  setData(data) {
     this.apiData.next(data)
   }
 
@@ -93,12 +93,12 @@ export class DataService {
     return this.httpClient.get(this.API_TEST_SERVER+ '/api/AgentByRegistrtionId/'+registerNo).pipe(map(response => response));;
   }
 
-  agentRegister(agent){    
+  agentRegister(agent){
     //var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
     var httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
-    return this.httpClient.post(this.API_TEST_SERVER + '/api/Agencies', 
+    return this.httpClient.post(this.API_TEST_SERVER + '/api/Agencies',
       {
         "RegistrationNo":agent.RegistrationNo,
         "AgencyType":agent.AgencyType,
@@ -117,19 +117,19 @@ export class DataService {
         "ActiveStatus":"Y"
       } ,httpOptions)
       //.pipe(catchError(this.handleError));
-      .pipe(  
-        map(res => res),  
-        catchError((error: HttpErrorResponse) => {  
-          return throwError(error);  
+      .pipe(
+        map(res => res),
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
         }));
 
   }
 
-  updateAgent(agent,agencyId){   
+  updateAgent(agent,agencyId){
     var httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
-    return this.httpClient.put(this.API_TEST_SERVER + '/api/Agencies/'+agencyId, 
+    return this.httpClient.put(this.API_TEST_SERVER + '/api/Agencies/'+agencyId,
       {
         "AgencyID":agencyId,
         "RegistrationNo":agent.RegistrationNo,
@@ -149,10 +149,10 @@ export class DataService {
         "ActiveStatus":"Y"
       } ,httpOptions)
       //.pipe(catchError(this.handleError));
-      .pipe(  
-        map(res => res),  
-        catchError((error: HttpErrorResponse) => {  
-          return throwError(error);  
+      .pipe(
+        map(res => res),
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
         }));
 
   }
@@ -167,7 +167,7 @@ export class DataService {
     var httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
-    return this.httpClient.post(this.API_TEST_SERVER + '/api/Contacts', 
+    return this.httpClient.post(this.API_TEST_SERVER + '/api/Contacts',
       {
         "IDNumber":agentContact.idNo,
         "Name":agentContact.firstName,
@@ -183,10 +183,10 @@ export class DataService {
         "AgencyID":agentContact.Agency,
         "CenterID":agentContact.centerId
       } ,httpOptions)
-      .pipe(  
-        map(res => res),  
-        catchError((error: HttpErrorResponse) => {  
-          return throwError(error);  
+      .pipe(
+        map(res => res),
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
         }));
 
   }
@@ -195,7 +195,7 @@ export class DataService {
     var httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
-    return this.httpClient.put(this.API_TEST_SERVER + '/api/Contacts/'+contactId, 
+    return this.httpClient.put(this.API_TEST_SERVER + '/api/Contacts/'+contactId,
       {
         "ContactID":contactId,
         "IDNumber":agentContact.idNo,
@@ -212,31 +212,31 @@ export class DataService {
         "AgencyID":agentContact.Agency,
         "CenterID":agentContact.centerId
       } ,httpOptions)
-      .pipe(  
-        map(res => res),  
-        catchError((error: HttpErrorResponse) => {  
-          return throwError(error);  
+      .pipe(
+        map(res => res),
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
         }));
 
   }
 
   getContact():Observable<any>{
    var accessToken=  localStorage.getItem('auth-token');
-    console.log(accessToken);    
+    console.log(accessToken);
     var httpOptions = {
       headers: new HttpHeaders().set('Authorization', `Bearer ${accessToken}` )
-    } 
+    }
     // let header = new Headers({ 'Authorization': `Bearer ${token}` });
     // const options = new RequestOptions({
     //    headers: header,
-    // }); 
+    // });
     return this.httpClient
     .get(this.API_TEST_SERVER+ '/api/UserContactsProfile',httpOptions)
     .pipe(map(response => response));
 
   }
 
-  getContactById(Id):Observable<any>{ 
+  getContactById(Id):Observable<any>{
     return this.httpClient.get(this.API_TEST_SERVER+ '/api/Contacts/'+Id);
     //.pipe(map(response => response));
 
@@ -246,7 +246,7 @@ export class DataService {
     var httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
-    return this.httpClient.post(this.API_TEST_SERVER + '/api/Applications', 
+    return this.httpClient.post(this.API_TEST_SERVER + '/api/Applications',
       {
         "ApplicationTypeID":application.ApplicationTypeID,
         "SubmissionType":application.submissionType,
@@ -261,10 +261,10 @@ export class DataService {
         "AcceptedBy":application.AcceptedBy,
         "Status":"Y"
       } ,httpOptions)
-      .pipe(  
-        map(res => res),  
-        catchError((error: HttpErrorResponse) => {  
-          return throwError(error);  
+      .pipe(
+        map(res => res),
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
         }));
 
   }
@@ -274,7 +274,7 @@ export class DataService {
     var httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
-    return this.httpClient.put(this.API_TEST_SERVER + '/api/Applications/'+applicationID, 
+    return this.httpClient.put(this.API_TEST_SERVER + '/api/Applications/'+applicationID,
       {
         "ApplicationID":applicationID,
         "ApplicationTypeID":application.ApplicationTypeID,
@@ -290,21 +290,21 @@ export class DataService {
         "AcceptedBy":application.AcceptedBy,
         "Status":"Y"
       } ,httpOptions)
-      .pipe(  
-        map(res => res),  
-        catchError((error: HttpErrorResponse) => {  
-          return throwError(error);  
+      .pipe(
+        map(res => res),
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
         }));
 
   }
 
-  getApplications():Observable<any>{   
+  getApplications():Observable<any>{
      return this.httpClient
      .get(this.API_TEST_SERVER+ '/api/ApplicationsByUser')
      .pipe(
        map(response => response),
-        catchError((error: HttpErrorResponse) => {  
-        return throwError(error);  
+        catchError((error: HttpErrorResponse) => {
+        return throwError(error);
         })
       );
  }
@@ -313,12 +313,12 @@ export class DataService {
     return this.httpClient
     .get(this.API_TEST_SERVER+ '/api/ApplicationTypes')
     .pipe(map(response => response),
-    catchError((error: HttpErrorResponse) => {  
-      return throwError(error);  
+    catchError((error: HttpErrorResponse) => {
+      return throwError(error);
       }));
   }
 
-  getApplicationById(appId):Observable<any>{ 
+  getApplicationById(appId):Observable<any>{
     return this.httpClient.get(this.API_TEST_SERVER+ '/api/Applications/'+appId);
     //.pipe(map(response => response));
 
@@ -329,8 +329,8 @@ export class DataService {
     var httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
-    
-    return this.httpClient.post(this.API_TEST_SERVER + '/api/Applicants', 
+
+    return this.httpClient.post(this.API_TEST_SERVER + '/api/Applicants',
       {
         "ApplicationID":applicant.Application,
         "FullName":applicant.FullName,
@@ -350,10 +350,10 @@ export class DataService {
         "Email":applicant.Email,
         "Photo":""
       } ,httpOptions)
-      .pipe(  
-        map(res => res),  
-        catchError((error: HttpErrorResponse) => {  
-          return throwError(error);  
+      .pipe(
+        map(res => res),
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
         })
       );
   }
@@ -363,8 +363,8 @@ export class DataService {
     var httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
-    
-    return this.httpClient.put(this.API_TEST_SERVER + '/api/Applicants/'+applicantId, 
+
+    return this.httpClient.put(this.API_TEST_SERVER + '/api/Applicants/'+applicantId,
       {
         "ApplicantID":applicantId,
         "ApplicationID":applicationId,
@@ -385,10 +385,10 @@ export class DataService {
         "Email":applicant.Email,
         "Photo":""
       } ,httpOptions)
-      .pipe(  
-        map(res => res),  
-        catchError((error: HttpErrorResponse) => {  
-          return throwError(error);  
+      .pipe(
+        map(res => res),
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
         })
       );
   }
@@ -399,8 +399,8 @@ export class DataService {
     var httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
-    
-    return this.httpClient.post(this.API_TEST_SERVER + '/api/TravelDocuments', 
+
+    return this.httpClient.post(this.API_TEST_SERVER + '/api/TravelDocuments',
       {
         "ApplicantID":travelDocument.Applicant,
         "PassportNo":travelDocument.PassportNo,
@@ -409,12 +409,12 @@ export class DataService {
         "IssuingCountry":travelDocument.IssuingCountry,
         "IssuingAuthority":travelDocument.IssuingAuthority,
         "IssuingDate":issueDate,
-        "ExpiryDate":expiryDate       
+        "ExpiryDate":expiryDate
       } ,httpOptions)
-      .pipe(  
-        map(res => res),  
-        catchError((error: HttpErrorResponse) => {  
-          return throwError(error);  
+      .pipe(
+        map(res => res),
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
         }));
 
   }
@@ -425,8 +425,8 @@ export class DataService {
     var httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
-    
-    return this.httpClient.put(this.API_TEST_SERVER + '/api/TravelDocuments/'+DocumentId, 
+
+    return this.httpClient.put(this.API_TEST_SERVER + '/api/TravelDocuments/'+DocumentId,
       {
         "DocumentID" : DocumentId,
         "ApplicantID":travelDocument.Applicant,
@@ -436,18 +436,18 @@ export class DataService {
         "IssuingCountry":travelDocument.IssuingCountry,
         "IssuingAuthority":travelDocument.IssuingAuthority,
         "IssuingDate":issueDate,
-        "ExpiryDate":expiryDate       
+        "ExpiryDate":expiryDate
       } ,httpOptions)
-      .pipe(  
-        map(res => res),  
-        catchError((error: HttpErrorResponse) => {  
-          return throwError(error);  
+      .pipe(
+        map(res => res),
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
         }));
 
   }
 
-  getTravelDocById(docId):Observable<any>{  
-    console.log("doc "+docId); 
+  getTravelDocById(docId):Observable<any>{
+    console.log("doc "+docId);
     return this.httpClient.get(this.API_TEST_SERVER+ '/api/TravelDocuments/'+docId);
     //.pipe(map(response => response));
 
@@ -459,20 +459,20 @@ export class DataService {
     var httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
-    
-    return this.httpClient.post(this.API_TEST_SERVER + '/api/VisaApplications', 
+
+    return this.httpClient.post(this.API_TEST_SERVER + '/api/VisaApplications',
       {
         "ApplicantID":visaApplication.ApplicantID,
         "DurationOfVisit":visaApplication.DurationOfVisit,
         "PurposeOfVisit":visaApplication.PurposeOfVisit,
         "VisaTypeID":visaApplication.VisaTypeID,
         "ApprovalDate":issueDate,
-        "ApprovalStatus":"P"       
+        "ApprovalStatus":"P"
       } ,httpOptions)
-      .pipe(  
-        map(res => res),  
-        catchError((error: HttpErrorResponse) => {  
-          return throwError(error);  
+      .pipe(
+        map(res => res),
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
         }));
 
   }
@@ -485,20 +485,20 @@ export class DataService {
     return this.httpClient.get(this.API_TEST_SERVER+ '/api/VisaApplications/'+visaNo).pipe(map(response => response));
   }
 
-  forgotPassword(forgotPassword):Observable<any>{    
+  forgotPassword(forgotPassword):Observable<any>{
    var httpOptions = {
      headers: new HttpHeaders({'Content-Type': 'application/json'})
    }
-   
-   return this.httpClient.post(this.API_TEST_SERVER + '/api/Account/ForgetPassword', 
+
+   return this.httpClient.post(this.API_TEST_SERVER + '/api/Account/ForgetPassword',
      {
        "NricNo":forgotPassword.Email,
        "Newpassword":forgotPassword.NewPassword
      } )
-     .pipe(  
-       map(res => res),  
-       catchError((error: HttpErrorResponse) => {  
-         return throwError(error);  
+     .pipe(
+       map(res => res),
+       catchError((error: HttpErrorResponse) => {
+         return throwError(error);
        }));
 
  }
@@ -510,8 +510,8 @@ export class DataService {
   getTravelDocumentByApplicantId(applicantId):Observable<any>{
     var params=new HttpParams();
     params=params.append('applicantid',applicantId);
-    return this.httpClient.get(this.API_TEST_SERVER+ '/api/TravelDocumentByApplicantID', {params: params}).pipe(map(response => response),catchError((error: HttpErrorResponse) => {  
-      return throwError(error);  
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/TravelDocumentByApplicantID', {params: params}).pipe(map(response => response),catchError((error: HttpErrorResponse) => {
+      return throwError(error);
     }));
 
   }
@@ -519,8 +519,8 @@ export class DataService {
   getApplicantStatusByVisaRefNo(visaRefNo ):Observable<any>{
     var params=new HttpParams();
     params=params.append('visaRefNo',visaRefNo);
-    return this.httpClient.get(this.API_TEST_SERVER+ '/api/ApplicantByVisaRefNo', {params: params}).pipe(map(response => response),catchError((error: HttpErrorResponse) => {  
-      return throwError(error);  
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/ApplicantByVisaRefNo', {params: params}).pipe(map(response => response),catchError((error: HttpErrorResponse) => {
+      return throwError(error);
     }));
   }
 }

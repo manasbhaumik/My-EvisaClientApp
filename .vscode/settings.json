@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/ab77a170-5076-418d-ab0c-ba8424335547/resourceGroups/ARB_Berhad-032020/providers/Microsoft.Web/sites/MyE-Visa",
+    "appService.deploySubpath": "dist"
+}
