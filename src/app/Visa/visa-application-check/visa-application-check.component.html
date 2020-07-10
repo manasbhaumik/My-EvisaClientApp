@@ -1,0 +1,71 @@
+<app-member></app-member>
+<div class="container-fluid">
+
+
+    <div class="row py-5">
+        <div class="col-md-2 order-md-1">
+        </div>
+        <div class="col-md-8 order-md-1">
+            <div class="py-2">
+                <!--<img class="d-block mx-auto mb-4" src="assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
+                <h3>{{title}}</h3>
+                <hr class="mb-4">
+            </div>
+
+            <div class="row">
+                <!-- <div class="col-md-4 order-md-2 mb-4">
+                    <span><b>Group Application :</b></span>
+                    <p>
+                        Group application type selection for a group of peoples with same visa duration or same visa type application.
+                        (E.G: Tour group , Company Delegates or Family Memebers who are going to Malaysia for a same periodof of time for bussiness or visting purpose.)
+                    </p>
+                    <span><b>Individual Application :</b></span>
+                    <p>
+                        Individual application type  selection for single person who is visting malaysia or going to reside in malaysia with sponsorship of Malaysian individual or
+                        Comapny.
+                        (E.G: Tourist, Student,Employee of a company  or visting malaysia for bussiness purpose)
+                    </p>
+
+                </div> -->
+                <div class="col-md-12 order-md-1">                   
+                    <form class="needs-validation" [formGroup]="visaApplicationCheckForm"   (ngSubmit)="SearchApplicant()">
+                        <div class="mb-3">
+                            <label for="country"><b>MyE-Visa Reference Number</b></label>
+                            <div class="input-group">
+                               <div class="col-md-6">
+                                <input type="text" formControlName="visaRefNo"  class="form-control" id="chkVisaRefNo" placeholder="" [ngClass]="{ 'is-invalid': isSubmitted && f.visaRefNo.errors }" >
+                                <div *ngIf="isSubmitted && f.visaRefNo.errors" class="invalid-feedback">
+                                    <div *ngIf="f.visaRefNo.errors.required">Applicant Reference Number Required</div>                                    
+                                </div>
+                               </div>
+                                
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary btn-md" type="submit">Enter</button>
+                                </div>
+                                
+                            </div>                                
+                        </div>
+                        
+                        
+                       
+                       
+                        
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 order-md-2">
+                    <div *ngIf="applicantStatusList?.length">
+                        <button class="btn btn-primary btn-md" type="submit" (click)="goToSubmitApplication(applicantStatusList[0].ApplicationID)">Application Submitted</button>&nbsp;
+                        <button class="btn btn-primary btn-md" type="submit" (click)="popupApplicationStatus(applicantStatusList[0].Status)">Application Status</button>&nbsp;
+                        <button class="btn btn-primary btn-md" type="submit" (click)="popupDateofSubmission(applicantStatusList[0].SubmissionDate)">Date of Submission</button>&nbsp;
+                        <button class="btn btn-primary btn-md" type="submit" (click)="popupVisaStatus(applicantStatusList[0].Applicants[0].VisaApplications[0].ApprovalStatus)">Visa Status</button>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -15,8 +15,8 @@ export class DataService {
   public apiData$ = this.apiData.asObservable();
 
   private API_LOCAL_SERVER = "https://localhost:44372/api/Account";
-  private API_TEST_SERVER  = "http://192.168.0.10/ARB-Service";
-  private API_TEST_SERVER1 = "https://localhost:44372";   
+  private API_TEST_SERVER1  = "http://192.168.0.10/ARB-Service";
+  private API_TEST_SERVER = "https://localhost:44372";   
                         
 
   constructor(private httpClient: HttpClient) { }
@@ -170,7 +170,36 @@ export class DataService {
     return this.httpClient.post(this.API_TEST_SERVER + '/api/Contacts', 
       {
         "IDNumber":agentContact.idNo,
-        "Name":agentContact.firstName+' '+agentContact.contactLastName,
+        "Name":agentContact.firstName,
+        "ContactNo":agentContact.ContactNo,
+        "AltContactNo":agentContact.AltContactNo,
+        "Address":agentContact.Address,
+        "City":agentContact.City,
+        "State":agentContact.State,
+        "CountryID":agentContact.Country,
+        "Email":agentContact.Email,
+        "WhatsappNo":"1",
+        "Status":"Y",
+        "AgencyID":agentContact.Agency,
+        "CenterID":agentContact.centerId
+      } ,httpOptions)
+      .pipe(  
+        map(res => res),  
+        catchError((error: HttpErrorResponse) => {  
+          return throwError(error);  
+        }));
+
+  }
+
+  updateContact(agentContact,contactId){
+    var httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+    return this.httpClient.put(this.API_TEST_SERVER + '/api/Contacts/'+contactId, 
+      {
+        "ContactID":contactId,
+        "IDNumber":agentContact.idNo,
+        "Name":agentContact.firstName,
         "ContactNo":agentContact.ContactNo,
         "AltContactNo":agentContact.AltContactNo,
         "Address":agentContact.Address,
@@ -204,6 +233,12 @@ export class DataService {
     return this.httpClient
     .get(this.API_TEST_SERVER+ '/api/UserContactsProfile',httpOptions)
     .pipe(map(response => response));
+
+  }
+
+  getContactById(Id):Observable<any>{ 
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/Contacts/'+Id);
+    //.pipe(map(response => response));
 
   }
 
@@ -479,5 +514,13 @@ export class DataService {
       return throwError(error);  
     }));
 
+  }
+
+  getApplicantStatusByVisaRefNo(visaRefNo ):Observable<any>{
+    var params=new HttpParams();
+    params=params.append('visaRefNo',visaRefNo);
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/ApplicantByVisaRefNo', {params: params}).pipe(map(response => response),catchError((error: HttpErrorResponse) => {  
+      return throwError(error);  
+    }));
   }
 }

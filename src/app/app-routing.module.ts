@@ -15,6 +15,7 @@ import { TravelDocumentComponent } from './Visa/travel-document/travel-document.
 import {SubmitApplicationComponent} from './Visa/submit-application/submit-application.component';
 import {BioMetricInfoComponent} from './Visa/bio-metric-info/bio-metric-info.component';
 import { ForgotPasswordComponent } from './User/forgot-password/forgot-password.component';
+import { VisaApplicationCheckComponent } from './Visa/visa-application-check/visa-application-check.component';
 
 
 const approutes: Routes = [   
@@ -33,6 +34,7 @@ const approutes: Routes = [
   { path: 'submit-application',component:SubmitApplicationComponent},
   { path: 'bio-metric-info',component:BioMetricInfoComponent},
   { path: 'forgot-password',component:ForgotPasswordComponent},
+  { path: 'visa-application-check',component:VisaApplicationCheckComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -27,6 +27,10 @@ export class AgencyContactDetailComponent implements OnInit {
   returnUrl: string;
   error : string;
   strAgencyId : string;
+  contactList : any;
+  contactID : number;
+  isEdited=false;
+  buttonTitle = "Save Contact Information";
 
   constructor(
     private fb: FormBuilder,
@@ -47,9 +51,11 @@ export class AgencyContactDetailComponent implements OnInit {
     this.activeRouter.params.subscribe(params => {
     var agencyId = params['agentId'];
     var Country=params['countryId'];
+    var contactId = params['contactId'];
     this.AgencyID=agencyId; 
     this.strAgencyId=agencyId;
-    this.countryId=Country;   
+    this.countryId=Country;  
+    this.contactID =  contactId;
     });    
     // this.dataService.getCenterByCountryId(this.countryId).subscribe(res => {this.centerList = res});
     //this.dataService.getCountiesByCountryId(this.countryId).subscribe(res => {this.CountryList = res});
@@ -65,8 +71,28 @@ export class AgencyContactDetailComponent implements OnInit {
       this.agencyContactForm.get('Country').enable();
       //this.agencyContactForm.get('Agency').setValue(0);
     }
+
+    if(this.contactID !== undefined){
+      this.dataService.getContactById(this.contactID).subscribe(res=>{
+        this.contactList = res;
+        this.isEdited=true;
+        this.buttonTitle = "Update contact information";
+
+        this.agencyContactForm.get('firstName').setValue(this.contactList.Name);
+        this.agencyContactForm.get('Country').setValue(this.contactList.CountryID);
+        this.agencyContactForm.get('centerId').setValue(this.contactList.CenterID);
+        this.agencyContactForm.get('idNo').setValue(this.contactList.IDNumber);
+        this.agencyContactForm.get('Email').setValue(this.contactList.Email);
+        this.agencyContactForm.get('ContactNo').setValue(this.contactList.ContactNo);
+        this.agencyContactForm.get('AltContactNo').setValue(this.contactList.AltContactNo);
+        this.agencyContactForm.get('Address').setValue(this.contactList.Address);
+        this.agencyContactForm.get('City').setValue(this.contactList.City);
+        this.agencyContactForm.get('State').setValue(this.contactList.State);
+
+      });
+    }
     
-   // console.log(this.AgencyID);
+   
   }
 
   regionChange(e){
@@ -77,7 +103,7 @@ export class AgencyContactDetailComponent implements OnInit {
   agencyContactForm=this.fb.group({
 
     firstName:['',Validators.required],
-    contactLastName:['',Validators.required],
+    //contactLastName:['',Validators.required],
     idNo:['',Validators.required],
     ContactNo:['',Validators.required],
     AltContactNo:[''],
@@ -101,30 +127,65 @@ export class AgencyContactDetailComponent implements OnInit {
       return;
     }
     console.log(this.agencyContactForm.getRawValue());
-    this.dataService.saveAgencyContact(this.agencyContactForm.getRawValue())
-    .subscribe((data:any)=>{
-      console.log(data);
-      var dialogRef= this.dialog.open(ModalComponent,{ data: {
-        message : data,//"Contact agent registered Successfully",
-        title : "Success",
-        buttonText : "Ok"
-      }});  
-      dialogRef.afterClosed().subscribe(
-        result => {
-         console.log('The dialog was closed',result);
-         this.returnUrl = result;
-         //this.ngOnInit();
+
+    if(this.isEdited == true){
+
+      this.dataService.updateContact(this.agencyContactForm.getRawValue(),this.contactID)
+      .subscribe((data:any)=>{
+        //console.log(data);
+        var dialogRef= this.dialog.open(ModalComponent,{ data: {
+          message : "Contact information updated Successfully",
+          title : "Success",
+          buttonText : "Ok"
+        }});  
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed',result);
+          this.returnUrl = result;
+          //this.ngOnInit();
+          this.router.navigate(['/agency-contact-detail',{agentId:this.AgencyID,countryId:this.countryId,contactId:this.contactID}]);
+        }); 
+      },
+      error=>{
+        this.error=error.error.Message;
+        console.log(error.error.Message);
+        var dialogRef =this.dialog.open(ModalComponent,{ data: {
+          message : this.error,
+          title : "Alert!",
+          buttonText : "Cancel"
+        }});
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed',result);
+          this.returnUrl = result;
+          result ? this.router.navigate(['/agency-details']): this.router.navigate(['/agency-contact-detail',{agentId:this.AgencyID,countryId:this.countryId,contactId:this.contactID}]);
+        });
+
+      });
+
+    }
+    else{
+
+      this.dataService.saveAgencyContact(this.agencyContactForm.getRawValue())
+      .subscribe((data:any)=>{
+        //console.log(data);
+        var dialogRef= this.dialog.open(ModalComponent,{ data: {
+          message : data,//"Contact agent registered Successfully",
+          title : "Success",
+          buttonText : "Ok"
+        }});  
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed',result);
+          this.returnUrl = result;
+          //this.ngOnInit();
           this.router.navigate(['/']);
-        }
-      ); 
-    },
-    error=>{
-      this.error=error.error.Message;
-      console.log(error.error.Message);
-      var dialogRef =this.dialog.open(ModalComponent,{ data: {
-        message : this.error,
-        title : "Alert!",
-        buttonText : "Cancel"
+        }); 
+      },
+      error=>{
+        this.error=error.error.Message;
+        console.log(error.error.Message);
+        var dialogRef =this.dialog.open(ModalComponent,{ data: {
+          message : this.error,
+          title : "Alert!",
+          buttonText : "Cancel"
         }});
         dialogRef.afterClosed().subscribe(result => {
           console.log('The dialog was closed',result);
@@ -132,10 +193,9 @@ export class AgencyContactDetailComponent implements OnInit {
           result ? this.router.navigate(['/agency-details']): this.router.navigate(['/agency-contact-detail',{agentId:this.AgencyID,countryId:this.countryId}]);
         });
 
+      });
+
     }
-
-    );
-
   }
 
 }

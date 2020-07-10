@@ -31,19 +31,19 @@
                 <div class="col-md-8 order-md-1 mb-4">
                     <form class="needs-validation" [formGroup]="agencyContactForm" (ngSubmit)="SaveAgencyContact()">
                         <div class="mb-3">
-                            <label for="firstName">First name</label>
+                            <label for="firstName">Name</label>
                             <input type="text" formControlName="firstName" class="form-control" id="firstName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.firstName.errors }">
                             <div *ngIf="isSubmitted && f.firstName.errors" class="invalid-feedback">
                                 <div *ngIf="f.firstName.errors.required">First name Required</div>                                    
                             </div> 
                         </div>
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label for="lastName">Last name</label>
                             <input type="text" formControlName="contactLastName" class="form-control" id="lastName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.contactLastName.errors }">
                             <div *ngIf="isSubmitted && f.contactLastName.errors" class="invalid-feedback">
                                 <div *ngIf="f.contactLastName.errors.required">Last name Required</div>                                    
                             </div> 
-                        </div>
+                        </div> -->
                         <div class="mb-3">
                             <label for="country">Country</label>
                             <select formControlName="Country" class="custom-select d-block w-100" (change)="regionChange($event)" id="country" required>
@@ -110,7 +110,7 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+                            <label for="address2">Address 1 <span class="text-muted">(Optional)</span></label>
                             <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
                         </div>
 
@@ -140,7 +140,7 @@
                         
                        
 
-                        <button class="btn btn-primary btn-md" type="submit">Continue to Contact Information</button>&nbsp;
+                        <button class="btn btn-primary btn-md" type="submit">{{buttonTitle}}</button>&nbsp;
                         <button class="btn btn-danger btn-md" type="submit">Cancel</button>
 
                     </form>

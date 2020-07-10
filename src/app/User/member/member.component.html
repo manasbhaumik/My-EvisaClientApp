@@ -10,11 +10,14 @@
                 <a class="nav-link" routerLink="/visa-application" style="font-size: 17px;">Visa Applications</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" style="font-size: 17px;">Notifications</a>
+                <a class="nav-link" routerLink="/visa-application-check" style="font-size: 17px;">Check Application Status</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" style="font-size: 17px;">Users</a>
+                <a class="nav-link" href="#" style="font-size: 17px;">Notifications</a>
             </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" routerLink="/member-list" style="font-size: 17px;">Application List(s)</a>
+            </li> -->
 
         </ul>
     </div>
@@ -29,7 +32,7 @@
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" [routerLink]="['/agency-contact-detail',{agentId:0,countryId:countryID,contactId:contactID}]">
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                         Profile
                     </a>

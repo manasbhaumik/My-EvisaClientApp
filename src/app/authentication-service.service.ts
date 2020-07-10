@@ -19,8 +19,8 @@ import { map,catchError } from 'rxjs/operators';
 
 export class AuthenticationServiceService {
 
-  private TEST_API_SERVER1 = "https://localhost:44372";
-  private TEST_API_SERVER  = "http://192.168.0.10/ARB-Service";
+  private TEST_API_SERVER = "https://localhost:44372";
+  private TEST_API_SERVER1  = "http://192.168.0.10/ARB-Service";
 
 
   constructor(private httpClient:HttpClient) { }

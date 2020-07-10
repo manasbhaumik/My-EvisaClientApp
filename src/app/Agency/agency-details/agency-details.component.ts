@@ -36,6 +36,7 @@ export class AgencyDetailsComponent implements OnInit {
   totalAgent:number;
   agentByRegisterNoList : any;
   isEdited=false;
+  buttonTitle = "Save & Continue to Contact Information";
   
   // RegionList : any = ["China","Australia","Taiwan","Indonesia","Bangladesh","Nepal","Pakistan","India"
   //                       ,"Cambodia","Myanmar","Philippines","Vietnam","Nigeria","Sri Lanka","Saudi Arabia"
@@ -89,6 +90,7 @@ export class AgencyDetailsComponent implements OnInit {
           {
             this.AgentList = res;
             this.isEdited=true;
+            this.buttonTitle = "Update Agency information";
             console.log(this.AgentList); 
             console.log(this.AgentList.RegistrationNo);
             console.log(this.AgentList.Country.CountryName);
@@ -368,7 +370,7 @@ export class AgencyDetailsComponent implements OnInit {
       this.dataService.agentRegister(this.agencyRegisterForm.getRawValue())
       .subscribe((data:any)=>{
        var dialogRef= this.dialog.open(ModalComponent,{ data: {
-          message : "Agent registered Successfully",
+          message : "Agent registered Successfully, click ok to fill contact information",
           title : "Success",
           buttonText : "Ok"
           }});  
