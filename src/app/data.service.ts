@@ -15,8 +15,8 @@ export class DataService {
   public apiData$ = this.apiData.asObservable();
 
   private API_LOCAL_SERVER = "https://localhost:44372/api/Account";
-  private API_TEST_SERVER1  = "http://192.168.0.10/ARB-Service";
-  private API_TEST_SERVER = "https://localhost:44372";   
+  private API_TEST_SERVER  = "http://192.168.0.10/ARB-Service";
+  private API_TEST_SERVER1 = "https://localhost:44372";   
                         
 
   constructor(private httpClient: HttpClient) { }

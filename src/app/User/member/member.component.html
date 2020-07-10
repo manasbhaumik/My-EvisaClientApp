@@ -13,7 +13,10 @@
                 <a class="nav-link" routerLink="/visa-application-check" style="font-size: 17px;">Check Application Status</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" style="font-size: 17px;">Notifications</a>
+                <a class="nav-link" [routerLink]="['/notification',{contactId:contactID}]" style="font-size: 17px;">Notifications
+                    <!-- <i class="fas fa-bell fa-fw"></i> -->
+                    <!-- <span class="badge badge-danger badge-counter">3+</span>  -->
+                </a>
             </li>
             <!-- <li class="nav-item">
                 <a class="nav-link" routerLink="/member-list" style="font-size: 17px;">Application List(s)</a>

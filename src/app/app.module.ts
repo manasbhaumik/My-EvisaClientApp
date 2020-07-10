@@ -35,6 +35,7 @@ import { BioMetricInfoComponent } from './Visa/bio-metric-info/bio-metric-info.c
 import { ChartsModule } from 'ng2-charts';
 import { ForgotPasswordComponent } from './User/forgot-password/forgot-password.component';
 import { VisaApplicationCheckComponent } from './Visa/visa-application-check/visa-application-check.component';
+import { NotificationComponent } from './Visa/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { VisaApplicationCheckComponent } from './Visa/visa-application-check/vis
     SubmitApplicationComponent,
     BioMetricInfoComponent,
     ForgotPasswordComponent,
-    VisaApplicationCheckComponent
+    VisaApplicationCheckComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
