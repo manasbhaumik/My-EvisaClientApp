@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/myevisa",
+            "outputPath": "docs/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -42,7 +42,6 @@
               "node_modules/chart.js/dist/Chart.min.js",
               "src/assets/js/demo/chart-pie-demo.js",
               "src/assets/js/demo/chart-bar-demo.js"
-            
             ]
           },
           "configurations": {
@@ -139,5 +138,8 @@
       }
     }
   },
-  "defaultProject": "myevisa"
+  "defaultProject": "myevisa",
+  "cli": {
+    "analytics": "05b81c73-d888-4133-8752-4da8a9883d00"
+  }
 }
