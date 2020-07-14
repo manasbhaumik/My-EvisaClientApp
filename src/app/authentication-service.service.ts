@@ -20,8 +20,8 @@ import { map,catchError } from 'rxjs/operators';
 export class AuthenticationServiceService {
 
   private TEST_API_SERVER1 = "https://localhost:44372";
-  private TEST_API_SERVER  = "http://192.168.0.10/ARB-Service";
-
+  private TEST_API_SERVER2  = "http://192.168.0.10/ARB-Service";
+  private TEST_API_SERVER  = "https://my-evisa.azurewebsites.net";
 
   constructor(private httpClient:HttpClient) { }
   public errorMessage: string = '';
@@ -57,10 +57,10 @@ export class AuthenticationServiceService {
     var reqHeader = new HttpHeaders({ 'Accept': 'application/json','Content-Type': 'application/x-www-form-urlencoded','No-Auth':'True' });
     return this.httpClient.post(this.TEST_API_SERVER + '/token', data)
       //.pipe(catchError(this.handleError));
-      .pipe(  
-        map(res => res),  
-        catchError((error: HttpErrorResponse) => {  
-          return throwError(error);  
+      .pipe(
+        map(res => res),
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
         }));
   }
 
@@ -71,17 +71,17 @@ export class AuthenticationServiceService {
       }));
   }
 
-  private encodeParams(params: any): string {  
-  
-    let body: string = "";  
-    for (let key in params) {  
-        if (body.length) {  
-            body += "&";  
-        }  
-        body += key + "=";  
-        body += encodeURIComponent(params[key]);  
-    }  
+  private encodeParams(params: any): string {
 
-    return body;  
-  } 
+    let body: string = "";
+    for (let key in params) {
+        if (body.length) {
+            body += "&";
+        }
+        body += key + "=";
+        body += encodeURIComponent(params[key]);
+    }
+
+    return body;
+  }
 }
