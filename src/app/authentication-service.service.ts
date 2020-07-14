@@ -20,6 +20,7 @@ import { map,catchError } from 'rxjs/operators';
 export class AuthenticationServiceService {
 
   private TEST_API_SERVER1 = "https://localhost:44372";
+  private TEST_API_SERVER2  = "http://192.168.0.10/ARB-Service";
   private TEST_API_SERVER  = "https://my-evisa.azurewebsites.net";
 
 

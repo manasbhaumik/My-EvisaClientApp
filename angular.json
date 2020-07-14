@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/myevisa",
+            "outputPath": "docs/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -140,6 +140,6 @@
   },
   "defaultProject": "myevisa",
   "cli": {
-    "analytics": "1e818c77-d902-4bd8-af48-e3aaf97ed3ff"
+    "analytics": "1149fbe2-e3af-47d1-96f3-afea0206e5bc"
   }
 }
