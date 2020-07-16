@@ -12,44 +12,60 @@
                 <hr class="mb-4">
             </div>
             <div class="row">
-                <div class="col-md-4 order-md-2 mb-4">
-                    
+                <div class="col-md-4 order-md-1 mb-4">
+                    <button class="btn btn-primary btn-md" (click)="showEVisa()" type="submit">MYE-Visa Reference</button><br/><br/>
+                    <button class="btn btn-primary btn-md" (click)="showImage()" type="submit" style="padding-right: 30px;">Capture of Image</button><br/><br/>
+                    <button class="btn btn-primary btn-md" (click)="showAFIS()" type="submit" style="padding-right: 20px;">Enrollment of AFIS</button><br/><br/>
+                    <button class="btn btn-primary btn-md" (click)="save()" type="submit" style="padding-right: 50px;">Save & Submit</button><br/><br/>
 
                 </div>
-                <div class="col-md-8 order-md-1">
-                    <!--<h4 class="mb-3">Personal information</h4>
-                    <hr class="mb-4">-->
-                    <form class="needs-validation" >
-                        <div class="row">
-                            <div class="col-md-12 mb-3">
-                                <label for="fullName">Full Name(As Passport)</label>
-                                <input type="text" class="form-control"  id="fullName" placeholder="" value="" >
-                                <div class="invalid-feedback">
-                                    Please enter full name as per passport
+                <div class="col-md-8 order-md-2">
+                   <div *ngIf="divEvisa">
+                        <form class="needs-validation" >
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="fullName">Full Name(As Passport)</label>
+                                    <input type="text" class="form-control"  id="fullName" placeholder="" value="" >
+                                    <div class="invalid-feedback">
+                                        Please enter full name as per passport
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-4">MyE-Visa No : </div>
-                                <!-- <div class="col-md-1">:</div> -->
-                                <input type="label" class="col-md-3 form-control" [value]="">
-                                <!-- <div class="col-md-6">
+                                <div class="form-group row">
+                                    <div class="col-md-4">MyE-Visa No : </div>
+                                    <!-- <div class="col-md-1">:</div> -->
+                                    <input type="label" class="col-md-3 form-control" [value]="">
+                                    <!-- <div class="col-md-6">
                                     <input type="label" class="form-control" [value]=""> 
-                                </div>                             -->
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label for="surName">MyE-Visa No</label>
-                                <input type="text" class="form-control"  id="fullName" placeholder="" value="" >
-                                <div class="invalid-feedback">
-                                    Please enter surname/family name
+                                    </div>                             -->
                                 </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="surName">MyE-Visa No</label>
+                                    <input type="text" class="form-control"  id="fullName" placeholder="" value="" >
+                                    <div class="invalid-feedback">
+                                        Please enter surname/family name
+                                    </div>
+                                </div>
+
+                            </div>   
+                            <!-- <button class="btn btn-primary btn-md" type="submit">Save & Continue</button>&nbsp;
+                            <button class="btn btn-danger btn-md" type="submit">Cancel</button> -->
+                        </form>
+                    </div>
+                    <div *ngIf="divImage">
+                        <div class="d-flex flex-column align-items-center">
+                            <div class="p-1">
+                                <video #video class="vid" autoplay></video>
                             </div>
+                            <div class="pb-2">
+                                <button class="btn btn-primary" (click)="capture()">Capture Image</button>
+                            </div>
+                            <div class="p-1">
+                                <canvas #canvas class="vid"></canvas>
+                            </div>
+                        </div>
 
-                        </div>    
-                        
-
-                        <!-- <button class="btn btn-primary btn-md" type="submit">Save & Continue</button>&nbsp;
-                        <button class="btn btn-danger btn-md" type="submit">Cancel</button> -->
-                    </form>
+                    </div>
+                    
                 </div>
             </div>
             

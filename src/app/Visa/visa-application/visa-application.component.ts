@@ -98,7 +98,7 @@ export class VisaApplicationComponent implements OnInit {
             }
             else{
               this.visaTypeForm.get('TotalApplicant').disable();
-            }alert(this.dFormat);
+            }
           });
 
       }

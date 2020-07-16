@@ -45,9 +45,9 @@ export class SubmitApplicationComponent implements OnInit {
           this.dFormat = this.datePipe.transform(this.dob, 'dd/MM/yyyy');
           this.issueDate=this.datePipe.transform(this.applicationList.Applicants[0].TravelDocuments[0].IssuingDate, 'dd/MM/yyyy')
           this.expiryDate=this.datePipe.transform(this.applicationList.Applicants[0].TravelDocuments[0].ExpiryDate, 'dd/MM/yyyy')
-          var applicationType:number;
-          applicationType=this.applicationList.ApplicationTypeID;
-          if(applicationType == 1){
+          var submissionType:number;
+          submissionType=this.applicationList.SubmissionType;
+          if(submissionType == 1){
             this.applicationDesc="Group of My E-Visa";
           }
           else{
