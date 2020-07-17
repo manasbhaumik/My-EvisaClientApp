@@ -88,6 +88,8 @@ export class ApplicantInformationComponent implements OnInit {
   }
 
   applicantForm=this.fb.group({
+    LastAppliedVisa:[],
+    LastArrivedDate:[],
     FullName:['',Validators.required],
     FamlilyName:['',Validators.required],
     FirstName:['',Validators.required],

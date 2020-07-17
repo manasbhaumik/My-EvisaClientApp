@@ -24,42 +24,42 @@
                             <label class="col-sm-5">Application Type</label>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label><a  [routerLink]="['/visa-application',{applicationId:applicationList.Applicants[0].ApplicationID}]">{{applicationDesc}}</a></label>                                
+                                <label><a  [routerLink]="['/visa-application',{applicationId:applicationList?.Applicants[0].ApplicationID}]">{{applicationDesc}}</a></label>                                
                             </div>                            
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-5">Designated Embassy/Consulate</label>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.Center.CenterName}}</label>                                
+                                <label>{{applicationList?.Center.CenterName}}</label>                                
                             </div>                            
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-5">Number of Person/Traveller</label>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.TotalApplicant}}</label>                                
+                                <label>{{applicationList?.TotalApplicant}}</label>                                
                             </div>                            
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-5">Duration of stay(In days)</label>
+                            <label class="col-sm-5">Duration of stay (In days)</label>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.DurationOfVisit}}</label>                                
+                                <label>{{applicationList?.DurationOfVisit}}</label>                                
                             </div>                            
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-5">Visa Type</label>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.ApplicationType.ApplicationType1}}</label>
+                                <label>{{applicationList?.ApplicationType.ApplicationType1}}</label>
                             </div>                            
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-5">Purposed of journey</div>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.PurposeOfVisit}}</label>
+                                <label>{{applicationList?.PurposeOfVisit}}</label>
                             </div>                            
                         </div>                          
                     </form>
@@ -86,7 +86,7 @@
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
                                 <!-- <label>{{applicationList.Applicants[0].FullName}}</label> -->
-                                <label><a  [routerLink]="['/applicant-information',{applicantId:applicationList.Applicants[0].ApplicantID}]">{{applicationList.Applicants[0].FullName}}</a></label>
+                                <label><a  [routerLink]="['/applicant-information',{applicantId:applicationList?.Applicants[0].ApplicantID}]">{{applicationList?.Applicants[0].FullName}}</a></label>
                                 <!-- <input type="label" class="form-control-plaintext" [value]="applicationList.Applicants[0].FullName"> -->
                             </div>                            
                         </div>
@@ -94,7 +94,7 @@
                             <label class="col-sm-5">Given Name</label>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.Applicants[0].FirstName}}</label>
+                                <label>{{applicationList?.Applicants[0].FirstName}}</label>
                                 <!-- <input type="label" class="form-control-plaintext" [value]="applicationList.Applicants[0].FirstName"> -->
                             </div>                            
                         </div>
@@ -102,7 +102,7 @@
                             <label class="col-sm-5">Family Name</label>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.Applicants[0].FamlilyName}}</label>
+                                <label>{{applicationList?.Applicants[0].FamlilyName}}</label>
                                 <!-- <input type="label" class="form-control-plaintext" [value]="applicationList.Applicants[0].FamlilyName"> -->
                             </div>                            
                         </div>
@@ -118,7 +118,7 @@
                             <label class="col-sm-5">NRIC Number</label>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.Applicants[0].IDNumber}}</label>
+                                <label>{{applicationList?.Applicants[0].IDNumber}}</label>
                                 <!-- <input type="label" class="form-control-plaintext" [value]="applicationList.Applicants[0].DOB"> -->
                             </div>                            
                         </div>
@@ -126,7 +126,7 @@
                             <label class="col-sm-5">Gender</label>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.Applicants[0].Gender}}</label>
+                                <label>{{applicationList?.Applicants[0].Gender}}</label>
                                 <!-- <input type="label" class="form-control-plaintext" [value]="applicationList.Applicants[0].Gender"> -->
                             </div>                            
                         </div>
@@ -135,63 +135,63 @@
                             <div class="col-sm-1">:</div>
                             <!-- <label class="col-sm-4 col-form-label">Nationality</label> -->
                             <div class="col-sm-6">
-                                <label>{{applicationList.Center.Country1.CountryName}}</label>
+                                <label>{{applicationList?.Center.Country1.CountryName}}</label>
                             </div>                            
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-5">Permanent Address</div>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.Applicants[0].Address1}}</label>
+                                <label>{{applicationList?.Applicants[0].Address1}}</label>
                             </div>                            
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-5">Address 1</div>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.Applicants[0].Address2}}</label>
+                                <label>{{applicationList?.Applicants[0].Address2}}</label>
                             </div>                            
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-5">Address 2</div>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.Applicants[0].Address3}}</label>
+                                <label>{{applicationList?.Applicants[0].Address3}}</label>
                             </div>                            
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-5">Postcode</div>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.Applicants[0].PostCode}}</label>
+                                <label>{{applicationList?.Applicants[0].PostCode}}</label>
                             </div>                            
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-5">City</div>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.Applicants[0].City}}</label>
+                                <label>{{applicationList?.Applicants[0].City}}</label>
                             </div>                            
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-5">State / Provence</div>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.Applicants[0].State}}</label>
+                                <label>{{applicationList?.Applicants[0].State}}</label>
                             </div>                            
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-5">Telephone No</div>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.Applicants[0].ContactNo}}</label>
+                                <label>{{applicationList?.Applicants[0].ContactNo}}</label>
                             </div>                            
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-5">Email Address</div>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.Applicants[0].Email}}</label>
+                                <label>{{applicationList?.Applicants[0].Email}}</label>
                             </div>                            
                         </div>
                     </form>
@@ -218,32 +218,39 @@
                 <div class="card-body">
                    <form>
                         <div class="form-group row">
+                            <div class="col-sm-5">Type of Passport / Travel Document</div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-6">                            
+                                <label>{{applicationList?.Applicants[0].TravelDocuments[0].DocumentType}}</label>
+                            </div>                            
+                        </div>
+                        <div class="form-group row">
                             <div class="col-sm-5">Passport Number</div>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
                                 <!-- <label>{{applicationList.Applicants[0].TravelDocuments[0].PassportNo}}</label> -->
-                                <a [routerLink]="['/travel-document',{applicantId:applicationList.Applicants[0].ApplicantID}]">{{applicationList.Applicants[0].TravelDocuments[0].PassportNo}}</a>
+                                <a [routerLink]="['/travel-document',{applicantId:applicationList?.Applicants[0].ApplicantID}]">{{applicationList?.Applicants[0].TravelDocuments[0].PassportNo}}</a>
                             </div>                            
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-5">Place / Country of Issue</div>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.Applicants[0].TravelDocuments[0].IssuingCountry}}</label>
+                                <label>{{applicationList?.Applicants[0].TravelDocuments[0].IssuingCountry}}</label>
                             </div>                            
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-5">Father Name</div>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.Applicants[0].TravelDocuments[0].FatherName}}</label>
+                                <label>{{applicationList?.Applicants[0].TravelDocuments[0].FatherName}}</label>
                             </div>                            
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-5">Mother Name</div>
                             <div class="col-sm-1">:</div>
                             <div class="col-sm-6">
-                                <label>{{applicationList.Applicants[0].TravelDocuments[0].MotherName}}</label>
+                                <label>{{applicationList?.Applicants[0].TravelDocuments[0].MotherName}}</label>
                             </div>                            
                         </div>
                         <div class="form-group row">
@@ -275,7 +282,7 @@
         
         <div class="col-md-12 order-md-2">
             <div class="card  mb-4">
-                <div *ngIf= "applicationList.Sponsors?.length ; else agentDetail">
+                <div *ngIf= "applicationList?.Sponsors?.length ; else agentDetail">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary" style="font-size: 16px;">D. DETAIL INFORMATION OF AGENT OR SPONSOR</h6>
                     </div>
@@ -285,23 +292,23 @@
                                 <div class="col-sm-5">Full Name (Capital Letter – as per in Passport)</div>
                                 <div class="col-sm-1">:</div>
                                 <div class="col-sm-6">
-                                    <label>{{applicationList.Sponsors[0].Name}}</label>
+                                    <label>{{applicationList?.Sponsors[0].Name}}</label>
                                 </div>                            
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-5">Passport Number</div>
                                 <div class="col-sm-1">:</div>
                                 <div class="col-sm-6">
-                                    <label>{{applicationList.Sponsors[0].NationalIDNumber}}</label>
+                                    <label>{{applicationList?.Sponsors[0].NationalIDNumber}}</label>
                                 </div>                            
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-5">Address</div>
                                 <div class="col-sm-1">:</div>
                                 <div class="col-sm-6">
-                                    <label>{{applicationList.Sponsors[0].Address1}}&nbsp;
-                                        {{applicationList.Sponsors[0].Address2}}&nbsp;
-                                        {{applicationList.Sponsors[0].Address3}}
+                                    <label>{{applicationList?.Sponsors[0].Address1}}&nbsp;
+                                        {{applicationList?.Sponsors[0].Address2}}&nbsp;
+                                        {{applicationList?.Sponsors[0].Address3}}
 
                                     </label>
                                 </div>                            
@@ -317,28 +324,28 @@
                                 <div class="col-sm-5">City</div>
                                 <div class="col-sm-1">:</div>
                                 <div class="col-sm-6">
-                                    <label>{{applicationList.Sponsors[0].City}}</label>
+                                    <label>{{applicationList?.Sponsors[0].City}}</label>
                                 </div>                            
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-5">State / Provence</div>
                                 <div class="col-sm-1">:</div>
                                 <div class="col-sm-6">
-                                    <label>{{applicationList.Sponsors[0].State}}</label>
+                                    <label>{{applicationList?.Sponsors[0].State}}</label>
                                 </div>                            
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-5">Telephone No</div>
                                 <div class="col-sm-1">:</div>
                                 <div class="col-sm-6">
-                                    <label>{{applicationList.Sponsors[0].ContactNo}}</label>
+                                    <label>{{applicationList?.Sponsors[0].ContactNo}}</label>
                                 </div>                            
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-5">Email Address</div>
                                 <div class="col-sm-1">:</div>
                                 <div class="col-sm-6">
-                                    <label>{{applicationList.Sponsors[0].Email}}</label>
+                                    <label>{{applicationList?.Sponsors[0].Email}}</label>
                                 </div>                            
                             </div>
                         </form>
@@ -348,7 +355,7 @@
 
                 </div>
                 <ng-template #agentDetail>
-                    <div *ngIf= "applicationList.Contact.AgencyID!=null">
+                    <div *ngIf= "applicationList?.Contact.AgencyID!=null">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary" style="font-size: 16px;">D. DETAIL INFORMATION OF AGENT OR SPONSOR</h6>
                         </div>
@@ -358,56 +365,56 @@
                                     <div class="col-sm-5">Full Name (Capital Letter – as per in Passport)</div>
                                     <div class="col-sm-1">:</div>
                                     <div class="col-sm-6">
-                                        <label>{{applicationList.Contact.Agency.ContactPerson}}</label>
+                                        <label>{{applicationList?.Contact.Agency.ContactPerson}}</label>
                                     </div>                            
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-5">Passport Number</div>
                                     <div class="col-sm-1">:</div>
                                     <div class="col-sm-6">
-                                        <label>{{applicationList.Contact.IDNumber}}</label>
+                                        <label>{{applicationList?.Contact.IDNumber}}</label>
                                     </div>                            
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-5">Address</div>
                                     <div class="col-sm-1">:</div>
                                     <div class="col-sm-6">
-                                        <label>{{applicationList.Contact.Agency.Address}}</label>
+                                        <label>{{applicationList?.Contact.Agency.Address}}</label>
                                     </div>                            
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-5">Postcode</div>
                                     <div class="col-sm-1">:</div>
                                     <div class="col-sm-6">
-                                        <label>{{applicationList.Contact.Agency.Pincode}}</label>
+                                        <label>{{applicationList?.Contact.Agency.Pincode}}</label>
                                     </div>                            
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-5">City</div>
                                     <div class="col-sm-1">:</div>
                                     <div class="col-sm-6">
-                                        <label>{{applicationList.Contact.Agency.City}}</label>
+                                        <label>{{applicationList?.Contact.Agency.City}}</label>
                                     </div>                            
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-5">State / Provence</div>
                                     <div class="col-sm-1">:</div>
                                     <div class="col-sm-6">
-                                        <label>{{applicationList.Contact.Agency.State}}</label>
+                                        <label>{{applicationList?.Contact.Agency.State}}</label>
                                     </div>                            
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-5">Telephone No</div>
                                     <div class="col-sm-1">:</div>
                                     <div class="col-sm-6">
-                                        <label>{{applicationList.Contact.Agency.ContacNo}}</label>
+                                        <label>{{applicationList?.Contact.Agency.ContacNo}}</label>
                                     </div>                            
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-5">Email Address</div>
                                     <div class="col-sm-1">:</div>
                                     <div class="col-sm-6">
-                                        <label>{{applicationList.Contact.Agency.Email}}</label>
+                                        <label>{{applicationList?.Contact.Agency.Email}}</label>
                                     </div>                            
                                 </div>
                             </form>

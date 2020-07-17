@@ -25,6 +25,7 @@ export class TravelDocumentComponent implements OnInit {
   travelList:any;
   isEdited = false;
   travelDocId : number;
+  documentTypeList:any=["Diplomatic Passport","Ordinary/International Passport","Regular/Service Passport","Emergency Passport"];
 
 
   constructor(
@@ -48,9 +49,10 @@ export class TravelDocumentComponent implements OnInit {
         this.dataService.getTravelDocumentByApplicantId(this.applicantID).subscribe(res=>
           {
             this.travelList = res;
-            //console.log(this.travelList);
+            console.log(this.travelList);
             this.isEdited = true;
             this.travelDocId = this.travelList.DocumentID;
+            this.traveldocForm.get('DocumentType').setValue(this.travelList.DocumentType);
             this.traveldocForm.get('PassportNo').setValue(this.travelList.PassportNo);
             this.traveldocForm.get('fatherName').setValue(this.travelList.FatherName);
             this.traveldocForm.get('motherName').setValue(this.travelList.MotherName);
@@ -76,6 +78,7 @@ export class TravelDocumentComponent implements OnInit {
   get f(){ return this.traveldocForm.controls; }
 
   traveldocForm=this.fb.group({
+    DocumentType:['',Validators.required],
     PassportNo:['',Validators.required],
     IssuingCountry:['',Validators.required],
     IssuingAuthority:[''],
@@ -90,7 +93,7 @@ export class TravelDocumentComponent implements OnInit {
     //console.log(this.traveldocForm.getRawValue());
     // console.log('date:'+this.dobDate);
     //console.log(this.dobDate.day+"/"+this.dobDate.month+"/"+this.dobDate.year);
-
+    console.log(this.traveldocForm.getRawValue());
     this.isSubmitted = true;
     if(this.traveldocForm.invalid){      
      return;

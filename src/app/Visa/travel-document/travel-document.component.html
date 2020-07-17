@@ -38,7 +38,19 @@
                     <!--<h4 class="mb-3">Personal information</h4>
                     <hr class="mb-4">-->
                     <form class="needs-validation" [formGroup]="traveldocForm"  (ngSubmit)="SaveTravelDoc()">
-                        <div class="row">
+                        <div class="mb-3">
+                            <label for="firstName">Type of Passport / Travel Document </label>
+                            <select formControlName="DocumentType" class="custom-select d-block w-100" id="state" [ngClass]="{ 'is-invalid': isSubmitted && f.DocumentType.errors }">
+                                <option value="">Choose...</option>
+                                <option *ngFor="let document of documentTypeList">
+                                    {{document}}
+                                </option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select type of passport
+                            </div>
+                        </div>
+                        <div class="row">                           
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">International Passport Number </label>
                                 <input type="text" formControlName="PassportNo" class="form-control" id="PassportNo" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.PassportNo.errors }">

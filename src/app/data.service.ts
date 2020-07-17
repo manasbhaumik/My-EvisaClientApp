@@ -14,9 +14,8 @@ export class DataService {
   private apiData = new BehaviorSubject<any>(null);
   public apiData$ = this.apiData.asObservable();
 
-  private API_LOCAL_SERVER = "https://localhost:44372/api/Account";
-  private API_TEST_SERVER2  = "http://192.168.0.10/ARB-Service";
-  private API_TEST_SERVER1 = "https://localhost:44372";
+  private API_TEST_SERVER1  = "http://192.168.0.10/ARB-Service";
+  private API_TEST_SERVER2 = "https://localhost:44372";
   private API_TEST_SERVER  = "https://my-evisa.azurewebsites.net";
 
 
@@ -404,6 +403,7 @@ export class DataService {
     return this.httpClient.post(this.API_TEST_SERVER + '/api/TravelDocuments',
       {
         "ApplicantID":travelDocument.Applicant,
+        "DocumentType":travelDocument.DocumentType,
         "PassportNo":travelDocument.PassportNo,
         "FatherName":travelDocument.fatherName,
         "MotherName":travelDocument.motherName,
@@ -431,6 +431,7 @@ export class DataService {
       {
         "DocumentID" : DocumentId,
         "ApplicantID":travelDocument.Applicant,
+        "DocumentType":travelDocument.DocumentType,
         "PassportNo":travelDocument.PassportNo,
         "FatherName":travelDocument.fatherName,
         "MotherName":travelDocument.motherName,
