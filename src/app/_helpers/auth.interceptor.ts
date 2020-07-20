@@ -22,8 +22,8 @@ export class AuthInterceptor implements HttpInterceptor {
         'Content-Type': 'application/json; charset=utf-8',
         Accept: 'application/json',
         //'X-AppName': environment.xAppName,
-        'Cache-Control': 'no-cache',
-        Pragma: 'no-cache',
+        // 'Cache-Control': 'no-cache',
+        // Pragma: 'no-cache',
         'X-Locale': 'en'
       }
     });

@@ -21,30 +21,128 @@
                 </div>
                 <div class="col-md-8 order-md-2">
                    <div *ngIf="divEvisa">
-                        <form class="needs-validation" >
-                            <div class="row">
-                                <div class="col-md-12 mb-3">
-                                    <label for="fullName">Full Name(As Passport)</label>
-                                    <input type="text" class="form-control"  id="fullName" placeholder="" value="" >
-                                    <div class="invalid-feedback">
-                                        Please enter full name as per passport
-                                    </div>
-                                </div>
+                        <form class="needs-validation" [formGroup]="applicantInfoForm"   (ngSubmit)="getApplicantInfo()" >
+                            <div class="row">                               
                                 <div class="form-group row">
-                                    <div class="col-md-4">MyE-Visa No : </div>
-                                    <!-- <div class="col-md-1">:</div> -->
-                                    <input type="label" class="col-md-3 form-control" [value]="">
-                                    <!-- <div class="col-md-6">
-                                    <input type="label" class="form-control" [value]=""> 
-                                    </div>                             -->
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label for="surName">MyE-Visa No</label>
-                                    <input type="text" class="form-control"  id="fullName" placeholder="" value="" >
-                                    <div class="invalid-feedback">
-                                        Please enter surname/family name
+                                    <div class="col-sm-3">MyE-Visa No</div>
+                                    <div class="col-sm-1">:</div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" formControlName="visaRefNo"  id="applicantID" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.visaRefNo.errors }" >
+                                        <div *ngIf="isSubmitted && f.visaRefNo.errors" class="invalid-feedback">
+                                            <div *ngIf="f.visaRefNo.errors.required">Applicant Reference Number Required</div>                                    
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-2">
+                                        <button class="btn btn-primary btn-md" type="submit" >Enter</button><br/><br/>
+
                                     </div>
+                                    
                                 </div>
+                                <div class="col-md-12 order-md-1">
+                                    <div>
+                                        <h6 class="m-0 font-weight-bold" style="font-size: 16px;">PARTICULAR APPLICANT</h6>
+                                    </div>                                    
+                                    <div class="body">
+                                        <form>
+                                            <div class="form-group row">
+                                                <label class="col-sm-5">Full Name</label>
+                                                <div class="col-sm-1">:</div>
+                                                <div class="col-sm-6">
+                                                    <label>{{applicantInfoList[0]?.Applicants[0].FullName}}</label>                                                    
+                                                </div>                            
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-5">Given Name</label>
+                                                <div class="col-sm-1">:</div>
+                                                <div class="col-sm-6">
+                                                    <label>{{applicantInfoList[0]?.Applicants[0].FirstName}}</label>                                                    
+                                                </div>                            
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-5">Family Name</label>
+                                                <div class="col-sm-1">:</div>
+                                                <div class="col-sm-6">
+                                                    <label>{{applicantInfoList[0]?.Applicants[0].FamlilyName}}</label>                                                    
+                                                </div>                            
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-5">Date of Birth</label>
+                                                <div class="col-sm-1">:</div>
+                                                <div class="col-sm-6">
+                                                    <label>{{dFormat}}</label>
+                                                </div>                            
+                                            </div>                                            
+                                            <div class="form-group row">
+                                                <label class="col-sm-5">Gender</label>
+                                                <div class="col-sm-1">:</div>
+                                                <div class="col-sm-6">
+                                                    <label>{{applicantInfoList[0]?.Applicants[0].Gender}}</label>
+                                                </div>                            
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-5">Nationality</div>
+                                                <div class="col-sm-1">:</div>
+                                                <div class="col-sm-6">
+                                                    <label>{{applicantInfoList[0]?.Center.Country1.CountryName}}</label>
+                                                </div>                            
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-5">NRIC Number</label>
+                                                <div class="col-sm-1">:</div>
+                                                <div class="col-sm-6">
+                                                    <label>{{applicantInfoList[0]?.Applicants[0].IDNumber}}</label>
+                                                </div>                            
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div>
+                                        <h6 class="m-0 font-weight-bold" style="font-size: 16px;">PARTICULAR OF PASSPORT / TRAVEL DOCUMENT</h6>
+                                    </div>
+                                    
+                                    <div class="body">
+                                        <form>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">Type of Travel Document</div>
+                                                <div class="col-sm-1">:</div>
+                                                <div class="col-sm-5">                            
+                                                    <label>{{applicantInfoList[0]?.Applicants[0].TravelDocuments[0].DocumentType}}</label>
+                                                </div>                            
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">Passport Number</div>
+                                                <div class="col-sm-1">:</div>
+                                                <div class="col-sm-5">
+                                                    <label>{{applicantInfoList[0]?.Applicants[0].TravelDocuments[0].PassportNo}}</label>
+                                                    <!-- <a [routerLink]="['/travel-document',{applicantId:applicationList?.Applicants[0].ApplicantID}]">{{applicationList?.Applicants[0].TravelDocuments[0].PassportNo}}</a> -->
+                                                </div>                            
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">Country of Issue</div>
+                                                <div class="col-sm-1">:</div>
+                                                <div class="col-sm-5">
+                                                    <label>{{applicantInfoList[0]?.Applicants[0].TravelDocuments[0].IssuingCountry}}</label>
+                                                </div>                            
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">Issue  Date</div>
+                                                <div class="col-sm-1">:</div>
+                                                <div class="col-sm-5">
+                                                    <label>{{issueDate}}</label>
+                                                </div>                            
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">Expiry  Date</div>
+                                                <div class="col-sm-1">:</div>
+                                                <div class="col-sm-5">
+                                                    <label>{{expiryDate}}</label>
+                                                </div>                            
+                                            </div>
+                                        </form>
+                                    </div>
+                                   
+
+                                </div>
+                                    
 
                             </div>   
                             <!-- <button class="btn btn-primary btn-md" type="submit">Save & Continue</button>&nbsp;
@@ -57,7 +155,7 @@
                                 <video #video class="vid" autoplay></video>
                             </div>
                             <div class="pb-2">
-                                <button class="btn btn-primary" (click)="capture()">Capture Image</button>
+                                <button class="btn btn-primary" (click)="capture()">Take photo</button>
                             </div>
                             <div class="p-1">
                                 <canvas #canvas class="vid"></canvas>

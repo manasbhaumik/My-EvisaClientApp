@@ -63,7 +63,7 @@ export class SubmitApplicationComponent implements OnInit {
   }
 
   onBioClick(event: Event) {
-    this.router.navigate(['/bio-metric-info']);
+    this.router.navigate(['/bio-metric-info',{visaRefNo:this.applicationList.Applicants[0].ApplicantID}]);
   }
 
   coderIdIsReserved(): boolean {
