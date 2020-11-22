@@ -21,7 +21,7 @@ export class AuthenticationServiceService {
 
   private TEST_API_SERVER2 = "https://localhost:44372";
   private TEST_API_SERVER1  = "http://192.168.0.10/ARB-Service";
-  private TEST_API_SERVER  = "https://my-evisa.azurewebsites.net";
+  private TEST_API_SERVER  = "http://1.9.116.25/ARB-Service";
 
   constructor(private httpClient:HttpClient) { }
   public errorMessage: string = '';
