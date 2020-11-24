@@ -165,7 +165,8 @@ export class VisaApplicationComponent implements OnInit {
           result => {
           console.log('The dialog was closed',result);
           this.returnUrl = result;
-          this.router.navigate(['/visa-application',{applicationId:this.applicationID}]);
+          this.router.navigate(['/submit-application',{applicationId:this.applicationID}]);
+          //this.router.navigate(['/visa-application',{applicationId:this.applicationID}]);
           //this.router.navigate(['/agency-contact-detail',{agentId:data.AgencyID,countryId:data.CountryID}]);
         });      
       },

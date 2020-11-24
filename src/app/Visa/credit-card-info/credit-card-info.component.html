@@ -1,0 +1,125 @@
+<app-member></app-member>
+ <!-- Begin Page Content -->
+ <div class="container-fluid">
+    <div class="row py-5">
+        <div class="col-md-2 order-md-1">
+        </div>
+        <div class="col-md-8 order-md-1">
+            <div class="py-2">
+                <!--<img class="d-block mx-auto mb-4" src="assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
+                <h3>Credit Card Information</h3>
+                <hr class="mb-4">
+            </div>
+            <div class="row">
+                <div class="col-md-4 order-md-2 mb-4">
+                    <p>
+                        Please enter valid information . After passport information is filled up , a My-Evisa Refferenceno will be generated for the visa application rregistartion No.<br />
+                        <b>
+                            My-EVisa RefNo.<br />
+                            cn/20/04/00/0001
+                        </b>
+                    </p>
+                    <p>
+                        Note :<br />
+                        <br />
+                        CN  : China<br />
+                        20  : Year<br />
+                        04  : Month<br />
+                        00  : Embasy ID <br />
+                        001 : Visa no.
+                    </p>
+                    <p>
+                        My-EVisa Ref No Is for Checking Visa Status , printing visa and further verification.
+
+                    </p>
+                </div>
+                <div class="col-md-8 order-md-1">
+                    <form class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="col-md-9 mb-3">
+                                <label for="firstName">Name</label>
+                                <input type="text" class="form-control" id="CardName" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Valid CardName is required.
+                                </div>
+                            </div>                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9 mb-3">
+                                <label for="firstName">Card No. :</label>
+                                <input type="text" class="form-control" id="CardName" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Valid CardName is required.
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <label for="firstName">CVC</label>
+                                <input type="text" class="form-control" id="cvc" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Valid cvc is required.
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="lastName">Expiry Month</label>
+                                <select class="custom-select d-block w-100" id="month" required>
+                                    <option value="">Choose...</option>
+                                    <option>January</option>
+                                    <option>February</option>
+                                    <option>March</option>
+                                    <option>April</option>
+                                    <option>May</option>
+                                    <option>June</option>
+                                    <option>July</option>
+                                    <option>August</option>
+                                    <option>September</option>
+                                    <option>October</option>
+                                    <option>November</option>
+                                    <option>December</option>
+
+                                </select>
+                                <div class="invalid-feedback">
+                                    Valid month is required.
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="lastName">Expiry Year</label>
+                                <select class="custom-select d-block w-100" id="year" required>
+                                    <option value="">Choose...</option>
+                                    <option>2020</option>
+                                    <option>2021</option>
+                                    <option>2022</option>
+                                    <option>2023</option>
+                                    <option>2024</option>
+                                    <option>2025</option>
+                                    <option>2026</option>
+                                    <option>2027</option>
+                                    <option>2028</option>
+                                    <option>2029</option>
+                                    <option>2030</option>
+                                    <option>2031</option>
+                                    <option>2032</option>
+                                    <option>2033</option>
+                                    <option>2034</option>
+                                    <option>2035</option>
+                                    
+                                </select>
+                                <div class="invalid-feedback">
+                                    Valid year is required.
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mb-4">                       
+                        <button class="btn btn-primary btn-md" (click)="onPaymentClick($event)" type="submit">Pay & Continue</button>&nbsp;
+                        <button class="btn btn-danger btn-md" type="submit">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+<router-outlet></router-outlet>

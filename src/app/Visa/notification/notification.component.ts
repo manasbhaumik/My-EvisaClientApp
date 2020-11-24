@@ -16,7 +16,10 @@ export class NotificationComponent implements OnInit {
   title = "Notifications";
   contactList : any;
   contactID : number;
+  paymentID : number;
   visaRegNo = "";
+  divPending : boolean = false;
+  divSucess : boolean = false;
 
   constructor( private fb: FormBuilder,
     private router: Router,
@@ -28,7 +31,9 @@ export class NotificationComponent implements OnInit {
   ngOnInit(): void {
     this.activeRouter.params.subscribe(params => {
       var contactId = params['contactId'];
+      var paymentId = params['paymentId'];
       this.contactID =  contactId;
+      this.paymentID = paymentId;
     });
 
     if(this.contactID !== undefined){
@@ -36,7 +41,21 @@ export class NotificationComponent implements OnInit {
         this.contactList = res;
         console.log(this.contactList);
         this.visaRegNo = this.contactList.Applications[0].Applicants[0].VisaApplications[0].MyEVisaRefNo;
+        // this.divPending = true;
+        // this.divSucess = false;
       });
+    }
+    // else{
+    //   this.divPending = false;
+    //   this.divSucess = true;
+    // }
+    if (this.paymentID!==undefined){
+      this.divPending = false;
+      this.divSucess = true;
+    }
+    else{
+      this.divPending = true;
+        this.divSucess = false;
     }
   }
 

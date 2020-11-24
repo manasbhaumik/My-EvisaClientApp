@@ -6,6 +6,8 @@ import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 //import { MatDatepickerModule} from '@angular/material/datepicker';
+import { NgOpenCVModule } from 'ng-open-cv';
+import { OpenCVOptions } from 'ng-open-cv/public_api.d';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,6 +38,15 @@ import { ChartsModule } from 'ng2-charts';
 import { ForgotPasswordComponent } from './User/forgot-password/forgot-password.component';
 import { VisaApplicationCheckComponent } from './Visa/visa-application-check/visa-application-check.component';
 import { NotificationComponent } from './Visa/notification/notification.component';
+import { PaymentInfoComponent } from './Visa/payment-info/payment-info.component';
+import { CreditCardInfoComponent } from './Visa/credit-card-info/credit-card-info.component';
+import { PaymentSuccessComponent } from './Visa/payment-success/payment-success.component';
+
+const openCVConfig: OpenCVOptions = {
+  scriptUrl: `assets/opencv/wasm/3.4/opencv.js`,
+  wasmBinaryFile: 'opencv_js.wasm',
+  usingWasm: true
+};
 
 @NgModule({
   declarations: [
@@ -59,10 +70,14 @@ import { NotificationComponent } from './Visa/notification/notification.componen
     BioMetricInfoComponent,
     ForgotPasswordComponent,
     VisaApplicationCheckComponent,
-    NotificationComponent
+    NotificationComponent,
+    PaymentInfoComponent,
+    CreditCardInfoComponent,
+    PaymentSuccessComponent
   ],
   imports: [
     BrowserModule,
+    NgOpenCVModule.forRoot(openCVConfig),
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,

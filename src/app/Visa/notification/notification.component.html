@@ -16,10 +16,14 @@
                             Applicant reference Number : {{visaRegNo}} 
                         </div>
                     </div>
-                    <div class="card  mb-4 alert-warning">                        
+                    <div *ngIf="divPending" class="card  mb-4 alert-warning">                        
                         <div class="card-body">
-                           Application submission pending
-
+                           Application submission pending for payment
+                        </div>
+                    </div>
+                    <div *ngIf="divSucess" class="card  mb-4 alert-success">                        
+                        <div class="card-body">
+                           Application submission sucess and you are required  to do for Biometric Enrollment
                         </div>
                     </div>
                 </div>

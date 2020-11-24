@@ -26,6 +26,7 @@
     "bootstrap": "^4.5.0",
     "chart.js": "^2.9.3",
     "ng2-charts": "^2.3.2",
+    "ng-open-cv": "^0.3.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

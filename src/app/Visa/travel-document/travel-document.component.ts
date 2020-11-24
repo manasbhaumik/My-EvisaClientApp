@@ -21,6 +21,7 @@ export class TravelDocumentComponent implements OnInit {
   error = '';
   isSubmitted=false;  
   applicantID:number;
+  applicationID : number;
   dobDate: NgbDate | null;
   travelList:any;
   isEdited = false;
@@ -66,6 +67,7 @@ export class TravelDocumentComponent implements OnInit {
             var monthExpiry = Number(this.datePipe.transform(this.travelList.ExpiryDate, 'MM'));
             var dayExpiry = Number(this.datePipe.transform(this.travelList.ExpiryDate, 'dd'));
             this.traveldocForm.get('ExpiryDate').setValue({year: yearExpiry, month: monthExpiry, day: dayExpiry});
+            this.applicationID = this.travelList.Applicant.Application.ApplicationID;
           },
           error=>{
             this.error="Message: " + error.message + "<br/>Status: " +error.status;
@@ -112,8 +114,9 @@ export class TravelDocumentComponent implements OnInit {
           result => {
           console.log('The dialog was closed',result);
           this.returnUrl = result;
-          var travelDoclist:any;        
-          this.router.navigate(['/travel-document',{applicantId:this.applicantID}]);
+          var travelDoclist:any;    
+          this.router.navigate(['/submit-application',{applicationId:this.applicationID}]);    
+        // this.router.navigate(['/travel-document',{applicantId:this.applicantID}]);
         }); 
       },
       error=>{

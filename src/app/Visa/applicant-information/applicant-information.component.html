@@ -32,25 +32,22 @@
                     <!--<h4 class="mb-3">Personal information</h4>
                     <hr class="mb-4">-->
                     <form class="needs-validation" [formGroup]="applicantForm"  (ngSubmit)="SaveApplicant()">
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label for="surName">Have you ever applied for a visa to enter Malaysia?</label>
                             <input type="radio" class="custom-radio w-25" style="width: 10% !important;" value="yes" formControlName="LastAppliedVisa" > Yes
                             <input type="radio" class="custom-radio w-25" style="width: 10% !important;" value="no" formControlName="LastAppliedVisa" > No
-                            <!-- <input type="text" class="form-control" formControlName="FirstName" id="fullName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.FirstName.errors }">
-                            <div class="invalid-feedback">
-                                Please enter surname/family name
-                            </div> -->
+                           
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="surName">Type your last date arrived in Malaysia</label>
                             <div class="input-group">
                                 <input class="form-control" formControlName="LastArrivedDate" placeholder="yyyy-mm-dd"
-                                       name="dob"  ngbDatepicker #d="ngbDatepicker" [minDate]="{year: 1900, month: 1, day: 1}">
+                                       name="lastdate"  ngbDatepicker #d1="ngbDatepicker" [minDate]="{year: 1900, month: 1, day: 1}">
                                 <div class="input-group-append">
-                                  <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">📅</button>
+                                  <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button">📅</button>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <label for="fullName">Full Name(As Passport)</label>

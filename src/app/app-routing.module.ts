@@ -17,6 +17,9 @@ import {BioMetricInfoComponent} from './Visa/bio-metric-info/bio-metric-info.com
 import { ForgotPasswordComponent } from './User/forgot-password/forgot-password.component';
 import { VisaApplicationCheckComponent } from './Visa/visa-application-check/visa-application-check.component';
 import { NotificationComponent } from './Visa/notification/notification.component';
+import { PaymentInfoComponent } from './Visa/payment-info/payment-info.component';
+import { CreditCardInfoComponent } from './Visa/credit-card-info/credit-card-info.component';
+import { PaymentSuccessComponent } from './Visa/payment-success/payment-success.component';
 
 
 const approutes: Routes = [   
@@ -37,6 +40,9 @@ const approutes: Routes = [
   { path: 'forgot-password',component:ForgotPasswordComponent},
   { path: 'visa-application-check',component:VisaApplicationCheckComponent},
   { path: 'notification',component:NotificationComponent},
+  { path: 'payment-info',component:PaymentInfoComponent},
+  { path: 'credit-card-info',component:CreditCardInfoComponent},
+  { path: 'payment-success',component:PaymentSuccessComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 

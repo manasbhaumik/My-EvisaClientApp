@@ -129,7 +129,8 @@ export class ApplicantInformationComponent implements OnInit {
         }});  
         dialogRef.afterClosed().subscribe(result => {
           this.returnUrl = result;
-          this.router.navigate(['/applicant-information',{applicantId:data.ApplicantID}]);
+          //this.router.navigate(['/applicant-information',{applicantId:data.ApplicantID}]);
+          this.router.navigate(['/submit-application',{applicationId:this.applicationId}]);
         }); 
       },
       error=>{
