@@ -526,4 +526,13 @@ export class DataService {
       return throwError(error);
     }));
   }
+
+  getPaymentMode():Observable<any>{
+    return this.httpClient
+    .get(this.API_TEST_SERVER+ '/api/PaymentModes')
+    .pipe(map(response => response),
+    catchError((error: HttpErrorResponse) => {
+      return throwError(error);
+      }));
+  }
 }

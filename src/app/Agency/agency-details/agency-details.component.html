@@ -8,21 +8,21 @@
         <div class="col-md-8 order-md-2">
             <div class="py-2">
                 <!--<img class="d-block mx-auto mb-4" src="assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
-                <h3>{{title}}</h3>
+                <h3 class="text-gray-800">{{title}}</h3>
                 <hr class="mb-4">
             </div>
             <form class="needs-validation" [formGroup]="agencyRegisterForm"  (ngSubmit)="SaveAgency()" >
                 <div class="row">
                     <div class="col-md-4 order-md-2 mb-4">
-                        <span><b>Group Application :</b></span>
+                        <span class="text-gray-800"><b>Group Application :</b></span>
                         <!--<hr class="mb-4" />-->
-                        <p>
+                        <p style="color:#131315 !important;">
                             Group application type selection for a group of peoples with same visa duration or same visa type application.
                             (E.G: Tour group , Company Delegates or Family Memebers who are going to Malaysia for a same periodof of time for bussiness or visting purpose.)
                         </p>
-                        <span><b>Individual Application :</b></span>
+                        <span class="text-gray-800"><b>Individual Application :</b></span>
                         <!--<hr class="mb-4" />-->
-                        <p>
+                        <p style="color:#131315 !important;">
                             Individual application type  selection for single person who is visting malaysia or going to reside in malaysia with sponsorship of Malaysian individual or
                             Comapny.
                             (E.G: Tourist, Student,Employee of a company  or visting malaysia for bussiness purpose)

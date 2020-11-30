@@ -9,16 +9,16 @@
         <div class="col-md-8 order-md-1">
             <div class="py-2">
                 <!--<img class="d-block mx-auto mb-4" src="assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
-                <h3>Payment Information</h3>
+                <h3 class="text-gray-800">{{title}}</h3>
                 <hr class="mb-4">
             </div>
             <div class="row">
                 <div class="col-md-4 order-md-2 mb-4">
-                    <p>
+                    <p style="color:#131315 !important;">
                         Please enter valid information . After passport information is filled up , a My-Evisa Refferenceno will be generated for the visa application rregistartion No.<br />
-                        <b>My-EVisa RefNo.<br />  cn/20/04/00/0001</b>
+                        <b>My-EVisa RefNo.<br />  CN/20/04/00/0001</b>
                     </p>
-                    <p>
+                    <p style="color:#131315 !important;">
                         Note :<br />
                         <br />
                         CN  : China<br />
@@ -27,7 +27,7 @@
                         00  : Embasy ID <br />
                         001 : Visa no.
                     </p>
-                    <p>
+                    <p style="color:#131315 !important;">
                         My-EVisa Ref No Is for Checking Visa Status , printing visa and further verification.
 
                     </p>
@@ -35,14 +35,14 @@
                 <div class="col-md-8 order-md-1">
                     <!--<h4 class="mb-3">Personal information</h4>
                     <hr class="mb-4">-->
-                    <form class="needs-validation" novalidate>
+                    <form class="needs-validation" [formGroup]="paymentInfoForm" novalidate>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">No Of Application :</label>
 
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="firstName"> 1 </label>
+                                <label for="firstName" > {{totalApplicant}} </label>
                             </div>
                         </div>
                         <div class="row">
@@ -51,17 +51,17 @@
 
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="firstName"> Rush </label>
+                                <label for="firstName"  > {{processType}} </label>
                             </div>
                         </div>
                         <hr class="mb-4">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="firstName">Application Fees :</label>
+                                <label for="firstName">Application/Government Fees :</label>
 
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="firstName"> RM500 </label>
+                                <label for="firstName" > USD {{applicationFees| number : '1.1-1'}} </label>
                             </div>
                         </div>
                         <div class="row">
@@ -70,7 +70,7 @@
 
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="firstName"> RM200 </label>
+                                <label for="firstName"  > USD {{processFees| number : '1.1-1'}} </label>
                             </div>
                         </div>
                         <hr class="mb-4">
@@ -80,7 +80,7 @@
 
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="firstName"> RM700 </label>
+                                <label for="firstName" > USD {{totalFees| number : '1.1-1'}} </label>
                             </div>
                         </div>
                         <hr class="mb-4">
@@ -91,18 +91,27 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="Bank" name="defaultExampleRadios" >
+                                <div *ngFor="let payMode of paymentModeList;let i = index" class="custom-control custom-radio" >
+                                    <!-- <label for="enum_answer_{{payMode.PaymentModeID}}">
+                                        <input id="enum_answer_{{payMode.PaymentModeID}}" [value]='payMode.PaymentMode1' type="radio" name="enums" [(ngModel)]="radioSelected">
+                                        {{payMode.PaymentMode1}}
+                                      </label> -->
+                                    <input type="radio" class="custom-control-input" id="{{payMode.PaymentModeID}}"[value]="payMode.PaymentModeID" name="payment" formControlName="payment" [(ngModel)]="radioSelected" >
+                                    <label class="custom-control-label"  for="Credit">{{payMode.PaymentMode1}}</label>{{radioSelected}}
+                                </div>
+                                
+                                <!-- <div class="custom-control custom-radio">                                    
+                                    <input type="radio" class="custom-control-input" id="Bank" value="Bank Transfer" name="payment" formControlName="payment" (change)="changeGender($event)" >
                                     <label class="custom-control-label" for="Bank">Bank Transfer</label>
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="Credit" name="defaultExampleRadios" checked>
+                                    <input type="radio" class="custom-control-input" id="Credit" value="Credit Card" name="payment" formControlName="payment" (change)="changeGender($event)">
                                     <label class="custom-control-label" for="Credit">Credit Crad</label>
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="Debit" name="defaultExampleRadios" >
+                                    <input type="radio" class="custom-control-input" id="Debit" value="Debit Card" name="payment" formControlName="payment" (change)="changeGender($event)" >
                                     <label class="custom-control-label" for="Debit">Debit Card</label>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <hr class="mb-4">

@@ -71,7 +71,7 @@ export class SubmitApplicationComponent implements OnInit {
   }
 
   onPaymentClick(event: Event){
-    this.router.navigate(['/payment-info']);
+    this.router.navigate(['/payment-info',{applicationId:this.applicationList.Applicants[0].ApplicationID}]);
   }
 
 }
