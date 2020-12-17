@@ -20,11 +20,14 @@ import { NotificationComponent } from './Visa/notification/notification.componen
 import { PaymentInfoComponent } from './Visa/payment-info/payment-info.component';
 import { CreditCardInfoComponent } from './Visa/credit-card-info/credit-card-info.component';
 import { PaymentSuccessComponent } from './Visa/payment-success/payment-success.component';
+import { HomenewComponent } from './homenew/homenew.component';
+import {LoginComponent} from './login/login.component';
+import { RegisterIndividualApplicantComponent } from './Visa/register-individual-applicant/register-individual-applicant.component';
 
 
 const approutes: Routes = [   
   // { path: '',   redirectTo: '/home', pathMatch: 'full' }
-  { path: '',   component: HomeComponent, pathMatch: 'full' },
+  { path: '',   component: HomenewComponent, pathMatch: 'full' },
   { path: 'home',   component: HomeComponent },
   { path: 'visa-application', component: VisaApplicationComponent },
   { path: 'agency-menu', component: AgencyMenuComponent },
@@ -43,6 +46,9 @@ const approutes: Routes = [
   { path: 'payment-info',component:PaymentInfoComponent},
   { path: 'credit-card-info',component:CreditCardInfoComponent},
   { path: 'payment-success',component:PaymentSuccessComponent},
+  { path: 'homenew',component:HomenewComponent},
+  { path: 'login',component:LoginComponent},
+  { path: 'register-individual',component:RegisterIndividualApplicantComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 

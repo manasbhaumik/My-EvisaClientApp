@@ -1,0 +1,176 @@
+<div class="container-fluid">
+    <div class="row py-5">
+        <div class="col-md-2 order-md-1">
+        </div>
+        <div class="col-md-8 order-md-1">
+            <div class="py-2">
+                <h3 class="text-gray-800">{{title}}</h3>
+                <hr class="mb-4">
+            </div>
+            <div class="row">
+                <div class="col-md-12 order-md-1">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;">Check Travel Requirements</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Type of visa</label>
+        
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <ng-select [items]="visaTypeList"
+                                    bindLabel="Name"
+                                    bindValue="ID"
+                                    placeholder="Select visa type"
+                                    appendTo="body"
+                                    searchable="true"
+                                    [(ngModel)]="selectedVisa" (change)="ChangeVisa($event)" >
+                                    </ng-select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Select the origin country(Nationality as in passport)</label>
+        
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <ng-select [items]="countryList"
+                                    bindLabel="CountryName"
+                                    bindValue="CountryID"
+                                    placeholder="Select Nationality"
+                                    appendTo="body"
+                                    searchable="true"
+                                    [(ngModel)]="selectedCountry" (change)="selectCenter($event)" >
+                                    </ng-select> 
+                                </div>
+                                <div class="col-md-3 mb-3">                            
+                                    <ng-select [items]="selectCountry"
+                                    bindLabel="Name"
+                                    appendTo="body"
+                                    [(ngModel)]="country" disabled >
+                                    </ng-select>
+        
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Embassy / General Consulate / OSC</label>
+        
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <ng-select [items]="centerList"
+                                    bindLabel="CenterName"
+                                    bindValue="CenterID"
+                                    placeholder="Select the nearest"
+                                    appendTo="body"
+                                    searchable="true"
+                                    [(ngModel)]="selectedCenter" >
+                                    </ng-select> 
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Type of visa to apply</label>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <ng-select [items]="visaList"
+                                    bindLabel="Name"
+                                    bindValue="ID"
+                                    placeholder="Select type of visa to apply"
+                                    appendTo="body"
+                                    searchable="true"
+                                    [(ngModel)]="selectedVisaType" >
+                                    </ng-select> 
+        
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Number of Traveler/Tourist</label>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" class="form-control" id="txtNoOfTravel" placeholder="Number of Traveler" #txtNoOfStay (keypress)="numberOnly($event)">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Duration of Stay</label>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" class="form-control" id="txtNoOfStay" placeholder="15 day(maximum)" value="15" disabled>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Sponsorship</label>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <ng-select [items]="SponsorList"
+                                    bindLabel="Name"
+                                    bindValue="ID"
+                                    placeholder="Select sponsorship"
+                                    appendTo="body"
+                                    searchable="true"
+                                    [(ngModel)]="selectedSponser" >
+                                    </ng-select> 
+        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="col-md-12 order-md-2 mb-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;Color:#173371 !important;">Calculate Fee Before Applying</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Select the procesing Time</label>
+        
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <ng-select [items]="visaProcessTypeList"
+                                    bindLabel="ApplicationType"
+                                    bindValue="ApplicationTypeID"
+                                    placeholder="Select the processing time"
+                                    appendTo="body"
+                                    searchable="true"
+                                    [(ngModel)]="selectedProcess" (change)="selectProcessType($event)" >
+                                    </ng-select> 
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Processing Period (in days)</label>        
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">{{processingPeriod}}</label>        
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Processing Fees</label>        
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">USD {{processingFee| number : '1.1-1'}}</label>        
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Submission Fees</label>        
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">USD {{submissionFee| number : '1.1-1'}}</label>        
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Total Fees</label>        
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">USD {{totalFee| number : '1.1-1'}}</label>        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="text-align: center;">
+                <div class="col-md-12 order-md-4">
+                    <div class="mb-4">
+                        <!-- <button class="btn btn-primary " type="submit" (click)="onClick($event)">Back to list(s)</button>&nbsp; -->
+                        <button class="btn btn-primary " style="color:#173371" type="submit" (click)="onStartClick($event)">START TO APPLY</button>&nbsp;
+                        <!-- <button class="btn btn-primary " type="submit" (click)="onPaymentClick($event)">Pay & Apply</button>&nbsp;
+                        <button class="btn btn-primary " type="submit" (click)="onBioClick($event)">Submit BioMetric Information</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>

@@ -61,7 +61,7 @@ export class DataService {
   }
 
   public getAllCountries() {
-    return this.httpClient.get(this.API_TEST_SERVER+ '/api/Countries').pipe(map(response => response));
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/GetAllCountries').pipe(map(response => response));
   }
 
   public getCenterByCountryId(countryId){
@@ -534,5 +534,23 @@ export class DataService {
     catchError((error: HttpErrorResponse) => {
       return throwError(error);
       }));
+  }
+
+  public getCenterByCountryId_V01(countryId){
+    var params=new HttpParams();
+    params=params.append('countryid',countryId);
+
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/GetCenterByCountryId', {params: params}).pipe(map(response => response),catchError((error: HttpErrorResponse) => {
+      return throwError(error);
+    }));
+  }
+
+  public getApplicationTypeById(ApplicationId){
+    var params=new HttpParams();
+    params=params.append('id',ApplicationId);
+
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/ApplicationTypes', {params: params}).pipe(map(response => response),catchError((error: HttpErrorResponse) => {
+      return throwError(error);
+    }));
   }
 }

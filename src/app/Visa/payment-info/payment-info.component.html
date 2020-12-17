@@ -35,7 +35,8 @@
                 <div class="col-md-8 order-md-1">
                     <!--<h4 class="mb-3">Personal information</h4>
                     <hr class="mb-4">-->
-                    <form class="needs-validation" [formGroup]="paymentInfoForm" novalidate>
+                    <form class="needs-validation"  novalidate>
+                    <!-- <form class="needs-validation" [formGroup]="paymentInfoForm" novalidate> -->
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">No Of Application :</label>
@@ -88,32 +89,16 @@
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">Payment Options  :</label>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6 mb-3">
-                                <div *ngFor="let payMode of paymentModeList;let i = index" class="custom-control custom-radio" >
-                                    <!-- <label for="enum_answer_{{payMode.PaymentModeID}}">
-                                        <input id="enum_answer_{{payMode.PaymentModeID}}" [value]='payMode.PaymentMode1' type="radio" name="enums" [(ngModel)]="radioSelected">
+                                <div *ngFor="let payMode of paymentModeList" class="custom-control custom-radio" >
+                                    <label for="{{payMode.PaymentModeID}}">
+                                        <input id="{{payMode.PaymentModeID}}" [value]='payMode.PaymentModeID' type="radio" name="payment"  [(ngModel)]="radioSelected">
                                         {{payMode.PaymentMode1}}
-                                      </label> -->
-                                    <input type="radio" class="custom-control-input" id="{{payMode.PaymentModeID}}"[value]="payMode.PaymentModeID" name="payment" formControlName="payment" [(ngModel)]="radioSelected" >
-                                    <label class="custom-control-label"  for="Credit">{{payMode.PaymentMode1}}</label>{{radioSelected}}
+                                      </label>
                                 </div>
-                                
-                                <!-- <div class="custom-control custom-radio">                                    
-                                    <input type="radio" class="custom-control-input" id="Bank" value="Bank Transfer" name="payment" formControlName="payment" (change)="changeGender($event)" >
-                                    <label class="custom-control-label" for="Bank">Bank Transfer</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="Credit" value="Credit Card" name="payment" formControlName="payment" (change)="changeGender($event)">
-                                    <label class="custom-control-label" for="Credit">Credit Crad</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="Debit" value="Debit Card" name="payment" formControlName="payment" (change)="changeGender($event)" >
-                                    <label class="custom-control-label" for="Debit">Debit Card</label>
-                                </div> -->
-                            </div>
-                        </div>
+                            </div>   
+                        </div>                       
+                        
                         <hr class="mb-4">
                         
                         <button class="btn btn-primary btn-md" (click)="onSave($event)" type="submit">Save & Continue</button>&nbsp;

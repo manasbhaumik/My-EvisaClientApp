@@ -93,7 +93,7 @@
                             <select formControlName="ApplicationTypeID" class="custom-select d-block w-100" id="state" [ngClass]="{ 'is-invalid': isSubmitted && f.ApplicationTypeID.errors }">
                                 <option value="">Choose...</option>
                                 <option *ngFor="let visa of visaProcessTypeList" [value]="visa.ApplicationTypeID">
-                                    {{visa.ApplicationType1}}
+                                    {{visa.ApplicationType}}
                                 </option>
                             </select>
                             <div class="invalid-feedback">

@@ -73,7 +73,6 @@ export class VisaApplicationComponent implements OnInit {
             this.isEdited=true;
             this.applicationID=this.applicationList.ApplicationID;
            // this.RegionList = Array.of(this.RegionList);
-            
             this.visaTypeForm.get('submissionType').setValue(this.applicationList.SubmissionType);
             this.visaTypeForm.get('centerId').setValue(this.applicationList.CenterID);
             this.visaTypeForm.get('TotalApplicant').setValue(this.applicationList.TotalApplicant);
@@ -115,7 +114,7 @@ export class VisaApplicationComponent implements OnInit {
       this.contactID=data.ContactID;
       this.contactName=data.Name; 
       this.centerID=data.CenterID;  
-      this.dataService.getCenterByCountryId(this.countryId).subscribe(res => {this.centerList = res;});
+      this.dataService.getCenterByCountryId_V01(this.countryId).subscribe(res => {this.centerList = res;});
       this.dFormat = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
       this.visaTypeForm.get('centerId').setValue(this.centerID);
       this.visaTypeForm.get('ContactID').setValue(this.contactID);

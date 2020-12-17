@@ -8,6 +8,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 //import { MatDatepickerModule} from '@angular/material/datepicker';
 import { NgOpenCVModule } from 'ng-open-cv';
 import { OpenCVOptions } from 'ng-open-cv/public_api.d';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -41,6 +42,10 @@ import { NotificationComponent } from './Visa/notification/notification.componen
 import { PaymentInfoComponent } from './Visa/payment-info/payment-info.component';
 import { CreditCardInfoComponent } from './Visa/credit-card-info/credit-card-info.component';
 import { PaymentSuccessComponent } from './Visa/payment-success/payment-success.component';
+import { HeadernewComponent } from './components/headernew/headernew.component';
+import { HomenewComponent } from './homenew/homenew.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterIndividualApplicantComponent } from './Visa/register-individual-applicant/register-individual-applicant.component';
 
 const openCVConfig: OpenCVOptions = {
   scriptUrl: `assets/opencv/wasm/3.4/opencv.js`,
@@ -73,7 +78,11 @@ const openCVConfig: OpenCVOptions = {
     NotificationComponent,
     PaymentInfoComponent,
     CreditCardInfoComponent,
-    PaymentSuccessComponent
+    PaymentSuccessComponent,
+    HeadernewComponent,
+    HomenewComponent,
+    LoginComponent,
+    RegisterIndividualApplicantComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +96,8 @@ const openCVConfig: OpenCVOptions = {
     MatDialogModule,
     //MatDatepickerModule,
     NgbModule,
-    ChartsModule
+    ChartsModule,
+    NgSelectModule
   ],
   providers: [
     {

@@ -58,7 +58,7 @@
                         <div class="mb-3">
                             <label for="lastName">OSC/Immigration Attache</label>
                             <select class="custom-select d-block w-100" formControlName="centerId"  id="agencytype" [ngClass]="{ 'is-invalid': isSubmitted && f.centerId.errors }" >
-                                
+                                <option value=""></option>
                                 <option *ngFor="let Center of centerList" [value]="Center.CenterID">{{Center.CenterName}}</option>
                             </select>
                             <div *ngIf="isSubmitted && f.centerId.errors" class="invalid-feedback">

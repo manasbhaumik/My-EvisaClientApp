@@ -23,12 +23,13 @@ export class PaymentInfoComponent implements OnInit {
   applicationFees : number;
   processFees : number;
   totalFees : number;
-  paymentModeList:any;
-  radioSelected:any;
+  paymentModeList: any;
+  radioSelected:string;
+  
 
-  paymentInfoForm =this.fb.group({
-     payment:['']
-  });
+  // paymentInfoForm =this.fb.group({
+  //    payment:['']
+  // });
 
   constructor(
     private fb: FormBuilder,
@@ -40,7 +41,7 @@ export class PaymentInfoComponent implements OnInit {
    // private decimalPipe: DecimalPipe
   ) { }
 
-  get f(){ return this.paymentInfoForm.controls; }
+  // get f(){ return this.paymentInfoForm.controls; }
 
   ngOnInit(): void {
     this.activeRouter.params.subscribe(params => {
@@ -71,7 +72,11 @@ export class PaymentInfoComponent implements OnInit {
     console.log(e.target.value);
   }
 
+  
+
   onSave(event: Event){
+    console.log(this.radioSelected);
+    //alert(this.radioSelected);
     this.router.navigate(['/credit-card-info']);
   }
 

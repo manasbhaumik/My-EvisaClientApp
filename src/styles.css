@@ -1,8 +1,415 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "assets/css_new/menu.css";
+@import "assets/css_new/red.css";
+@import "assets/css_new/responsive.css";
 @import "assets/css/sb-admin-2.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "assets/vendor/fontawesome-free/css/all.min.css";
+/* @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins&display=swap'); */
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 h1, h2, h3, h4, h5 {
    font-size: 1.75rem !important;
-  }
+}
+
+footer.sticky-footer{
+     min-width: 100% !important;
+     padding:10px 0 !important;
+     bottom: 0 !important;
+     border-top:1px solid #ddd;
+}
+
+/* * {
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box
+}
+
+body {
+   background-color: #eee;
+   height: 100vh;
+   font-family: 'Poppins', sans-serif;
+   background: linear-gradient(to top, #fff 10%, rgba(93, 42, 141, 0.4) 90%) no-repeat
+} */
+
+.wrapper {
+   max-width: 500px;
+   border-radius: 10px;
+   margin: 50px auto;
+   padding: 30px 40px;
+   box-shadow: 20px 20px 80px rgb(206, 206, 206)
+}
+
+.h2 {
+   font-family: 'arial', cursive;
+   font-size: 2.5rem;
+   font-weight: bold;
+   color: #11133a;
+   font-style: normal
+}
+
+.h4 {
+   font-family: 'Poppins', sans-serif
+}
+
+.input-field {
+   border-radius: 5px;
+   padding: 5px;
+   display: flex;
+   align-items: center;
+   cursor: pointer;
+   border: 1px solid #0f72dc;
+   color: #0f72dc
+}
+
+.input-field:hover {
+   color: #7b4ca0;
+   border: 1px solid #7b4ca0
+}
+
+input {
+   border: none;
+   outline: none;
+   box-shadow: none;
+   width: 100%;
+   padding: 0px 2px;
+   font-family: 'Poppins', sans-serif
+}
+
+.fa-eye-slash.btn {
+   border: none;
+   outline: none;
+   box-shadow: none
+}
+
+a {
+   text-decoration: none;
+   color: #0f72dc;
+   font-weight: 700
+}
+
+a:hover {
+   text-decoration: none;
+   color: #7b4ca0
+}
+
+.option {
+   position: relative;
+   padding-left: 30px;
+   cursor: pointer
+}
+
+.option label.text-muted {
+   display: block;
+   cursor: pointer
+}
+
+.option input {
+   display: none
+}
+
+.checkmark {
+   position: absolute;
+   top: 3px;
+   left: 0;
+   height: 20px;
+   width: 20px;
+   background-color: #fff;
+   border: 1px solid #ddd;
+   border-radius: 50%;
+   cursor: pointer
+}
+
+.option input:checked~.checkmark:after {
+   display: block
+}
+
+.option .checkmark:after {
+   content: "";
+   width: 13px;
+   height: 13px;
+   display: block;
+   background: #0f72dc;
+   position: absolute;
+   top: 48%;
+   left: 53%;
+   border-radius: 50%;
+   transform: translate(-50%, -50%) scale(0);
+   transition: 300ms ease-in-out 0s
+}
+
+.option input[type="radio"]:checked~.checkmark {
+   background: #fff;
+   transition: 300ms ease-in-out 0s;
+   border: 1px solid #0f72dc
+}
+
+.option input[type="radio"]:checked~.checkmark:after {
+   transform: translate(-50%, -50%) scale(1)
+}
+
+.btn.btn-block {
+   border-radius: 20px;
+   background-color: #0f72dc;
+   color: #fff
+}
+
+.btn.btn-block:hover {
+   background-color: #55268be0
+}
+
+@media(max-width: 575px) {
+   .wrapper {
+       margin: 10px
+   }
+}
+
+@media(max-width:424px) {
+   .wrapper {
+       padding: 30px 10px;
+       margin: 5px
+   }
+
+   .option {
+       position: relative;
+       padding-left: 22px
+   }
+
+   .option label.text-muted {
+       font-size: 0.95rem
+   }
+
+   .checkmark {
+       position: absolute;
+       top: 2px
+   }
+
+   .option .checkmark:after {
+       top: 50%
+   }
+
+   #forgot {
+       font-size: 0.95rem
+   }
+}
+
+* {
+   margin: 0;
+   padding: 0
+}
+
+html {
+   height: 100%
+}
+
+p {
+   color: grey
+}
+
+#heading {
+   text-transform: uppercase;
+   color: #0f72dc;
+   font-weight: normal
+}
+
+#msform {
+   text-align: center;
+   position: relative;
+   margin-top: 20px
+}
+
+#msform fieldset {
+   background: white;
+   border: 0 none;
+   border-radius: 0.5rem;
+   box-sizing: border-box;
+   width: 100%;
+   margin: 0;
+   padding-bottom: 20px;
+   position: relative
+}
+
+.form-card {
+   text-align: left
+}
+
+#msform fieldset:not(:first-of-type) {
+   display: none
+}
+
+#msform input,
+#msform textarea {
+   padding: 8px 15px 8px 15px;
+   border: 1px solid #ccc;
+   border-radius: 0px;
+   margin-bottom: 25px;
+   margin-top: 2px;
+   width: 100%;
+   box-sizing: border-box;
+   font-family: montserrat;
+   color: #2C3E50;
+   background-color: #ECEFF1;
+   font-size: 16px;
+   letter-spacing: 1px
+}
+
+#msform input:focus,
+#msform textarea:focus {
+   -moz-box-shadow: none !important;
+   -webkit-box-shadow: none !important;
+   box-shadow: none !important;
+   border: 1px solid #0f72dc;
+   outline-width: 0
+}
+
+#msform .action-button {
+   width: 100px;
+   background: #0f72dc;
+   font-weight: bold;
+   color: white;
+   border: 0 none;
+   border-radius: 0px;
+   cursor: pointer;
+   padding: 10px 5px;
+   margin: 10px 0px 10px 5px;
+   float: right
+}
+
+#msform .action-button:hover,
+#msform .action-button:focus {
+   background-color: #311B92
+}
+
+#msform .action-button-previous {
+   width: 100px;
+   background: #616161;
+   font-weight: bold;
+   color: white;
+   border: 0 none;
+   border-radius: 0px;
+   cursor: pointer;
+   padding: 10px 5px;
+   margin: 10px 5px 10px 0px;
+   float: right
+}
+
+#msform .action-button-previous:hover,
+#msform .action-button-previous:focus {
+   background-color: #000000
+}
+
+.card {
+   z-index: 0;
+   border: none;
+   position: relative
+}
+
+.fs-title {
+   font-size: 25px;
+   color: #0f72dc;
+   margin-bottom: 15px;
+   font-weight: normal;
+   text-align: left
+}
+
+.purple-text {
+   color: #0f72dc;
+   font-weight: normal
+}
+
+.steps {
+   font-size: 25px;
+   color: gray;
+   margin-bottom: 10px;
+   font-weight: normal;
+   text-align: right
+}
+
+.fieldlabels {
+   color: gray;
+   text-align: left
+}
+
+#progressbar {
+   margin-bottom: 30px;
+   overflow: hidden;
+   color: lightgrey
+}
+
+#progressbar .active {
+   color: #0f72dc
+}
+
+#progressbar li {
+   list-style-type: none;
+   font-size: 15px;
+   width: 25%;
+   float: left;
+   position: relative;
+   font-weight: 400
+}
+
+#progressbar #account:before {
+   font-family: FontAwesome;
+   content: "\f13e"
+}
+
+#progressbar #personal:before {
+   font-family: FontAwesome;
+   content: "\f007"
+}
+
+#progressbar #payment:before {
+   font-family: FontAwesome;
+   content: "\f030"
+}
+
+#progressbar #confirm:before {
+   font-family: FontAwesome;
+   content: "\f00c"
+}
+
+#progressbar li:before {
+   width: 50px;
+   height: 50px;
+   line-height: 45px;
+   display: block;
+   font-size: 20px;
+   color: #ffffff;
+   background: lightgray;
+   border-radius: 50%;
+   margin: 0 auto 10px auto;
+   padding: 2px
+}
+
+#progressbar li:after {
+   content: '';
+   width: 100%;
+   height: 2px;
+   background: lightgray;
+   position: absolute;
+   left: 0;
+   top: 25px;
+   z-index: -1
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+   background: #0f72dc
+}
+
+.progress {
+   height: 20px
+}
+
+.progress-bar {
+   background-color: #0f72dc
+}
+
+.fit-image {
+   width: 100%;
+   object-fit: cover
+}

@@ -97,7 +97,7 @@ export class AgencyContactDetailComponent implements OnInit {
 
   regionChange(e){
     var value =e.target.value;
-    this.dataService.getCenterByCountryId(value).subscribe(res => {this.centerList = res});
+    this.dataService.getCenterByCountryId_V01(value).subscribe(res => {this.centerList = res});
   }
 
   agencyContactForm=this.fb.group({
@@ -176,7 +176,7 @@ export class AgencyContactDetailComponent implements OnInit {
           console.log('The dialog was closed',result);
           this.returnUrl = result;
           //this.ngOnInit();
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         }); 
       },
       error=>{
