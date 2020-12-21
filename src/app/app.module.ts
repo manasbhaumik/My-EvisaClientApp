@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule }   from '@angular/forms';
-import { ReactiveFormsModule }   from '@angular/forms';
-import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 //import { MatDatepickerModule} from '@angular/material/datepicker';
@@ -27,7 +27,7 @@ import { MemberComponent } from './User/member/member.component';
 import { MemberListComponent } from './User/member-list/member-list.component';
 import { AgencyListComponent } from './Agency/agency-list/agency-list.component';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthInterceptor } from './_helpers/auth.interceptor';
 // import { NgbDateCustomParserFormatter } from './_helpers/dateformat';
 import { ApplicantInformationComponent } from './Visa/applicant-information/applicant-information.component';
@@ -46,6 +46,10 @@ import { HeadernewComponent } from './components/headernew/headernew.component';
 import { HomenewComponent } from './homenew/homenew.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterIndividualApplicantComponent } from './Visa/register-individual-applicant/register-individual-applicant.component';
+import { IndividualApplicationComponent } from './Individual/individual-application/individual-application.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 const openCVConfig: OpenCVOptions = {
   scriptUrl: `assets/opencv/wasm/3.4/opencv.js`,
@@ -67,7 +71,7 @@ const openCVConfig: OpenCVOptions = {
     ModalComponent,
     MemberComponent,
     MemberListComponent,
-    AgencyListComponent,    
+    AgencyListComponent,
     VisaApplicationComponent,
     ApplicantInformationComponent,
     TravelDocumentComponent,
@@ -82,7 +86,8 @@ const openCVConfig: OpenCVOptions = {
     HeadernewComponent,
     HomenewComponent,
     LoginComponent,
-    RegisterIndividualApplicantComponent
+    RegisterIndividualApplicantComponent,
+    IndividualApplicationComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +102,10 @@ const openCVConfig: OpenCVOptions = {
     //MatDatepickerModule,
     NgbModule,
     ChartsModule,
-    NgSelectModule
+    NgSelectModule,
+    MatStepperModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   providers: [
     {

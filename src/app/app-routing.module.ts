@@ -23,6 +23,7 @@ import { PaymentSuccessComponent } from './Visa/payment-success/payment-success.
 import { HomenewComponent } from './homenew/homenew.component';
 import {LoginComponent} from './login/login.component';
 import { RegisterIndividualApplicantComponent } from './Visa/register-individual-applicant/register-individual-applicant.component';
+import { IndividualApplicationComponent } from './Individual/individual-application/individual-application.component';
 
 
 const approutes: Routes = [   
@@ -49,6 +50,7 @@ const approutes: Routes = [
   { path: 'homenew',component:HomenewComponent},
   { path: 'login',component:LoginComponent},
   { path: 'register-individual',component:RegisterIndividualApplicantComponent},
+  { path: 'individual-application',component:IndividualApplicationComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 
