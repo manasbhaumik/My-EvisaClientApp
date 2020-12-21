@@ -5,7 +5,7 @@
                 <h2 id="heading">Register MyE-Visa Application</h2>
                 <p>Fill all form field to go to next step</p>
 
-                <mat-horizontal-stepper linear #stepper>
+                <mat-horizontal-stepper labelPosition="bottom" #stepper>
                     <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
                         <form [formGroup]="firstFormGroup">
                             <ng-template matStepLabel>Application Type</ng-template>
