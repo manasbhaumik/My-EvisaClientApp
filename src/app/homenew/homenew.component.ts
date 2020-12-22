@@ -17,17 +17,17 @@ export class HomenewComponent implements OnInit {
   visaTypeList:any =[{ID:'1',Name:'Group of My E-Visa'},{ID:'2',Name:'Individual’s MyE-Visa'}];
   selectedVisa:any=[];
   countryList:any=[];
-  selectedCountry=[];
+  selectedCountry:any=[];
   selectCountry:any=[{ID:'1',Name:'Malaysia'}];
   country=[{ID:'2',Name:'Malaysia'}];
   centerList:any=[];
-  selectedCenter=[];
+  selectedCenter:any=[];
   visaList:any=[{ID:'1',Name:'e-Tourist Visa'},{ID:'2',Name:'e-Business Visa',disabled:true},{ID:'3',Name:'e-Conference Visa',disabled:true},{ID:'4',Name:'e-Student Visa',disabled:true},{ID:'5',Name:'e-Medical Attendant Visa',disabled:true}];
-  selectedVisaType=[];
+  selectedVisaType:any=[];
   SponsorList:any=[{ID:'1',Name:'Sponsor by Government'},{ID:'2',Name:'Sponsor by Government Agency'},{ID:'3',Name:'Sponsor by Public/Private Company'},{ID:'4',Name:'Sponsor by Association'},{ID:'5',Name:'Self-Dependent'}]
   selectedSponser=[];
   visaProcessTypeList:any=[];
-  selectedProcess=[];
+  selectedProcess:any=[];
   visaFeeList:any;
   processingPeriod:number;
   processingFee:number;
@@ -36,6 +36,7 @@ export class HomenewComponent implements OnInit {
   error='';
 
   @ViewChild("txtNoOfStay") txtNoOfStay: ElementRef;
+  @ViewChild("txtNoOfTraveller") txtNoOfTraveller: ElementRef;
 
   constructor(
     private fb: FormBuilder,
@@ -85,13 +86,13 @@ export class HomenewComponent implements OnInit {
   ChangeVisa(e){    
     //console.log(this.selectedVisa);
     if(this.selectedVisa=="2"){
-      this.txtNoOfStay.nativeElement.value = "1";
-      this.txtNoOfStay.nativeElement.disabled=true;
+      this.txtNoOfTraveller.nativeElement.value = "1";
+      this.txtNoOfTraveller.nativeElement.disabled=true;
       //this.getValue();
     }
     else{
-      this.txtNoOfStay.nativeElement.value = "";
-      this.txtNoOfStay.nativeElement.disabled=false;
+      this.txtNoOfTraveller.nativeElement.value = "";
+      this.txtNoOfTraveller.nativeElement.disabled=false;
     }
   }
 
@@ -102,7 +103,7 @@ export class HomenewComponent implements OnInit {
   selectProcessType(event){
     this.dataService.getApplicationTypeById(this.selectedProcess).subscribe(data => 
       {
-        console.log(data);
+        //console.log(data);
         this.visaFeeList = data;
         this.processingPeriod = this.visaFeeList[0].ProcessingPeriod;
         this.processingFee = this.visaFeeList[0].ProccesingFee;
@@ -121,8 +122,14 @@ export class HomenewComponent implements OnInit {
   }
 
   onStartClick(event: Event) {
+    localStorage.setItem('SubmissionType',this.selectedVisa);
+    localStorage.setItem('SelectedCountry',this.selectedCountry);
+    localStorage.setItem('SelectedEmbassy',this.selectedCenter);
+    localStorage.setItem('SelectedJourney',this.selectedVisaType);
+    localStorage.setItem('NoOfTraveller',this.txtNoOfTraveller.nativeElement.value);
+    localStorage.setItem('Duration',this.txtNoOfStay.nativeElement.value);
+    localStorage.setItem('ApplicationType',this.selectedProcess);
     this.router.navigate(['/login']);
-    //this.router.navigate(['/agency-contact-detail',{agentId:0,countryId:0}]);
   }
 
 }

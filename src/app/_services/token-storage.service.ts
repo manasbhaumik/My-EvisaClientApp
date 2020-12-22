@@ -31,7 +31,8 @@ export class TokenStorageService {
   public saveUser(user) {
     localStorage.removeItem(USER_KEY);
     localStorage.setItem(USER_KEY, JSON.stringify(user));
-    console.log("user :"+localStorage.getItem(USER_KEY));
+    localStorage.setItem("FirstTimeLogin", "Y");
+    //console.log("user :"+localStorage.getItem(USER_KEY));
     // window.sessionStorage.removeItem(USER_KEY);
     // window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }

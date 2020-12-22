@@ -83,13 +83,13 @@
                                     <label for="firstName">Number of Traveler/Tourist</label>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <input type="text" class="form-control" id="txtNoOfTravel" placeholder="Number of Traveler" #txtNoOfStay (keypress)="numberOnly($event)">
+                                    <input type="text" class="form-control" id="txtNoOfTravel" placeholder="Number of Traveler" #txtNoOfTraveller (keypress)="numberOnly($event)">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="firstName">Duration of Stay</label>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <input type="text" class="form-control" id="txtNoOfStay" placeholder="15 day(maximum)" value="15" disabled>
+                                    <input type="text" class="form-control" id="txtNoOfStay" placeholder="15 day(maximum)" #txtNoOfStay value="15" disabled>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="firstName">Sponsorship</label>

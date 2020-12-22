@@ -176,7 +176,7 @@ export class AgencyContactDetailComponent implements OnInit {
           console.log('The dialog was closed',result);
           this.returnUrl = result;
           //this.ngOnInit();
-          this.router.navigate(['/home']);
+          this.router.navigate(['/login']);
         }); 
       },
       error=>{

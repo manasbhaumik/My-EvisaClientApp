@@ -32,7 +32,7 @@ export class MemberComponent implements OnInit {
 
   logOut(){
     this.tokenStorage.signOut();
-    this.router.navigate(['/home']);
+    this.router.navigate(['/login']);
   }
 
 }

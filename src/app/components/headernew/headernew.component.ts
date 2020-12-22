@@ -31,7 +31,7 @@ export class HeadernewComponent implements OnInit {
 
   logOut(){
     this.tokenStorage.signOut();
-    this.router.navigate(['/home']);
+    this.router.navigate(['/login']);
   }
 
 }
