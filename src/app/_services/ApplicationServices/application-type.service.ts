@@ -7,7 +7,7 @@ import { BaseService } from '../base.service';
 })
 export class ApplicationTypeService extends BaseService {
 
-  // getApplicationById(appId: string): Observable<server.participantModel> {
+  // getApplicationById(appId: string): Observable<server.applicationTypeModel> {
   //   return this.get(
   //     `api/Applications?id=${appId}`
   //   );
