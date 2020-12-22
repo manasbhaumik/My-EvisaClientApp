@@ -1,6 +1,7 @@
 declare module server {
 	interface applicationTypeModel {
 		submissionType: number;
+		countryID: number;
 		centerId: number;
 		totalApplicant: number;
 		durationOfVisit: number;
