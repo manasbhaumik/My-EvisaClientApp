@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class IndividualApplicationComponent implements OnInit {
 
-  firstFormGroup: FormGroup;
+  ApplicationTypeFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
   fourthFormGroup: FormGroup;
@@ -19,7 +19,7 @@ export class IndividualApplicationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
+    this.ApplicationTypeFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
