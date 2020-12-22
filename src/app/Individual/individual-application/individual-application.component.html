@@ -6,8 +6,8 @@
                 <p>Fill all form field to go to next step</p>
 
                 <mat-horizontal-stepper labelPosition="bottom" linear #stepper>
-                    <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
-                        <form [formGroup]="firstFormGroup">
+                    <mat-step [stepControl]="ApplicationTypeFormGroup" errorMessage="Application Type is required.">
+                        <form [formGroup]="ApplicationTypeFormGroup">
                             <ng-template matStepLabel>Application Type</ng-template>
                             <div class="example-container">
                                 <mat-form-field>

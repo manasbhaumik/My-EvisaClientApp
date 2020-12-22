@@ -3,8 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseUrl: 'v1',
+  AuthConfig: {
+    callbackURL: 'http://localhost:4200',
+    API_TEST_SERVER: 'http://1.9.116.25/ARB-Service'
+  }
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file
