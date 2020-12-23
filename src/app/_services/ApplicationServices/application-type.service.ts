@@ -2,6 +2,7 @@ import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ApplicationTypeModel } from 'src/app/models/applicationType/ApplicationTypeModel.cs';
 import { BaseService } from '../base.service';
 
 @Injectable({
@@ -9,9 +10,15 @@ import { BaseService } from '../base.service';
 })
 export class ApplicationTypeService extends BaseService {
 
-  getApplicationById(appId: string): Observable<any> {
+  getApplicationById(appId: number): Observable<ApplicationTypeModel> {
     return this.get(
       `api/Applications?id=${appId}`
+    );
+  }
+
+  getApplications(): Observable<ApplicationTypeModel> {
+    return this.get(
+      `api/ApplicationsByUser`
     );
   }
 

@@ -12,7 +12,7 @@
                             <div class="example-container">
                                 <mat-form-field appearance="outline">
                                     <mat-label>Application Type</mat-label>
-                                    <mat-select>
+                                    <mat-select matNativeControl formControlName="SubmissionType">
                                         <mat-option value="1">Group of My E-Visa</mat-option>
                                         <mat-option value="2">Individual’s MyE-Visa</mat-option>
                                     </mat-select>
@@ -20,9 +20,10 @@
 
                                 <mat-form-field appearance="outline">
                                     <mat-label>Select the origin country(Nationality as in passport)</mat-label>
-                                    <mat-select placeholder="Origin Country">
+                                    <mat-select placeholder="Origin Country" formControlName="CountryID">
                                         <mat-option [value]="null">No default type</mat-option>
-                                        <mat-option *ngFor="let c of countryList" [value]="c.countryID">{{ c.CountryName }}</mat-option>
+                                        <mat-option *ngFor="let c of countryList" [value]="c.CountryID">{{
+                                            c.CountryName }}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
 

@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
+import { DataService } from 'src/app/data.service';
+import { ApplicationTypeModel } from 'src/app/models/applicationType/ApplicationTypeModel.cs';
 import { ApplicationTypeService } from 'src/app/_services/ApplicationServices/application-type.service';
+import { CountryService } from 'src/app/_services/CountryServices/country.service';
 
 @Component({
   selector: 'app-individual-application',
@@ -14,10 +19,20 @@ export class IndividualApplicationComponent implements OnInit {
   thirdFormGroup: FormGroup;
   fourthFormGroup: FormGroup;
   isEditable = false;
+  countryList: any = [];
+
+  public isNew: boolean;
+  public isLoading = true;
+
+  // public allCountries: Array<server.DropdownModel<any>>;
 
   constructor(
     private _formBuilder: FormBuilder,
-    private applicationTypeService: ApplicationTypeService
+    private applicationTypeService: ApplicationTypeService,
+    private countryService: CountryService,
+    private dataService: DataService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -33,38 +48,45 @@ export class IndividualApplicationComponent implements OnInit {
     this.fourthFormGroup = this._formBuilder.group({
       fourthCtrl: ['', Validators.required]
     });
-  }
 
+    // this.countryService.getAllCountries().subscribe(res => {this.countryList = res});
+    this.dataService.getAllCountries().subscribe(res => { this.countryList = res });
 
-  originCountryChanged() {
-    this.getOrigincountry();
-  }
-
-  private getOrigincountry() {
-    // this.trainingSchedules = [];
-
-    // if (this.form.get('trainingTypeId').value) {
-    //   this.trainingScheduleService.getTrainingScheduleDropdown(this.form.get('trainingTypeId').value)
-    //     .subscribe(res => {
-    //       this.trainingSchedules = res;
-    //       console.log('list loaded');
-    //     });
-    // }
-  }
-
-  setFormData(model: server.applicationTypeModel) {
-    this.ApplicationTypeFormGroup = new FormGroup({
-      submissionType: new FormControl(model.submissionType),
-      countryID: new FormControl(model.countryID),
-      centerId: new FormControl(model.centerId),
-      totalApplicant: new FormControl(model.totalApplicant),
-      durationOfVisit: new FormControl(model.durationOfVisit),
-      isSponsor: new FormControl(model.isSponsor),
-      applicationTypeID: new FormControl(model.applicationTypeID),
-      purposeOfVisit: new FormControl(model.purposeOfVisit),
+    this.route.params.subscribe(p => {
+      const id = p.id;
+      // if (id === 'new') {
+      //   this.isNew = true;
+      this.applicationTypeService.getApplications()
+        .pipe(finalize(() => this.isLoading = false))
+        .subscribe(res => {
+          this.setFormData(res);
+        }, err => {
+          alert(err);
+        });
+      // } else {
+      // this.isNew = false;
+      // this.applicationTypeService.getApplicationById(id)
+      //   .pipe(finalize(() => this.isLoading = false))
+      //   .subscribe(res => {
+      //     this.setFormData(res);
+      //   }, err => {
+      //     alert(err);
+      //   });
+      // }
     });
+  }
 
-    console.log(this.ApplicationTypeFormGroup);
+  setFormData(model: ApplicationTypeModel) {
+    this.ApplicationTypeFormGroup = new FormGroup({
+      SubmissionType: new FormControl(model.SubmissionType),
+      countryID: new FormControl(model.CountryID),
+      CenterID: new FormControl(model.CenterID),
+      TotalApplicant: new FormControl(model.TotalApplicant),
+      DurationOfVisit: new FormControl(model.DurationOfVisit),
+      // isSponsor: new FormControl(model.isSponsor),
+      ApplicationTypeID: new FormControl(model.ApplicationTypeID),
+      PurposeOfVisit: new FormControl(model.PurposeOfVisit),
+    });
   }
 
 }
