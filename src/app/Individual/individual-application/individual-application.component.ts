@@ -21,7 +21,7 @@ export class IndividualApplicationComponent implements OnInit {
   isEditable = false;
   countryList: any = [];
   centerList: any = [];
-  visaProcessTypeList:any=[];
+  visaProcessTypeList: any = [];
 
   public isNew: boolean;
   public isLoading = true;
@@ -54,32 +54,8 @@ export class IndividualApplicationComponent implements OnInit {
     // this.countryService.getAllCountries().subscribe(res => {this.countryList = res});
     this.dataService.getAllCountries().subscribe(res => { this.countryList = res });
 
-    this.route.params.subscribe(p => {
-      const id = p.id;
-
-      this.dataService.getApplicationType().subscribe(res=>{
-        this.visaProcessTypeList = res;
-      });
-
-      // if (id === 'new') {
-      //   this.isNew = true;
-      // this.applicationTypeService.getApplications()
-      //   .pipe(finalize(() => this.isLoading = false))
-      //   .subscribe(res => {
-      //     this.setFormData(res);
-      //   }, err => {
-      //     alert(err);
-      //   });
-      // } else {
-      // this.isNew = false;
-      // this.applicationTypeService.getApplicationById(id)
-      //   .pipe(finalize(() => this.isLoading = false))
-      //   .subscribe(res => {
-      //     this.setFormData(res);
-      //   }, err => {
-      //     alert(err);
-      //   });
-      // }
+    this.dataService.getApplicationType().subscribe(res => {
+      this.visaProcessTypeList = res;
     });
   }
 
