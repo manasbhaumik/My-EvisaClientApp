@@ -20,6 +20,8 @@ export class IndividualApplicationComponent implements OnInit {
   fourthFormGroup: FormGroup;
   isEditable = false;
   countryList: any = [];
+  centerList: any = [];
+  visaProcessTypeList:any=[];
 
   public isNew: boolean;
   public isLoading = true;
@@ -54,15 +56,20 @@ export class IndividualApplicationComponent implements OnInit {
 
     this.route.params.subscribe(p => {
       const id = p.id;
+
+      this.dataService.getApplicationType().subscribe(res=>{
+        this.visaProcessTypeList = res;
+      });
+
       // if (id === 'new') {
       //   this.isNew = true;
-      this.applicationTypeService.getApplications()
-        .pipe(finalize(() => this.isLoading = false))
-        .subscribe(res => {
-          this.setFormData(res);
-        }, err => {
-          alert(err);
-        });
+      // this.applicationTypeService.getApplications()
+      //   .pipe(finalize(() => this.isLoading = false))
+      //   .subscribe(res => {
+      //     this.setFormData(res);
+      //   }, err => {
+      //     alert(err);
+      //   });
       // } else {
       // this.isNew = false;
       // this.applicationTypeService.getApplicationById(id)
@@ -74,6 +81,22 @@ export class IndividualApplicationComponent implements OnInit {
       //   });
       // }
     });
+  }
+
+  countryChanged() {
+    this.getAmbassy();
+  }
+
+  private getAmbassy() {
+    this.centerList = [];
+
+    if (this.ApplicationTypeFormGroup.get('CountryID').value) {
+      this.dataService.getCenterByCountryId_V01(this.ApplicationTypeFormGroup.get('CountryID').value)
+        .subscribe(res => {
+          this.centerList = res;
+          console.log('list loaded');
+        });
+    }
   }
 
   setFormData(model: ApplicationTypeModel) {

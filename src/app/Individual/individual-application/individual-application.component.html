@@ -20,20 +20,23 @@
 
                                 <mat-form-field appearance="outline">
                                     <mat-label>Select the origin country(Nationality as in passport)</mat-label>
-                                    <mat-select placeholder="Origin Country" formControlName="CountryID">
+                                    <mat-select placeholder="Origin Country" formControlName="CountryID" (selectionChange)="countryChanged()">
                                         <mat-option [value]="null">No default type</mat-option>
                                         <mat-option *ngFor="let c of countryList" [value]="c.CountryID">{{
                                             c.CountryName }}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
 
-                                <mat-form-field appearance="outline">
+                                <!-- <mat-form-field appearance="outline">
                                     <mat-label>Choose Embassy / Consulate</mat-label>
                                     <mat-select>
                                         <mat-option>Choose...</mat-option>
-                                        <mat-option>Embassy</mat-option>
+                                        <mat-select placeholder="Embassy / Consulate" formControlName="CenterID">
+                                            <mat-option [value]="null">No default type</mat-option>
+                                            <mat-option *ngFor="let c of centerList" [value]="c.CenterID">{{ c.CenterName }}</mat-option>
+                                          </mat-select>
                                     </mat-select>
-                                </mat-form-field>
+                                </mat-form-field> -->
                                 <br>
 
                                 <mat-form-field appearance="outline">
@@ -42,13 +45,8 @@
                                 </mat-form-field>
 
                                 <mat-form-field appearance="outline">
-                                    <mat-label>Duration of stay</mat-label>
-                                    <mat-select>
-                                        <mat-option value="7">One Week</mat-option>
-                                        <mat-option value="14">Two Weeks</mat-option>
-                                        <mat-option value="21">Three Weeks</mat-option>
-                                        <mat-option value="28">Four Weeks</mat-option>
-                                    </mat-select>
+                                    <mat-label>15</mat-label>
+                                    <input matInput placeholder="15 day(maximum)" disabled>
                                 </mat-form-field>
 
                                 <mat-form-field appearance="outline">
