@@ -17,8 +17,12 @@ export class VisaApplicationComponent implements OnInit {
   title="New Visa Application";
   totalApplicantsTitle:string;
   submissionTypeList:any =[{ID:'1',Name:'Group of My E-Visa'},{ID:'2',Name:'Individual’s MyE-Visa'}];
-  durationOfVisitList =[{ID:'7',Name:'One Week'},{ID:'14',Name:'Two Weeks'},{ID:'21',Name:'Three Weeks'},{ID:'28',Name:'Four Weeks'}];
-  JourneyList:any=["Business","Conference","Employment","Holiday","Medical / Medical Tourism","Official Trip","Study","Tourist/Social Visit","Transit","Visiting Friend / Relative"];
+ // durationOfVisitList =[{ID:'7',Name:'One Week'},{ID:'14',Name:'Two Weeks'},{ID:'21',Name:'Three Weeks'},{ID:'28',Name:'Four Weeks'}];
+  durationOfVisitList=[{ID:'15',Name:'15'}];
+  //JourneyList:any=["Business","Conference","Employment","Holiday","Medical / Medical Tourism","Official Trip","Study","Tourist/Social Visit","Transit","Visiting Friend / Relative"];
+  JourneyList:any=["Education - Studies","Business Trip","Official Trip","Conference","Employment","Holiday","Social Visit","Medical Treatment","Visiting Friend / Relative","Transit"];
+  VisaTypeList:any=[{ID:'1',Name:'e-Tourist Visa'},{ID:'2',Name:'e-Business Visa',disabled:true},{ID:'3',Name:'e-Conference Visa',disabled:true},{ID:'4',Name:'e-Student Visa',disabled:true},{ID:'5',Name:'e-Medical Attendant Visa',disabled:true}];
+  selectedJourneyType:any=[];
   visaProcessTypeList:any;
   applicationSelectedText:string;
   contactList:any;
@@ -35,6 +39,10 @@ export class VisaApplicationComponent implements OnInit {
   applicationID:number;
   applicationList:any;
   isEdited=false;
+  countryList:any;
+  SponsorList:any=[{ID:'1',Name:'Sponsor by Government',disabled : true},{ID:'2',Name:'Sponsor by Government Agency'},{ID:'3',Name:'Sponsor by Public/Private Company'},{ID:'4',Name:'Sponsor by Association'},{ID:'5',Name:'Self-Dependent'}]
+  selectedSponser:any=[];
+  embassyID:any;
 
 
   visaTypeForm=this.fb.group({
@@ -46,7 +54,12 @@ export class VisaApplicationComponent implements OnInit {
     PurposeOfVisit:['',Validators.required],
     DurationOfVisit:['',Validators.required],
     SubmitedBy:[''],
-    SubmisisionDate:['']
+    SubmisisionDate:[''],
+    countryId:[],
+    SponsorID:[],
+    UpdatedBy:[''],
+    UpdatedDate:[''],
+    VisaTypeID:['',Validators.required]
   });
   isSubmitted=false;  
 
@@ -62,82 +75,116 @@ export class VisaApplicationComponent implements OnInit {
   get f(){ return this.visaTypeForm.controls; }
 
   ngOnInit():void {  
-    this.activeRouter.params.subscribe(params => {
-      var applicationID = params['applicationId'];
-      this.applicationID=applicationID; 
-
-      if(this.applicationID!==undefined){
-        this.dataService.getApplicationById(this.applicationID).subscribe(res => 
-          {
-            this.applicationList = res;
-            this.isEdited=true;
-            this.applicationID=this.applicationList.ApplicationID;
-           // this.RegionList = Array.of(this.RegionList);
-            this.visaTypeForm.get('submissionType').setValue(this.applicationList.SubmissionType);
-            this.visaTypeForm.get('centerId').setValue(this.applicationList.CenterID);
-            this.visaTypeForm.get('TotalApplicant').setValue(this.applicationList.TotalApplicant);
-            this.visaTypeForm.get('DurationOfVisit').setValue(this.applicationList.DurationOfVisit);
-            this.visaTypeForm.get('ApplicationTypeID').setValue(this.applicationList.ApplicationTypeID);
-            this.visaTypeForm.get('PurposeOfVisit').setValue(this.applicationList.PurposeOfVisit);
-            if(this.applicationList.SubmissionDate==null)
-            {
-              this.dFormat = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
-              this.visaTypeForm.get('ContactID').setValue(this.contactID);
-              this.visaTypeForm.get('SubmitedBy').setValue(this.contactName);
-              this.visaTypeForm.get('SubmisisionDate').setValue(this.dFormat);
-            }
-            else{
-              this.dFormat = this.datePipe.transform(this.applicationList.SubmissionDate, 'yyyy-mm-dd');
-              this.visaTypeForm.get('ContactID').setValue(this.applicationList.ContactID);
-              this.visaTypeForm.get('SubmitedBy').setValue(this.applicationList.SubmitedBy);
-              this.visaTypeForm.get('SubmisisionDate').setValue(this.dFormat);
-            }
-            if(this.applicationList.SubmissionType==1){
-              this.visaTypeForm.get('TotalApplicant').enable();
-            }
-            else{
-              this.visaTypeForm.get('TotalApplicant').disable();
-            }
-          });
-
-      }
-    });
+    //window.location.reload();
     this.dataService.getApplicationType().subscribe(res=>{
       this.visaProcessTypeList = res;
     },
     error=>{
       this.error = error;
     });
-    this.dataService.getContact()
-    .subscribe((data:any)=>{
+
+    this.dataService.getAllCountries().subscribe(res => {this.countryList = res});
+
+    this.dataService.getContact().subscribe((data:any)=>{
       this.countryId=data.CountryID;
       this.contactID=data.ContactID;
       this.contactName=data.Name; 
-      this.centerID=data.CenterID;  
-      //this.dataService.getCenterByCountryId_V01(this.countryId).subscribe(res => {this.centerList = res;});
-      this.dataService.getCenterByCountryId_V01(localStorage.getItem("SelectedCountry")).subscribe(res => {this.centerList = res;});
-      this.dFormat = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
-      this.visaTypeForm.get('submissionType').setValue(localStorage.getItem("SubmissionType"));
-      this.visaTypeForm.get('centerId').setValue(localStorage.getItem("SelectedEmbassy"));
-      this.visaTypeForm.get('TotalApplicant').setValue(localStorage.getItem("NoOfTraveller"));
-      this.visaTypeForm.get('DurationOfVisit').setValue(14);
-      this.visaTypeForm.get('ApplicationTypeID').setValue(localStorage.getItem("ApplicationType"));
-      this.visaTypeForm.get('PurposeOfVisit').setValue("Tourist/Social Visit");
-
-     // this.visaTypeForm.get('centerId').setValue(this.centerID);
+      this.centerID=data.CenterID; 
+      this.embassyID = localStorage.getItem("SelectedEmbassy");      
       this.visaTypeForm.get('ContactID').setValue(this.contactID);
       this.visaTypeForm.get('SubmitedBy').setValue(this.contactName);
+      this.dFormat = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
       this.visaTypeForm.get('SubmisisionDate').setValue(this.dFormat);
+     
+    });
 
-      if(this.visaTypeForm.get('submissionType').value==1){
-        this.visaTypeForm.get('TotalApplicant').enable();
+    this.activeRouter.params.subscribe(params => {
+      var applicationID = params['applicationId'];
+      this.applicationID=applicationID; 
+
+      if(this.applicationID!==undefined){        
+        this.dataService.getApplicationById(this.applicationID).subscribe(res => 
+        {
+          this.applicationList = res;
+          this.isEdited=true;
+          this.applicationID=this.applicationList.ApplicationID;
+          this.dataService.getCenterByCountryId_V01(this.applicationList.CountryID).subscribe(res => {this.centerList = res;});
+          // this.RegionList = Array.of(this.RegionList);
+          this.visaTypeForm.get('submissionType').setValue(this.applicationList.SubmissionType);
+          this.visaTypeForm.get('countryId').setValue(this.applicationList.CountryID);
+          this.visaTypeForm.get('centerId').setValue(this.applicationList.CenterID);
+          this.visaTypeForm.get('TotalApplicant').setValue(this.applicationList.TotalApplicant);
+          this.visaTypeForm.get('DurationOfVisit').setValue(this.applicationList.DurationOfVisit);
+          this.visaTypeForm.get('SponsorID').setValue(this.applicationList.SponsorID);
+          this.visaTypeForm.get('ApplicationTypeID').setValue(this.applicationList.ApplicationTypeID);
+          this.visaTypeForm.get('PurposeOfVisit').setValue(this.applicationList.PurposeOfVisit);
+          this.visaTypeForm.get('VisaTypeID').setValue(this.applicationList.VisaTypeID);
+          if(this.applicationList.SubmissionDate==null)
+          {
+            this.dFormat = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
+            this.visaTypeForm.get('ContactID').setValue(this.contactID);
+            this.visaTypeForm.get('SubmitedBy').setValue(this.contactName);
+            this.visaTypeForm.get('SubmisisionDate').setValue(this.dFormat);
+            this.visaTypeForm.get('UpdatedBy').setValue(this.contactName);
+            this.visaTypeForm.get('UpdatedDate').setValue(this.dFormat);
+          }
+          else{
+            this.dFormat = this.datePipe.transform(this.applicationList.SubmissionDate, 'yyyy-MM-dd');
+            this.visaTypeForm.get('ContactID').setValue(this.applicationList.ContactID);
+            this.visaTypeForm.get('SubmitedBy').setValue(this.applicationList.SubmitedBy);
+            this.visaTypeForm.get('SubmisisionDate').setValue(this.dFormat);
+            this.visaTypeForm.get('UpdatedBy').setValue(this.contactName);
+            this.visaTypeForm.get('UpdatedDate').setValue(this.dFormat);
+          }
+          if(this.applicationList.SubmissionType==1){
+            this.visaTypeForm.get('TotalApplicant').enable();
+          }
+          else{
+            this.visaTypeForm.get('TotalApplicant').disable();
+          }
+        });
+
       }
       else{
-        this.visaTypeForm.get('TotalApplicant').disable();
+        if(this.embassyID==undefined){
+          this.dataService.getCenterByCountryId_V01(localStorage.getItem("SelectedCountry")).subscribe(res => {this.centerList = res;});
+          this.visaTypeForm.get('submissionType').setValue(localStorage.getItem("SubmissionType"));
+          this.visaTypeForm.get('countryId').setValue(localStorage.getItem("SelectedCountry"));
+          this.visaTypeForm.get('centerId').setValue(localStorage.getItem("SelectedEmbassy"));
+          this.visaTypeForm.get('TotalApplicant').setValue(localStorage.getItem("NoOfTraveller"));
+          this.visaTypeForm.get('DurationOfVisit').setValue(localStorage.getItem("Duration"));
+          this.visaTypeForm.get('SponsorID').setValue(localStorage.getItem("Sponsor"));
+          this.visaTypeForm.get('ApplicationTypeID').setValue(localStorage.getItem("ApplicationType"));
+          //this.visaTypeForm.get('PurposeOfVisit').setValue(localStorage.getItem("SelectedJourney"));
+          this.visaTypeForm.get('VisaTypeID').setValue(localStorage.getItem("SelectedJourney"));
+          if(this.visaTypeForm.get('submissionType').value==1){
+            this.visaTypeForm.get('TotalApplicant').enable();
+          }
+          else{
+            this.visaTypeForm.get('TotalApplicant').disable();
+          }  
+        }
+        else{
+          this.dataService.getCenterByCountryId_V01(this.countryId).subscribe(res => {this.centerList = res;});
+        }
       }
-
     });    
-    
+  }
+
+  selectCenter(e){
+    var value =e.target.value;
+    this.dataService.getCenterByCountryId_V01(value).subscribe(res => 
+      {
+        this.centerList = res;
+      },
+      error=>{
+        this.error=error.error.Message;
+        var dialogRef =this.dialog.open(ModalComponent,{ data: {
+          message : this.error,
+          title : "Alert!",
+          buttonText : "Cancel"
+        }});
+      });
   }
 
   public getVisaProcess(){
@@ -230,7 +277,7 @@ export class VisaApplicationComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
           console.log('The dialog was closed',result);
           this.returnUrl = result;
-          result ? this.router.navigate(['/home']): this.router.navigate(['/applicant-information']);
+          result ? this.router.navigate(['/home']): this.router.navigate(['/visa-application']);
         });    
       });
 

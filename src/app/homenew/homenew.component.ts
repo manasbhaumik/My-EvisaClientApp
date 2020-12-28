@@ -25,7 +25,7 @@ export class HomenewComponent implements OnInit {
   visaList:any=[{ID:'1',Name:'e-Tourist Visa'},{ID:'2',Name:'e-Business Visa',disabled:true},{ID:'3',Name:'e-Conference Visa',disabled:true},{ID:'4',Name:'e-Student Visa',disabled:true},{ID:'5',Name:'e-Medical Attendant Visa',disabled:true}];
   selectedVisaType:any=[];
   SponsorList:any=[{ID:'1',Name:'Sponsor by Government'},{ID:'2',Name:'Sponsor by Government Agency'},{ID:'3',Name:'Sponsor by Public/Private Company'},{ID:'4',Name:'Sponsor by Association'},{ID:'5',Name:'Self-Dependent'}]
-  selectedSponser=[];
+  selectedSponser:any=[];
   visaProcessTypeList:any=[];
   selectedProcess:any=[];
   visaFeeList:any;
@@ -128,6 +128,7 @@ export class HomenewComponent implements OnInit {
     localStorage.setItem('SelectedJourney',this.selectedVisaType);
     localStorage.setItem('NoOfTraveller',this.txtNoOfTraveller.nativeElement.value);
     localStorage.setItem('Duration',this.txtNoOfStay.nativeElement.value);
+    localStorage.setItem('Sponsor',this.selectedSponser);
     localStorage.setItem('ApplicationType',this.selectedProcess);
     this.router.navigate(['/login']);
   }

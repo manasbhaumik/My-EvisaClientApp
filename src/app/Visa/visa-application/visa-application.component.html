@@ -13,23 +13,21 @@
             </div>
 
             <div class="row">
-                <div class="col-md-4 order-md-2 mb-4">
+                <!-- <div class="col-md-4 order-md-2 mb-4">
                     <span class="text-gray-800"><b>Group Application :</b></span>
-                    <!--<hr class="mb-4" />-->
                     <p style="color:#131315 !important;">
                         Group application type selection for a group of peoples with same visa duration or same visa type application.
                         (E.G: Tour group , Company Delegates or Family Memebers who are going to Malaysia for a same periodof of time for bussiness or visting purpose.)
                     </p>
                     <span class="text-gray-800"><b>Individual Application :</b></span>
-                    <!--<hr class="mb-4" />-->
                     <p style="color:#131315 !important;">
                         Individual application type  selection for single person who is visting malaysia or going to reside in malaysia with sponsorship of Malaysian individual or
                         Comapny.
                         (E.G: Tourist, Student,Employee of a company  or visting malaysia for bussiness purpose)
                     </p>
 
-                </div>
-                <div class="col-md-8 order-md-1">                   
+                </div> -->
+                <div class="col-md-12 order-md-1">                   
                     <form class="needs-validation" [formGroup]="visaTypeForm"  (ngSubmit)="SaveApplication()"> 
                         <div class="mb-3">
                             <label for="application">Application Type</label>
@@ -41,18 +39,33 @@
                                 <option *ngFor="let Submission of submissionTypeList; let i = index" [value]="submissionTypeList[i].ID">
                                     {{submissionTypeList[i].Name}}
                                 </option>
-                                <!-- <option value="">Choose...</option>
-                                <option>Group Visa Apllication</option>
-                                <option>Individual Visa Apllication</option> -->
                             </select>
                             <div *ngIf="isSubmitted && f.submissionType.errors" class="invalid-feedback">
                                 <div *ngIf="f.submissionType.errors.required">Please select Application Type</div>                                    
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="email">The origin Country(Nationality as in Passport)</label>
+                                <select class="custom-select d-block w-100" formControlName="countryId" id="countryId" (change)="selectCenter($event)" [ngClass]="{ 'is-invalid': isSubmitted && f.countryId.errors }">
+                                    <option value="">Select Origin Country</option>
+                                    <option *ngFor="let Country of countryList" [value]="Country.CountryID">{{Country.CountryName}}</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Please select a origin country
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email">Destination Country</label>
+                                <select class="custom-select d-block w-100"  id="centerId" disabled>
+                                    <option value="">Malaysia</option>                                    
+                                </select>                            
+                            </div>
+                        </div>
                         <div class="mb-3">
-                            <label for="email">Choose Embassy / Consulate</label>
+                            <label for="email">Nearest Embassy / General Consulate / OSC</label>
                             <select class="custom-select d-block w-100" formControlName="centerId" id="centerId" [ngClass]="{ 'is-invalid': isSubmitted && f.centerId.errors }">
-                                <option value="">Choose...</option>
+                                <option value="">Select nearest Embassy / General Consulate / OSC</option>
                                  <option *ngFor="let Center of centerList" [value]="Center.CenterID">{{Center.CenterName}}</option>
                             </select>
                             <div class="invalid-feedback">
@@ -60,38 +73,56 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-5 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="country">Number of Applicant</label>
                                 <input type="text" formControlName="TotalApplicant" class="form-control" id="TotalApplicant" placeholder="" [ngClass]="{ 'is-invalid': isSubmitted && f.TotalApplicant.errors }">
                                 <div class="invalid-feedback">
                                     Please enter No.of Applicants
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="state">Duration of stay</label>
-                                <select formControlName="DurationOfVisit" class="custom-select d-block w-100" id="DurationOfVisit" [ngClass]="{ 'is-invalid': isSubmitted && f.DurationOfVisit.errors }">
+                                <!-- <select formControlName="DurationOfVisit" class="custom-select d-block w-100" id="DurationOfVisit" [ngClass]="{ 'is-invalid': isSubmitted && f.DurationOfVisit.errors }">
                                     <option value="">Choose...</option>
                                     <option *ngFor="let duration of durationOfVisitList; let i = index" [value]="durationOfVisitList[i].ID">
                                         {{durationOfVisitList[i].Name}}
                                     </option>
-                                </select>
+                                </select> -->
+                                <input type="text" formControlName="DurationOfVisit" class="form-control" id="DurationOfVisit" placeholder="" [ngClass]="{ 'is-invalid': isSubmitted && f.DurationOfVisit.errors }" disabled>
                                 <div class="invalid-feedback">
                                     Please select duration of stay
                                 </div>
                             </div>
-                            <div class="col-md-3 mb-3">
+                            <!-- <div class="col-md-3 mb-3">
                                 <label for="zip">Is Sponsored</label>
                                 <select class="custom-select d-block w-100" id="state" required>
                                     <option value="">Choose...</option>
                                     <option>Yes</option>
                                     <option>No</option>
-                                </select>
-                            </div>
+                                </select>                               
+                            </div> -->
                         </div>
                         <div class="mb-3">
-                            <label for="visaProcessingType">Visa Processing Type</label>
+                            <label for="zip">Sponsorship</label>
+                            <select formControlName="SponsorID" class="custom-select d-block w-100" id="sponsor" [ngClass]="{ 'is-invalid': isSubmitted && f.SponsorID.errors }">
+                                <option value="">Select Sponsorship</option>
+                                <option *ngFor="let sponsor of SponsorList" [value]="sponsor.ID">
+                                    {{sponsor.Name}}
+                                </option>
+                           </select>
+                            <!-- <ng-select [items]="SponsorList"
+                            bindLabel="Name"
+                            bindValue="ID"
+                            placeholder="Select sponsorship"
+                            appendTo="body"
+                            searchable="true"
+                            [(ngModel)]="selectedSponser" >
+                            </ng-select> -->
+                        </div>
+                        <div class="mb-3">
+                            <label for="visaProcessingType">Visa Processing Time</label>
                             <select formControlName="ApplicationTypeID" class="custom-select d-block w-100" id="state" [ngClass]="{ 'is-invalid': isSubmitted && f.ApplicationTypeID.errors }">
-                                <option value="">Choose...</option>
+                                <option value="">Select Visa Processing Time</option>
                                 <option *ngFor="let visa of visaProcessTypeList" [value]="visa.ApplicationTypeID">
                                     {{visa.ApplicationType}}
                                 </option>
@@ -100,18 +131,34 @@
                                 Please select visa processing type
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="email">Pupose of Journey</label>
-                            <select formControlName="PurposeOfVisit" class="custom-select d-block w-100" id="state" [ngClass]="{ 'is-invalid': isSubmitted && f.PurposeOfVisit.errors }">
-                                <option value="">Choose...</option>
-                                <option *ngFor="let Journey of JourneyList">
-                                    {{Journey}}
-                                </option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please select purpose of journey
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="email">Type of visa</label>
+                                <select formControlName="VisaTypeID" class="custom-select d-block w-100" id="state" [ngClass]="{ 'is-invalid': isSubmitted && f.VisaTypeID.errors }">
+                                    <option value="">Select Type of Visa</option>
+                                    <option *ngFor="let Visa of VisaTypeList" [value]="Visa.ID" [disabled]="Visa.ID === '2' || Visa.ID === '3'|| Visa.ID === '4'|| Visa.ID === '5'">
+                                        {{Visa.Name}}
+                                    </option>
+                                </select>                                
+                                <div class="invalid-feedback">
+                                    Please select type of visa
+                                </div>
                             </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email">Pupose of Journey</label>
+                                <select formControlName="PurposeOfVisit" class="custom-select d-block w-100" id="state" [ngClass]="{ 'is-invalid': isSubmitted && f.PurposeOfVisit.errors }">
+                                    <option value="">Select Purpose of Journey</option>
+                                    <option *ngFor="let Journey of JourneyList" [value]="Journey">
+                                        {{Journey}}
+                                    </option>
+                                </select>                                
+                                <div class="invalid-feedback">
+                                    Please select purpose of journey
+                                </div>
+                            </div>
+
                         </div>
+                        
                         
                         <!--<div class="mb-3">
                     <label for="address">Address</label>

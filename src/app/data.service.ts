@@ -256,11 +256,13 @@ export class DataService {
         "TotalApplicant":application.TotalApplicant,
         "PurposeOfVisit":application.PurposeOfVisit,
         "DurationOfVisit":application.DurationOfVisit,
-        "VisaTypeID":"1",
+        "VisaTypeID":application.VisaTypeID,
         "SubmitedBy":application.SubmitedBy,
         "SubmissionDate":application.SubmisisionDate,
         "AcceptedBy":application.AcceptedBy,
-        "Status":"Y"
+        "Status":"Y",
+        "SponsorID":application.SponsorID,
+        "CountryID":application.countryId
       } ,httpOptions)
       .pipe(
         map(res => res),
@@ -285,11 +287,15 @@ export class DataService {
         "TotalApplicant":application.TotalApplicant,
         "PurposeOfVisit":application.PurposeOfVisit,
         "DurationOfVisit":application.DurationOfVisit,
-        "VisaTypeID":"1",
+        "VisaTypeID":application.VisaTypeID,
         "SubmitedBy":application.SubmitedBy,
         "SubmissionDate":application.SubmisisionDate,
         "AcceptedBy":application.AcceptedBy,
-        "Status":"Y"
+        "Status":"Y",
+        "SponsorID":application.SponsorID,
+        "CountryID":application.countryId,
+        "UpdatedBy":application.UpdatedBy,
+        "UpdatedDate":application.UpdatedDate
       } ,httpOptions)
       .pipe(
         map(res => res),

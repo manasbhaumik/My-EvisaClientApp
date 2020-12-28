@@ -22,6 +22,7 @@ import { DatePipe } from '@angular/common';
 //import { Console } from 'console';
 
 declare var $: any;
+declare function showDataTable():any;
 
 
 @Component({
@@ -128,6 +129,7 @@ export class MemberListComponent implements OnInit {
     // );
 
     //$("#dataTable").datatable();
+    showDataTable();
 
     this.dataService.getApplications()
       .subscribe(data=>{

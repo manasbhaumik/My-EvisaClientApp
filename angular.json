@@ -44,7 +44,9 @@
               "src/assets/js_new/jquery.magnific-popup.min.js",
               "src/assets/js_new/jquery.ajaxchimp.min.js",
               "src/assets/js_new/jquery.validate.min.js",
-              "src/assets/js_new/custom.js"
+              "src/assets/js_new/custom.js",
+              "src/assets/vendor/datatables/jquery.dataTables.min.js",
+              "src/assets/js/demo/datatables-demo.js"
               
             ]
           },
