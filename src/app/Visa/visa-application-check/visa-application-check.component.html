@@ -56,9 +56,9 @@
             <div class="row">
                 <div class="col-md-12 order-md-2">
                     <div *ngIf="applicantStatusList?.length">
-                        <button class="btn btn-primary btn-md" type="submit" (click)="goToSubmitApplication(applicantStatusList[0].ApplicationID)">Application Submitted</button>&nbsp;
-                        <button class="btn btn-primary btn-md" type="submit" (click)="popupApplicationStatus(applicantStatusList[0].Status)">Application Status</button>&nbsp;
-                        <button class="btn btn-primary btn-md" type="submit" (click)="popupDateofSubmission(applicantStatusList[0].SubmissionDate)">Date of Submission</button>&nbsp;
+                        <button class="btn btn-primary btn-md" type="submit" (click)="goToSubmitApplication(applicantStatusList[0].ApplicationID)">Application Submitted</button>&nbsp;&nbsp;
+                        <button class="btn btn-primary btn-md" type="submit" (click)="popupApplicationStatus(applicantStatusList[0].Status)">Application Status</button>&nbsp;&nbsp;
+                        <button class="btn btn-primary btn-md" type="submit" (click)="popupDateofSubmission(applicantStatusList[0].SubmissionDate)">Date of Submission</button>&nbsp;&nbsp;
                         <button class="btn btn-primary btn-md" type="submit" (click)="popupVisaStatus(applicantStatusList[0].Applicants[0].VisaApplications[0].ApprovalStatus)">Visa Status</button>
                     </div>
                 </div>

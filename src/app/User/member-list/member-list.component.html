@@ -37,23 +37,35 @@
                                
                                 <tr *ngFor="let application of applicationsList; let i = index">
                                     <td>
-                                        <div *ngIf="application.Applicants[0] && application.Applicants[0].VisaApplications[0]; else showFirstName">
+                                        <!-- <div *ngIf="application.Applicants[0] && application.Applicants[0].VisaApplications[0]; else showFirstName">
                                             <a class="nav-link" [routerLink]="['/submit-application',{applicationId:application.ApplicationID}]">{{application.Applicants[0].VisaApplications[0].MyEVisaRefNo}}</a>
-                                        </div>                                        
-                                        <ng-template #showFirstName> 
+                                        </div>                                         -->
+                                        <div *ngIf="application.ApplicantID && application.MyEVisaRefNo; else showFirstName">
+                                            <a class="nav-link" [routerLink]="['/submit-application',{applicationId:application.ApplicationID}]">{{application.MyEVisaRefNo}}</a>
+                                        </div> 
+                                        <!-- <ng-template #showFirstName> 
                                             <div *ngIf="application.Applicants[0];else showEmpty">
                                                 <a class="nav-link" [routerLink]="['/travel-document',{applicantId:application.Applicants[0].ApplicantID}]">Continue to fillup travel information</a>
                                             </div>
-                                            <!-- <a class="nav-link" [routerLink]="['/submit-application',{applicationId:application.ApplicationID}]">-</a> -->
+                                            
+                                        </ng-template> -->
+                                        <ng-template #showFirstName> 
+                                            <div *ngIf="application.ApplicantID;else showEmpty">
+                                                <a class="nav-link" [routerLink]="['/travel-document',{applicantId:application.ApplicantID}]">Continue to fillup travel information</a>
+                                            </div>
+                                            
                                         </ng-template>
+                                        <!-- <ng-template #showEmpty>
+                                            <a class="nav-link" [routerLink]="['/applicant-information',{applicationId:application.ApplicationID}]">Continue to fillup applicant information</a>
+                                        </ng-template> -->
                                         <ng-template #showEmpty>
                                             <a class="nav-link" [routerLink]="['/applicant-information',{applicationId:application.ApplicationID}]">Continue to fillup applicant information</a>
                                         </ng-template>
                                     </td>                                    
-                                    <td>{{application.ApplicationType.ApplicationType1}}</td>
+                                    <td>{{application.ApplicationType}}</td>
                                     <td>{{application.PurposeOfVisit}}</td>
                                     <td>{{application.DurationOfVisit}}</td>
-                                    <td>{{submissionDate}}</td>                                   
+                                    <td>{{application.SubmissionDate | date : 'dd/MM/yyyy'}}</td>                                   
                                     <td>{{application.TotalApplicant}}</td>
                                     
                                     
