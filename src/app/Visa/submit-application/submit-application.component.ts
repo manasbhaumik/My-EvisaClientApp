@@ -38,15 +38,15 @@ export class SubmitApplicationComponent implements OnInit {
       var applicationId = params['applicationId'];
       this.applicationId=applicationId;
 
-      this.dataService.getApplicationsById(this.applicationId).subscribe(res => 
+      this.dataService.getApplicationsPreviewById(this.applicationId).subscribe(res => 
         {
-          this.applicationList = res;console.log(this.applicationList);
-          this.dob=this.applicationList.Applicants[0].DOB;
+          this.applicationList = res;
+          this.dob=this.applicationList[0].DOB;
           this.dFormat = this.datePipe.transform(this.dob, 'dd/MM/yyyy');
-          this.issueDate=this.datePipe.transform(this.applicationList.Applicants[0].TravelDocuments[0].IssuingDate, 'dd/MM/yyyy')
-          this.expiryDate=this.datePipe.transform(this.applicationList.Applicants[0].TravelDocuments[0].ExpiryDate, 'dd/MM/yyyy')
+          this.issueDate=this.datePipe.transform(this.applicationList[0].IssuingDate, 'dd/MM/yyyy')
+          this.expiryDate=this.datePipe.transform(this.applicationList[0].ExpiryDate, 'dd/MM/yyyy')
           var submissionType:number;
-          submissionType=this.applicationList.SubmissionType;
+          submissionType=this.applicationList[0].SubmissionType;
           if(submissionType == 1){
             this.applicationDesc="Group of My E-Visa";
           }

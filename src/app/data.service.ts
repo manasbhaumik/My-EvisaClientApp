@@ -25,7 +25,7 @@ export class DataService {
   public AgencyID : 0;
 
   handleError(error: HttpErrorResponse) {
-    console.log(error+"Err");
+    //console.log(error+"Err");
     let errorMessage = 'Unknown error!';
     if(error.status===401||error.status===403){
       errorMessage=error.message;
@@ -223,7 +223,7 @@ export class DataService {
 
   getContact():Observable<any>{
    var accessToken=  localStorage.getItem('auth-token');
-    console.log(accessToken);
+    //console.log(accessToken);
     var httpOptions = {
       headers: new HttpHeaders().set('Authorization', `Bearer ${accessToken}` )
     }
@@ -273,7 +273,7 @@ export class DataService {
   }
 
   updateAplication(application,applicationID):Observable<any>{
-    console.log(application);
+    //console.log(application);
     var httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
@@ -456,7 +456,7 @@ export class DataService {
   }
 
   getTravelDocById(docId):Observable<any>{
-    console.log("doc "+docId);
+    //console.log("doc "+docId);
     return this.httpClient.get(this.API_TEST_SERVER+ '/api/TravelDocuments/'+docId);
     //.pipe(map(response => response));
 
@@ -559,4 +559,13 @@ export class DataService {
       return throwError(error);
     }));
   }
+
+  public getApplicationsPreviewById(countryId){
+    var params=new HttpParams();
+    params=params.append('id',countryId);
+
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/ApplicationsPreviewById', {params: params}).pipe(map(response => response),catchError((error: HttpErrorResponse) => {
+      return throwError(error);
+    }));
+  }  
 }

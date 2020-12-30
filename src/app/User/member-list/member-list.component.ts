@@ -140,7 +140,7 @@ export class MemberListComponent implements OnInit {
       },
       error=>{
         this.error = error;
-        console.log(this.error);
+        //console.log(this.error);
       }
 
     )

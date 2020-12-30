@@ -52,22 +52,22 @@ export class TravelDocumentComponent implements OnInit {
             this.travelList = res;
             console.log(this.travelList);
             this.isEdited = true;
-            this.travelDocId = this.travelList.DocumentID;
-            this.traveldocForm.get('DocumentType').setValue(this.travelList.DocumentType);
-            this.traveldocForm.get('PassportNo').setValue(this.travelList.PassportNo);
-            this.traveldocForm.get('fatherName').setValue(this.travelList.FatherName);
-            this.traveldocForm.get('motherName').setValue(this.travelList.MotherName);
-            this.traveldocForm.get('IssuingCountry').setValue(this.travelList.IssuingCountry);
-            this.traveldocForm.get('IssuingAuthority').setValue(this.travelList.IssuingAuthority);
-            var yearIssue = Number(this.datePipe.transform(this.travelList.IssuingDate, 'yyyy'));
-            var monthIssue = Number(this.datePipe.transform(this.travelList.IssuingDate, 'MM'));
-            var dayIssue = Number(this.datePipe.transform(this.travelList.IssuingDate, 'dd'));
+            this.travelDocId = this.travelList[0].DocumentID;
+            this.traveldocForm.get('DocumentType').setValue(this.travelList[0].DocumentType);
+            this.traveldocForm.get('PassportNo').setValue(this.travelList[0].PassportNo);
+            this.traveldocForm.get('fatherName').setValue(this.travelList[0].FatherName);
+            this.traveldocForm.get('motherName').setValue(this.travelList[0].MotherName);
+            this.traveldocForm.get('IssuingCountry').setValue(this.travelList[0].IssuingCountry);
+            this.traveldocForm.get('IssuingAuthority').setValue(this.travelList[0].IssuingAuthority);
+            var yearIssue = Number(this.datePipe.transform(this.travelList[0].IssuingDate, 'yyyy'));
+            var monthIssue = Number(this.datePipe.transform(this.travelList[0].IssuingDate, 'MM'));
+            var dayIssue = Number(this.datePipe.transform(this.travelList[0].IssuingDate, 'dd'));
             this.traveldocForm.get('IssuingDate').setValue({year: yearIssue, month: monthIssue, day: dayIssue});
-            var yearExpiry = Number(this.datePipe.transform(this.travelList.ExpiryDate, 'yyyy'));
-            var monthExpiry = Number(this.datePipe.transform(this.travelList.ExpiryDate, 'MM'));
-            var dayExpiry = Number(this.datePipe.transform(this.travelList.ExpiryDate, 'dd'));
+            var yearExpiry = Number(this.datePipe.transform(this.travelList[0].ExpiryDate, 'yyyy'));
+            var monthExpiry = Number(this.datePipe.transform(this.travelList[0].ExpiryDate, 'MM'));
+            var dayExpiry = Number(this.datePipe.transform(this.travelList[0].ExpiryDate, 'dd'));
             this.traveldocForm.get('ExpiryDate').setValue({year: yearExpiry, month: monthExpiry, day: dayExpiry});
-            this.applicationID = this.travelList.Applicant.Application.ApplicationID;
+            this.applicationID = this.travelList[0].ApplicationID;
           },
           error=>{
             this.error="Message: " + error.message + "<br/>Status: " +error.status;
