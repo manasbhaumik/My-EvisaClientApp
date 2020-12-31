@@ -88,7 +88,7 @@
                                         {{durationOfVisitList[i].Name}}
                                     </option>
                                 </select> -->
-                                <input type="text" formControlName="DurationOfVisit" class="form-control" id="DurationOfVisit" placeholder="" [ngClass]="{ 'is-invalid': isSubmitted && f.DurationOfVisit.errors }" disabled>
+                                <input type="text" formControlName="DurationOfVisit" class="form-control" id="DurationOfVisit" value="15" placeholder="" [ngClass]="{ 'is-invalid': isSubmitted && f.DurationOfVisit.errors }" disabled>
                                 <div class="invalid-feedback">
                                     Please select duration of stay
                                 </div>

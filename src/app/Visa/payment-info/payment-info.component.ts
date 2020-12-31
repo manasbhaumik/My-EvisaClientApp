@@ -48,14 +48,14 @@ export class PaymentInfoComponent implements OnInit {
       var applicationId = params['applicationId'];
       this.applicationId=applicationId;
 
-      this.dataService.getApplicationsById(this.applicationId).subscribe(res => 
+      this.dataService.getPayInfoByApplicationId(this.applicationId).subscribe(res => 
         {
           this.applicationList = res;console.log(this.applicationList);
-          this.totalApplicant = this.applicationList.TotalApplicant;
-          this.processType = this.applicationList.ApplicationType.ApplicationType1;
-          this.applicationFees = this.applicationList.ApplicationType.SubmissionFee;
-          this.processFees = this.applicationList.ApplicationType.ProccesingFee;
-          this.totalFees = this.applicationList.ApplicationType.TotalFee;          
+          this.totalApplicant = this.applicationList[0].TotalApplicant;
+          this.processType = this.applicationList[0].ApplicationType;
+          this.applicationFees = this.applicationList[0].SubmissionFee;
+          this.processFees = this.applicationList[0].ProccesingFee;
+          this.totalFees = this.applicationList[0].TotalFee;          
 
         });
 

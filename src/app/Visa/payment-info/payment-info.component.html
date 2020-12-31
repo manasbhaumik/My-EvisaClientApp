@@ -90,11 +90,13 @@
                                 <label for="firstName">Payment Options  :</label>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <div *ngFor="let payMode of paymentModeList" class="custom-control custom-radio" >
-                                    <label for="{{payMode.PaymentModeID}}">
-                                        <input id="{{payMode.PaymentModeID}}" [value]='payMode.PaymentModeID' type="radio" name="payment"  [(ngModel)]="radioSelected">
+                                <div *ngFor="let payMode of paymentModeList"  >
+                                    <!-- <label for="{{payMode.PaymentModeID}}">
+                                        <input id="{{payMode.PaymentModeID}}" class="custom-radio" [value]='payMode.PaymentModeID' type="radio" name="payment"  [(ngModel)]="radioSelected">
                                         {{payMode.PaymentMode1}}
-                                      </label>
+                                      </label> -->
+                                      <input id="{{payMode.PaymentModeID}}" class="custom-radio" [value]='payMode.PaymentModeID' type="radio" name="payment"  [(ngModel)]="radioSelected">
+                                        {{payMode.PaymentMode1}}
                                 </div>
                             </div>   
                         </div>                       

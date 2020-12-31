@@ -567,5 +567,15 @@ export class DataService {
     return this.httpClient.get(this.API_TEST_SERVER+ '/api/ApplicationsPreviewById', {params: params}).pipe(map(response => response),catchError((error: HttpErrorResponse) => {
       return throwError(error);
     }));
-  }  
+  } 
+  
+  getPayInfoByApplicationId(applicationId):Observable<any>{
+    var params=new HttpParams();
+    params=params.append('id',applicationId);
+
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/PaymentInfoByApplicationID', {params: params}).pipe(map(response => response),catchError((error: HttpErrorResponse) => {
+      return throwError(error);
+    }));
+    
+  }
 }

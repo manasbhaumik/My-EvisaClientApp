@@ -153,12 +153,14 @@ a:hover {
 
 .btn.btn-block {
    border-radius: 20px;
-   background-color: #0f72dc;
+   /* background-color: #0f72dc; */
+   background-color: #06406e;
    color: #fff
 }
 
 .btn.btn-block:hover {
-   background-color: #55268be0
+   /* background-color: #55268be0 */
+   background-color: #06406e;
 }
 
 @media(max-width: 575px) {

@@ -62,26 +62,26 @@ export class ApplicantInformationComponent implements OnInit {
           {
             this.applicantsList = res;
             this.isEdited = true;
-            this.applicationId = this.applicantsList.ApplicationID;
-            this.applicantForm.get('FullName').setValue(this.applicantsList.FullName);
-            this.applicantForm.get('FamlilyName').setValue(this.applicantsList.FamlilyName);
-            this.applicantForm.get('FirstName').setValue(this.applicantsList.FirstName);
-            this.applicantForm.get('NickName').setValue(this.applicantsList.NickName);
-            this.applicantForm.get('Gender').setValue(this.applicantsList.Gender);
-            var year = Number(this.datePipe.transform(this.applicantsList.DOB, 'yyyy'));
-            var month = Number(this.datePipe.transform(this.applicantsList.DOB, 'MM'));
-            var day = Number(this.datePipe.transform(this.applicantsList.DOB, 'dd'));
+            this.applicationId = this.applicantsList[0].ApplicationID;
+            this.applicantForm.get('FullName').setValue(this.applicantsList[0].FullName);
+            this.applicantForm.get('FamlilyName').setValue(this.applicantsList[0].FamlilyName);
+            this.applicantForm.get('FirstName').setValue(this.applicantsList[0].FirstName);
+            this.applicantForm.get('NickName').setValue(this.applicantsList[0].NickName);
+            this.applicantForm.get('Gender').setValue(this.applicantsList[0].Gender);
+            var year = Number(this.datePipe.transform(this.applicantsList[0].DOB, 'yyyy'));
+            var month = Number(this.datePipe.transform(this.applicantsList[0].DOB, 'MM'));
+            var day = Number(this.datePipe.transform(this.applicantsList[0].DOB, 'dd'));
             this.applicantForm.get('DOB').setValue({year: year, month: month, day: day});
-            this.applicantForm.get('IDNumber').setValue(this.applicantsList.IDNumber);
-            this.applicantForm.get('ContactNo').setValue(this.applicantsList.ContactNo);
-            this.applicantForm.get('Email').setValue(this.applicantsList.Email);
-            this.applicantForm.get('AltEmail').setValue(this.applicantsList.Email);
-            this.applicantForm.get('Address1').setValue(this.applicantsList.Address1);
-            this.applicantForm.get('Address2').setValue(this.applicantsList.Address2);
-            this.applicantForm.get('Address3').setValue(this.applicantsList.Address3);
-            this.applicantForm.get('City').setValue(this.applicantsList.City);
-            this.applicantForm.get('State').setValue(this.applicantsList.State);
-            this.applicantForm.get('PostCode').setValue(this.applicantsList.PostCode);
+            this.applicantForm.get('IDNumber').setValue(this.applicantsList[0].IDNumber);
+            this.applicantForm.get('ContactNo').setValue(this.applicantsList[0].ContactNo);
+            this.applicantForm.get('Email').setValue(this.applicantsList[0].Email);
+            this.applicantForm.get('AltEmail').setValue(this.applicantsList[0].Email);
+            this.applicantForm.get('Address1').setValue(this.applicantsList[0].Address1);
+            this.applicantForm.get('Address2').setValue(this.applicantsList[0].Address2);
+            this.applicantForm.get('Address3').setValue(this.applicantsList[0].Address3);
+            this.applicantForm.get('City').setValue(this.applicantsList[0].City);
+            this.applicantForm.get('State').setValue(this.applicantsList[0].State);
+            this.applicantForm.get('PostCode').setValue(this.applicantsList[0].PostCode);
 
           });
       }
