@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'v1',
+  baseUrl: 'http://1.9.116.25/ARB-Service/Help',
   AuthConfig: {
     callbackURL: 'http://localhost:4200',
     API_TEST_SERVER: 'http://1.9.116.25/ARB-Service'

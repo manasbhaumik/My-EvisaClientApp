@@ -10,39 +10,44 @@
                         <form [formGroup]="ApplicationTypeFormGroup">
                             <ng-template matStepLabel>Application Type</ng-template>
                             <div class="example-container">
-                                <mat-form-field>
+                                <mat-form-field appearance="outline">
                                     <mat-label>Application Type</mat-label>
-                                    <mat-select>
+                                    <mat-select matNativeControl formControlName="SubmissionType">
                                         <mat-option value="1">Group of My E-Visa</mat-option>
                                         <mat-option value="2">Individual’s MyE-Visa</mat-option>
                                     </mat-select>
                                 </mat-form-field>
 
-                                <mat-form-field>
-                                    <mat-label>Choose Embassy / Consulate</mat-label>
-                                    <mat-select>
-                                        <mat-option>Choose...</mat-option>
-                                        <mat-option>Embassy</mat-option>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Select the origin country(Nationality as in passport)</mat-label>
+                                    <mat-select placeholder="Origin Country" formControlName="CountryID" (selectionChange)="countryChanged()">
+                                        <mat-option [value]="null">No default type</mat-option>
+                                        <mat-option *ngFor="let c of countryList" [value]="c.CountryID">{{
+                                            c.CountryName }}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
+
+                                <!-- <mat-form-field appearance="outline">
+                                    <mat-label>Embassy / Consulate</mat-label>
+                                    <mat-select placeholder="Embassy / Consulate" formControlName="CenterID">
+                                        <mat-option [value]="null">No default type</mat-option>
+                                        <mat-option *ngFor="let c of centerList" [value]="c.CenterID">{{
+                                            c.CenterName }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field> -->
                                 <br>
 
-                                <mat-form-field>
+                                <mat-form-field appearance="outline">
                                     <mat-label>Number of Applicant</mat-label>
                                     <input matInput placeholder="Number of Applicant">
                                 </mat-form-field>
 
-                                <mat-form-field>
-                                    <mat-label>Duration of stay</mat-label>
-                                    <mat-select>
-                                        <mat-option value="7">One Week</mat-option>
-                                        <mat-option value="14">Two Weeks</mat-option>
-                                        <mat-option value="21">Three Weeks</mat-option>
-                                        <mat-option value="28">Four Weeks</mat-option>
-                                    </mat-select>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>15</mat-label>
+                                    <input matInput placeholder="15 day(maximum)" disabled>
                                 </mat-form-field>
 
-                                <mat-form-field>
+                                <mat-form-field appearance="outline">
                                     <mat-label>Is Sponsored</mat-label>
                                     <mat-select>
                                         <mat-option value="1">Yes</mat-option>
@@ -51,7 +56,7 @@
                                 </mat-form-field>
                                 <br>
 
-                                <mat-form-field>
+                                <mat-form-field appearance="outline">
                                     <mat-label>Visa Processing Type</mat-label>
                                     <mat-select>
                                         <mat-option value="5">Ordinary</mat-option>
@@ -61,7 +66,7 @@
                                 </mat-form-field>
                                 <br>
 
-                                <mat-form-field>
+                                <mat-form-field appearance="outline">
                                     <mat-label>Purpose of Journey</mat-label>
                                     <mat-select>
                                         <mat-option value="5">Business</mat-option>
