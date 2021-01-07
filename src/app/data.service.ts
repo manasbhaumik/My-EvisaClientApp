@@ -578,4 +578,38 @@ export class DataService {
     }));
     
   }
+
+  saveRegisterUser(userRegister){
+    var httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+    return this.httpClient.post(this.API_TEST_SERVER + '/api/Contacts',
+      {
+        "Name":userRegister.Name,
+        "Email":userRegister.Email,
+        "Password":userRegister.Password,
+        "IDNumber":userRegister.idNo,
+        "ContactNo":userRegister.ContactNo,
+        "CountryID":userRegister.CountryId,
+        "CenterID":userRegister.centerId,
+        "AgencyID":1,
+        
+      } ,httpOptions)
+      .pipe(
+        map(res => res),
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
+        }));
+
+  }
+
+  getVisaRefNoByContactId(contactId):Observable<any>{
+    var params=new HttpParams();
+    params=params.append('id',contactId);
+
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/VisaRefNoByContactID', {params: params}).pipe(map(response => response),catchError((error: HttpErrorResponse) => {
+      return throwError(error);
+    }));
+    
+  }
 }

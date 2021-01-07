@@ -51,6 +51,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { RegistrationComponent } from './User/registration/registration.component';
 
 const openCVConfig: OpenCVOptions = {
   scriptUrl: `assets/opencv/wasm/3.4/opencv.js`,
@@ -88,7 +89,8 @@ const openCVConfig: OpenCVOptions = {
     HomenewComponent,
     LoginComponent,
     RegisterIndividualApplicantComponent,
-    IndividualApplicationComponent
+    IndividualApplicationComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

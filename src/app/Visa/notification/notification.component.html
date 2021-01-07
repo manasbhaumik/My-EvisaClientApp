@@ -1,4 +1,4 @@
-<app-member></app-member>
+<!-- <app-member></app-member> -->
 <div class="container-fluid">
     <div class="row py-5">
         <div class="col-md-2 order-md-1">
@@ -24,6 +24,11 @@
                     <div *ngIf="divSucess" class="card  mb-4 alert-success">                        
                         <div class="card-body">
                            Application submission sucess and you are required  to do for Biometric Enrollment
+                        </div>
+                    </div>
+                    <div *ngIf="divAlert" class="card  mb-4 alert-danger">                        
+                        <div class="card-body">
+                           The application has not been submitted, <a routerLink="/visa-application">Please submit the application</a>
                         </div>
                     </div>
                 </div>

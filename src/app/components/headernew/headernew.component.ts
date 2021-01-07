@@ -31,7 +31,9 @@ export class HeadernewComponent implements OnInit {
 
   logOut(){
     this.tokenStorage.signOut();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+    });
   }
 
 }

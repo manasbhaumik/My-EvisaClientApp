@@ -58,7 +58,10 @@ export class LoginComponent implements OnInit {
           result => {
           this.returnUrl = result;
           //this.ngOnInit();
-          this.router.navigate(['/visa-application']);
+          //this.router.navigate(['/visa-application']);
+          this.router.navigate(['/visa-application']).then(() => {
+            window.location.reload();
+          });
           // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           //   this.router.navigate(['/register-individual']);
           // }); 

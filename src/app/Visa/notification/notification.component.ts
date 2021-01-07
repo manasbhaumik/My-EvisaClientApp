@@ -20,6 +20,8 @@ export class NotificationComponent implements OnInit {
   visaRegNo = "";
   divPending : boolean = false;
   divSucess : boolean = false;
+  divAlert : boolean = false;
+
 
   constructor( private fb: FormBuilder,
     private router: Router,
@@ -37,10 +39,21 @@ export class NotificationComponent implements OnInit {
     });
 
     if(this.contactID !== undefined){
-      this.dataService.getContactById(this.contactID).subscribe(res=>{
+      this.dataService.getVisaRefNoByContactId(this.contactID).subscribe(res=>{
         this.contactList = res;
         console.log(this.contactList);
-        this.visaRegNo = this.contactList.Applications[0].Applicants[0].VisaApplications[0].MyEVisaRefNo;
+        if(this.contactList[0].MYEVISAREFNO===null){
+          this.divPending = false;
+          this.divSucess = false;
+          this.divAlert = true;
+          this.visaRegNo = "N/A"
+        }
+        else{
+          // this.visaRegNo = this.contactList.Applications[0].Applicants[0].VisaApplications[0].MyEVisaRefNo;
+          this.visaRegNo = this.contactList[0].MYEVISAREFNO;
+        }
+        
+        //alert(this.contactList.Applications[0]);
         // this.divPending = true;
         // this.divSucess = false;
       });
@@ -49,13 +62,16 @@ export class NotificationComponent implements OnInit {
     //   this.divPending = false;
     //   this.divSucess = true;
     // }
+    
     if (this.paymentID!==undefined){
       this.divPending = false;
       this.divSucess = true;
+      this.divAlert = false;
     }
     else{
       this.divPending = true;
-        this.divSucess = false;
+      this.divSucess = false;
+      this.divAlert = false;
     }
   }
 

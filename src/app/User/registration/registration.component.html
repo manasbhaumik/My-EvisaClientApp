@@ -1,0 +1,110 @@
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <div class="row py-5">
+        <div class="col-md-2 order-md-1">
+        </div>
+        <div class="col-md-8 order-md-1">
+            <div class="py-2">
+                <!--<img class="d-block mx-auto mb-4" src="assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
+                <h3 class="text-gray-800">Registration Information</h3>
+                <hr class="mb-4">
+            </div>
+            <div class="row">                
+                <div class="col-md-12 order-md-1">
+                    <form class="needs-validation" [formGroup]="userRegisterForm" (ngSubmit)="RegisterUser()">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">Name</label>
+                                <input type="text" formControlName="Name" class="form-control" id="firstName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.Name.errors }">
+                                <div *ngIf="isSubmitted && f.Name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Name.errors.required">Name Required</div>                                    
+                                </div> 
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email">Email Address</label>
+                                <input type="email" formControlName="Email" class="form-control" id="email" placeholder="you@example.com" [ngClass]="{ 'is-invalid': isSubmitted && f.Email.errors }">
+                                <div *ngIf="isSubmitted && f.Email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Email.errors.required">Email Required</div> 
+                                    <div *ngIf="f.Email.errors.email">Must be a valid email address</div>                                   
+                                </div>
+                            </div>  
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="password">Password</label>
+                                <input type="password" formControlName="Password" class="form-control" id="password"  [ngClass]="{ 'is-invalid': isSubmitted && f.Password.errors }">
+                                <div *ngIf="isSubmitted && f.Password.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Password.errors.required">Password Required</div> 
+                                    <div *ngIf="f.Password.errors.minlength">Please enter a password at least 8 characters.</div> 
+                                    <div *ngIf="f.Password.errors.maxlength">Please enter a password at not more than 12 characters.</div>                                                                     
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="password">Confirmed Password</label>
+                                <input type="password" formControlName="RePassword" class="form-control" id="Repassword"  [ngClass]="{ 'is-invalid': isSubmitted && f.RePassword.errors }">
+                                <div *ngIf="isSubmitted && f.RePassword.errors || userRegisterForm.errors?.mismatch" class="invalid-feedback">
+                                    <div *ngIf="f.RePassword.errors.required">Confirm Password Required</div> 
+                                    <div *ngIf="f.RePassword.errors || userRegisterForm.errors?.mismatch">Password does not match</div>
+                                    <!-- <div *ngIf="f.RePassword.errors.minlength">Please enter a password at least 6 characters.</div>                                    -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">National Registration Identity Card</label>
+                                <input type="text" formControlName="idNo" class="form-control" id="nrid" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.idNo.errors }">
+                                <div *ngIf="isSubmitted && f.idNo.errors" class="invalid-feedback">
+                                    <div *ngIf="f.idNo.errors.required">ID No Required</div>                                    
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">Telephone Number</label>
+                                <input type="text" formControlName="ContactNo" class="form-control" id="ContactNo" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.ContactNo.errors }">
+                                <div *ngIf="isSubmitted && f.ContactNo.errors" class="invalid-feedback">
+                                    <div *ngIf="f.ContactNo.errors.required">Contact No Required</div>                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="country">Country</label>
+                                <select formControlName="CountryId" class="custom-select d-block w-100" (change)="regionChange($event)" id="CountryId" [ngClass]="{ 'is-invalid': isSubmitted && f.CountryId.errors }">
+                                    <option value="">Select Country</option>
+                                    <option *ngFor="let Country of CountryList" [value]="Country.CountryID" >
+                                        {{Country.CountryName}}
+                                    </option>
+                                </select>
+                                <div *ngIf="isSubmitted && f.CountryId.errors" class="invalid-feedback">
+                                    <div *ngIf="f.CountryId.errors.required">Please choose Country</div>                                    
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName">Nearest Immigration Attache or OSC</label>
+                                <select class="custom-select d-block w-100" formControlName="centerId"  id="agencytype" [ngClass]="{ 'is-invalid': isSubmitted && f.centerId.errors }" >
+                                    <option value="">Select nearest Embassy/General Consulate/OSC</option>
+                                    <option *ngFor="let Center of centerList" [value]="Center.CenterID">{{Center.CenterName}}</option>
+                                </select>
+                                <div *ngIf="isSubmitted && f.centerId.errors" class="invalid-feedback">
+                                    <div *ngIf="f.centerId.errors.required">Please choose nearest Embassy/ General Consulate/ OSC</div>
+                                </div>
+                            </div>
+                        </div> 
+                                
+                        <!-- <div class="row"></div> -->
+
+                        <button class="btn btn-primary btn-md" type="submit">{{buttonTitle}}</button>&nbsp;
+                        <button class="btn btn-danger btn-md" type="submit">Cancel</button>
+
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->

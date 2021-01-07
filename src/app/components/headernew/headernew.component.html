@@ -58,6 +58,20 @@
 						<li class="nl-simple">
 							<a routerLink="/Faq" >F.A.Q</a>
 						</li>
+						<!-- <div *ngIf="userName?.length;else none"></div> -->
+						<li aria-haspopup="true" *ngIf="userName?.length;else none" >
+							<a  href="#">User Profile<span class="wsarrow"></span></a>
+							<ul class="sub-menu">
+								<li ><a routerLink="/visa-application-check">Application Status</a></li>
+								<li ><a [routerLink]="['/agency-contact-detail',{agentId:0,countryId:countryID,contactId:contactID}]">View Profile</a></li>
+								<li ><a [routerLink]="['/notification',{contactId:contactID}]">Notifications</a></li>
+								<li ><a href="#" (click)="logOut()">Log Out</a></li>
+							</ul>
+						</li>						
+						<ng-template #none>							
+						</ng-template>
+						<!-- <li aria-haspopup="true"><a href="#" (click)="logOut()">Log Out</a></li> -->
+						
 
 			          	<!-- PAGES -->
 					    <!-- <li aria-haspopup="true"><a href="#">Apply Online <span class="wsarrow"></span></a>
@@ -79,3 +93,4 @@
 		</div>	<!-- END NAVIGATION MENU -->
 	</div>     <!-- End header-wrapper -->
 </header>	<!-- END HEADER -->
+<router-outlet></router-outlet>
