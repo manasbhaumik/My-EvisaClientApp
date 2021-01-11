@@ -125,7 +125,7 @@ export class VisaApplicationComponent implements OnInit {
             this.visaTypeForm.get('ContactID').setValue(this.contactID);
             this.visaTypeForm.get('SubmitedBy').setValue(this.contactName);
             this.visaTypeForm.get('SubmisisionDate').setValue(this.dFormat);
-            this.visaTypeForm.get('UpdatedBy').setValue(this.contactName);
+            this.visaTypeForm.get('UpdatedBy').setValue(this.contactID);
             this.visaTypeForm.get('UpdatedDate').setValue(this.dFormat);
           }
           else{
@@ -133,7 +133,7 @@ export class VisaApplicationComponent implements OnInit {
             this.visaTypeForm.get('ContactID').setValue(this.applicationList[0].ContactID);
             this.visaTypeForm.get('SubmitedBy').setValue(this.applicationList[0].SubmitedBy);
             this.visaTypeForm.get('SubmisisionDate').setValue(this.dFormat);
-            this.visaTypeForm.get('UpdatedBy').setValue(this.contactName);
+            this.visaTypeForm.get('UpdatedBy').setValue(this.contactID);
             this.visaTypeForm.get('UpdatedDate').setValue(this.dFormat);
           }
           if(this.applicationList[0].SubmissionType==1){
@@ -224,7 +224,7 @@ export class VisaApplicationComponent implements OnInit {
     if(this.isEdited == true){
       this.dataService.updateAplication(this.visaTypeForm.getRawValue(),this.applicationID)
       .subscribe((data:any)=>{
-        console.log(data);     
+        //console.log(data);     
         var dialogRef= this.dialog.open(ModalComponent,{ data: {
         message : "Application information updated Successfully",
         title : "Success",
@@ -232,7 +232,7 @@ export class VisaApplicationComponent implements OnInit {
         }});  
         dialogRef.afterClosed().subscribe(
           result => {
-          console.log('The dialog was closed',result);
+          //console.log('The dialog was closed',result);
           this.returnUrl = result;
           this.router.navigate(['/submit-application',{applicationId:this.applicationID}]);
           //this.router.navigate(['/visa-application',{applicationId:this.applicationID}]);
@@ -240,16 +240,16 @@ export class VisaApplicationComponent implements OnInit {
         });      
       },
       error=>{
-        console.log("error :"+error);
+        //console.log("error :"+error);
         this.error=error.error.Message;
-        console.log(error.error.Message);
+        //console.log(error.error.Message);
         var dialogRef =this.dialog.open(ModalComponent,{ data: {
           message : this.error,
           title : "Alert!",
           buttonText : "Cancel"
         }});
         dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed',result);
+          //console.log('The dialog was closed',result);
           this.returnUrl = result;
           result ? this.router.navigate(['/home']): this.router.navigate(['/visa-application',{applicationId:this.applicationID}]);
         });    
@@ -259,7 +259,7 @@ export class VisaApplicationComponent implements OnInit {
     else{
       this.dataService.saveAplication(this.visaTypeForm.getRawValue())
       .subscribe((data:any)=>{
-        console.log(data);     
+        //console.log(data);     
         var dialogRef= this.dialog.open(ModalComponent,{ data: {
         message : "Application registered Successfully, please click Ok to fill applicant information",
         title : "Success",
@@ -267,22 +267,22 @@ export class VisaApplicationComponent implements OnInit {
         }});  
         dialogRef.afterClosed().subscribe(
           result => {
-          console.log('The dialog was closed',result);
+          //console.log('The dialog was closed',result);
           this.returnUrl = result;
           this.router.navigate(['/applicant-information',{applicationId:data.ApplicationID}]);
         });      
       },
       error=>{
-        console.log("error :"+error);
+        //console.log("error :"+error);
         this.error=error.error.Message;
-        console.log(error.error.Message);
+        //console.log(error.error.Message);
         var dialogRef =this.dialog.open(ModalComponent,{ data: {
           message : this.error,
           title : "Alert!",
           buttonText : "Cancel"
         }});
         dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed',result);
+          //console.log('The dialog was closed',result);
           this.returnUrl = result;
           result ? this.router.navigate(['/home']): this.router.navigate(['/visa-application']);
         });    

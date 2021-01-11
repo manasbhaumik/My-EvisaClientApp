@@ -42,7 +42,9 @@ export class TravelDocumentComponent implements OnInit {
   ngOnInit(): void {
     this.activeRouter.params.subscribe(params => {
       var applicantID = params['applicantId'];
+      var applicationID = params['applicationId'];
       this.applicantID=applicantID; 
+      this.applicationID = applicationID;
       });  
       this.traveldocForm.get('Applicant').setValue(this.applicantID);
 
@@ -95,7 +97,7 @@ export class TravelDocumentComponent implements OnInit {
     //console.log(this.traveldocForm.getRawValue());
     // console.log('date:'+this.dobDate);
     //console.log(this.dobDate.day+"/"+this.dobDate.month+"/"+this.dobDate.year);
-    console.log(this.traveldocForm.getRawValue());
+    //console.log(this.traveldocForm.getRawValue());
     this.isSubmitted = true;
     if(this.traveldocForm.invalid){      
      return;
@@ -112,7 +114,7 @@ export class TravelDocumentComponent implements OnInit {
         }});  
         dialogRef.afterClosed().subscribe(
           result => {
-          console.log('The dialog was closed',result);
+          //console.log('The dialog was closed',result);
           this.returnUrl = result;
           var travelDoclist:any;    
           this.router.navigate(['/submit-application',{applicationId:this.applicationID}]);    
@@ -121,14 +123,14 @@ export class TravelDocumentComponent implements OnInit {
       },
       error=>{
         this.error=error.error.Message;
-        console.log(error.error.Message);
+        //console.log(error.error.Message);
         var dialogRef =this.dialog.open(ModalComponent,{ data: {
           message : this.error,
           title : "Alert!",
           buttonText : "Cancel"
         }});
         dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed',result);
+          //console.log('The dialog was closed',result);
           this.returnUrl = result;
           result ? this.router.navigate(['/home']): this.router.navigate(['/travel-document',{applicantId:this.applicantID}]);
         });
@@ -143,22 +145,23 @@ export class TravelDocumentComponent implements OnInit {
         }});  
         dialogRef.afterClosed().subscribe(
           result => {
-          console.log('The dialog was closed',result);
+          //console.log('The dialog was closed',result);
           this.returnUrl = result;
           var travelDoclist:any;        
-          this.router.navigate(['/member-list']);
+         // this.router.navigate(['/member-list']);
+          this.router.navigate(['/submit-application',{applicationId:this.applicationID}]);
         }); 
       },
       error=>{
         this.error=error.error.Message;
-        console.log(error.error.Message);
+        //console.log(error.error.Message);
         var dialogRef =this.dialog.open(ModalComponent,{ data: {
           message : this.error,
           title : "Alert!",
           buttonText : "Cancel"
         }});
         dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed',result);
+          //console.log('The dialog was closed',result);
           this.returnUrl = result;
           result ? this.router.navigate(['/home']): this.router.navigate(['/travel-document',{applicantId:this.applicantID}]);
         });

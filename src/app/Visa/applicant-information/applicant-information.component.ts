@@ -158,7 +158,8 @@ export class ApplicantInformationComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
           //console.log('The dialog was closed',result);
           this.returnUrl = result;
-          this.router.navigate(['/travel-document',{applicantId:data.ApplicantID}]);
+          // this.router.navigate(['/travel-document',{applicantId:data.ApplicantID}]);
+          this.router.navigate(['/travel-document',{applicantId:data.ApplicantID,applicationId:this.applicationId}]);
         }); 
       },
       error=>{

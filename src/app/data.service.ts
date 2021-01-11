@@ -612,4 +612,26 @@ export class DataService {
     }));
     
   }
+
+  savePayment(appId,payMode,totFees,paidAmt,dueAmt,payDate,Status):Observable<any>{
+    var httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+    return this.httpClient.post(this.API_TEST_SERVER + '/api/Payments',
+    {     
+      "ApplicationID":appId,
+      "PaymentModeID":payMode,
+      "TotalAmount":totFees,
+      "PaidAmount":paidAmt,
+      "DueAmount":1.05,
+      "PaymentDate":payDate,
+      "Status":Status
+    } ,httpOptions)
+    .pipe(
+      map(res => res),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
+    );
+  }
 }

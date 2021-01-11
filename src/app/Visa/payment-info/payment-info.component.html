@@ -81,7 +81,7 @@
 
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="firstName" > USD {{totalFees| number : '1.1-1'}} </label>
+                                <label for="firstName" [(ngModel)]="totalFees" name="totalFees" > USD {{totalFees| number : '1.1-1'}} </label>
                             </div>
                         </div>
                         <hr class="mb-4">
@@ -92,15 +92,20 @@
                             <div class="col-md-6 mb-3">
                                 <div *ngFor="let payMode of paymentModeList"  >
                                     <!-- <label for="{{payMode.PaymentModeID}}">
-                                        <input id="{{payMode.PaymentModeID}}" class="custom-radio" [value]='payMode.PaymentModeID' type="radio" name="payment"  [(ngModel)]="radioSelected">
+                                        <input id="{{payMode.PaymentModeID}}" class="custom-radio" style="width: 20% !important;" [value]='payMode.PaymentModeID' type="radio" name="payment"  [(ngModel)]="radioSelected">
                                         {{payMode.PaymentMode1}}
                                       </label> -->
-                                      <input id="{{payMode.PaymentModeID}}" class="custom-radio" [value]='payMode.PaymentModeID' type="radio" name="payment"  [(ngModel)]="radioSelected">
+                                      <input id="{{payMode.PaymentModeID}}" class="custom-radio" style="width: 10% !important;" [value]='payMode.PaymentModeID' type="radio" name="payment"  [(ngModel)]="radioSelected" name="radioSelected">
                                         {{payMode.PaymentMode1}}
                                 </div>
                             </div>   
-                        </div>                       
-                        
+                        </div>  
+                        <!-- <input type="hidden" [(ngModel)]="Payment.ApplicationId" value="{{applicationId}}" >  -->
+                        <!-- <input type="hidden" [(ngModel)]="Payment.TotalAmt" value="{{totalFees}}" > 
+                        <input type="hidden" [(ngModel)]="Payment.PaidAmt" value="{{totalFees}}" > 
+                        <input type="hidden" [(ngModel)]="Payment.PayDate" value="{{dFormat}}" > 
+                        <input type="hidden" [(ngModel)]="Payment.Status" value="{{status}}" >                      -->
+                        <!-- {{payment | json}} -->
                         <hr class="mb-4">
                         
                         <button class="btn btn-primary btn-md" (click)="onSave($event)" type="submit">Save & Continue</button>&nbsp;

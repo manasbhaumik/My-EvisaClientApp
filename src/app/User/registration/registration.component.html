@@ -15,7 +15,7 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">Name</label>
-                                <input type="text" formControlName="Name" class="form-control" id="firstName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.Name.errors }">
+                                <input type="text" formControlName="Name" class="form-control" id="firstName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.Name.errors }" style="text-transform:uppercase">
                                 <div *ngIf="isSubmitted && f.Name.errors" class="invalid-feedback">
                                     <div *ngIf="f.Name.errors.required">Name Required</div>                                    
                                 </div> 
@@ -53,7 +53,7 @@
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="firstName">National Registration Identity Card</label>
+                                <label for="firstName">National Registration Identity Card Number</label>
                                 <input type="text" formControlName="idNo" class="form-control" id="nrid" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.idNo.errors }">
                                 <div *ngIf="isSubmitted && f.idNo.errors" class="invalid-feedback">
                                     <div *ngIf="f.idNo.errors.required">ID No Required</div>                                    
@@ -63,7 +63,7 @@
                                 <label for="firstName">Telephone Number</label>
                                 <input type="text" formControlName="ContactNo" class="form-control" id="ContactNo" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.ContactNo.errors }">
                                 <div *ngIf="isSubmitted && f.ContactNo.errors" class="invalid-feedback">
-                                    <div *ngIf="f.ContactNo.errors.required">Contact No Required</div>                                    
+                                    <div *ngIf="f.ContactNo.errors.required">Contact Number Required</div>                                    
                                 </div>
                             </div>
                         </div>
