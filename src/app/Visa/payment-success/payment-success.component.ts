@@ -33,7 +33,8 @@ export class PaymentSuccessComponent implements OnInit {
   }
 
   onBioClick(event: Event) {
-    this.router.navigate(['/notification',{contactId:this.contactID,paymentId:1}]);
+    //this.router.navigate(['/notification',{contactId:this.contactID,paymentId:1}]);
+    this.router.navigate(['/applicant-summary-info']);
   }
 
 }

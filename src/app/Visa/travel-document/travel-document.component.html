@@ -38,19 +38,19 @@
                     <!--<h4 class="mb-3">Personal information</h4>
                     <hr class="mb-4">-->
                     <form class="needs-validation" [formGroup]="traveldocForm"  (ngSubmit)="SaveTravelDoc()">
-                        <div class="mb-3">
-                            <label for="firstName">Type of Passport / Travel Document </label>
-                            <select formControlName="DocumentType" class="custom-select d-block w-100" id="state" [ngClass]="{ 'is-invalid': isSubmitted && f.DocumentType.errors }">
-                                <option value="">Choose...</option>
-                                <option *ngFor="let document of documentTypeList">
-                                    {{document}}
-                                </option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please select type of passport
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">Type of Passport / Traveler Document </label>
+                                <select formControlName="DocumentType" class="custom-select d-block w-100" id="state" [ngClass]="{ 'is-invalid': isSubmitted && f.DocumentType.errors }">
+                                    <option value="">Select Type of Passport / Traveler Document </option>
+                                    <option *ngFor="let document of documentTypeList">
+                                        {{document}}
+                                    </option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Please select type of passport
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">                           
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">International Passport Number </label>
                                 <input type="text" formControlName="PassportNo" class="form-control" id="PassportNo" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.PassportNo.errors }">
@@ -58,42 +58,27 @@
                                     Please enter pasport number
                                 </div>
                             </div>
+
+                        </div>
+                        
+                        <div class="row"> 
                             <div class="col-md-6 mb-3">
                                 <label for="lastName">Passport Issue Country</label>
-                                <input type="text" formControlName="IssuingCountry" class="form-control" id="IssuingCountry" [ngClass]="{ 'is-invalid': isSubmitted && f.IssuingCountry.errors }">
-                                <!-- <select class="custom-select d-block w-100" id="country" required>
-                                    <option value="">Choose...</option>
-                                    <option>China</option>
-                                </select> -->
+                                <input type="text" formControlName="IssuingCountry" class="form-control" id="IssuingCountry" [ngClass]="{ 'is-invalid': isSubmitted && f.IssuingCountry.errors }">                               
                                 <div class="invalid-feedback">
                                     Please enter passport issue country
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="firstName">Father's Name</label>
-                                <input type="text" formControlName="fatherName" class="form-control" id="firstName" placeholder="" value="" >
+                                <label for="email">Passport Issue Authority</label>
+                                <input type="email" formControlName="IssuingAuthority" class="form-control" id="IssuingAuthority" [ngClass]="{ 'is-invalid': isSubmitted && f.IssuingAuthority.errors }">
+                                <input type="hidden" formControlName="Applicant"  class="form-control"> 
                                 <div class="invalid-feedback">
-                                    Valid first name is required.
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="lastName">Mother's Name</label>
-                                <input type="text" formControlName="motherName" class="form-control" id="firstName" placeholder="" value="" >
-                                <div class="invalid-feedback">
-                                    Valid first name is required.
+                                    Please enter passport issue authority
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="email">Passport Issue Authority</label>
-                            <input type="email" formControlName="IssuingAuthority" class="form-control" id="IssuingAuthority" [ngClass]="{ 'is-invalid': isSubmitted && f.IssuingAuthority.errors }">
-                            <input type="hidden" formControlName="Applicant"  class="form-control"> 
-                            <div class="invalid-feedback">
-                                Please enter passport issue authority
-                            </div>
-                        </div>
+
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">Issue Date</label>
@@ -125,6 +110,43 @@
                                
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">Name of Passport Holder</label>
+                                <input type="text" formControlName="Name" class="form-control" id="firstName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.Name.errors }" >
+                                <div class="invalid-feedback">
+                                    Please enter Name of Passport Holder
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">National Registration Identity Card Number</label>
+                                <input type="text" formControlName="IDNumber" class="form-control" id="firstName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.IDNumber.errors }" >
+                                <div class="invalid-feedback">
+                                    Please enter National Registration Identity Card Number
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">Father's Name</label>
+                                <input type="text" formControlName="fatherName" class="form-control" id="firstName" placeholder="" value="" >
+                                <div class="invalid-feedback">
+                                    Valid first name is required.
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName">Mother's Name</label>
+                                <input type="text" formControlName="motherName" class="form-control" id="firstName" placeholder="" value="" >
+                                <div class="invalid-feedback">
+                                    Valid first name is required.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
 
                         
                         <button class="btn btn-primary btn-md" type="submit">Save & Continue</button>&nbsp;

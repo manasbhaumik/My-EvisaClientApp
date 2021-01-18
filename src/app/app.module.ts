@@ -52,6 +52,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { RegistrationComponent } from './User/registration/registration.component';
+import { ApplicantSummaryInfoComponent } from './Visa/applicant-summary-info/applicant-summary-info.component';
 
 const openCVConfig: OpenCVOptions = {
   scriptUrl: `assets/opencv/wasm/3.4/opencv.js`,
@@ -90,7 +91,8 @@ const openCVConfig: OpenCVOptions = {
     LoginComponent,
     RegisterIndividualApplicantComponent,
     IndividualApplicationComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ApplicantSummaryInfoComponent
   ],
   imports: [
     BrowserModule,

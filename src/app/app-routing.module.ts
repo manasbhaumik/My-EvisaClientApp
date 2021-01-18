@@ -25,6 +25,7 @@ import {LoginComponent} from './login/login.component';
 import { RegisterIndividualApplicantComponent } from './Visa/register-individual-applicant/register-individual-applicant.component';
 import { IndividualApplicationComponent } from './Individual/individual-application/individual-application.component';
 import { RegistrationComponent } from './User/registration/registration.component';
+import { ApplicantSummaryInfoComponent } from './Visa/applicant-summary-info/applicant-summary-info.component';
 
 
 const approutes: Routes = [   
@@ -53,6 +54,7 @@ const approutes: Routes = [
   { path: 'register-individual',component:RegisterIndividualApplicantComponent},
   { path: 'individual-application',component:IndividualApplicationComponent},
   { path: 'registration',component:RegistrationComponent},
+  { path: 'applicant-summary-info',component:ApplicantSummaryInfoComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 

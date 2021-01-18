@@ -18,7 +18,7 @@ import { NgbDateCustomParserFormatter } from 'src/app/_helpers/dateformat';
 
 export class ApplicantInformationComponent implements OnInit {
 
-  title="Applicant Registration";
+  title="Registration of New Applicant";
   myDate = new Date();
   dFormat:string;
   returnUrl: string;
@@ -29,6 +29,9 @@ export class ApplicantInformationComponent implements OnInit {
   applicantsList : any;
   applicantId : number;
   isEdited = false;
+  countryList:any;
+  ShowName:boolean;
+  rdoSelect:number;
 
   constructor(
     private fb: FormBuilder,
@@ -48,6 +51,7 @@ export class ApplicantInformationComponent implements OnInit {
 
   ngOnInit(): void {
     //this.applicantForm.controls['DOB'].setValue(this.datePipe.transform(this.dobDate, 'dd-MM-yyyy'));
+    this.dataService.getAllCountries().subscribe(res => {this.countryList = res});
     this.activeRouter.params.subscribe(params => {
       var applicationId = params['applicationId'];
       var applicantId = params['applicantId'];
@@ -75,10 +79,10 @@ export class ApplicantInformationComponent implements OnInit {
             this.applicantForm.get('IDNumber').setValue(this.applicantsList[0].IDNumber);
             this.applicantForm.get('ContactNo').setValue(this.applicantsList[0].ContactNo);
             this.applicantForm.get('Email').setValue(this.applicantsList[0].Email);
-            this.applicantForm.get('AltEmail').setValue(this.applicantsList[0].Email);
+            this.applicantForm.get('countryId').setValue(this.applicantsList[0].CountryID);
             this.applicantForm.get('Address1').setValue(this.applicantsList[0].Address1);
             this.applicantForm.get('Address2').setValue(this.applicantsList[0].Address2);
-            this.applicantForm.get('Address3').setValue(this.applicantsList[0].Address3);
+            //this.applicantForm.get('Address3').setValue(this.applicantsList[0].Address3);
             this.applicantForm.get('City').setValue(this.applicantsList[0].City);
             this.applicantForm.get('State').setValue(this.applicantsList[0].State);
             this.applicantForm.get('PostCode').setValue(this.applicantsList[0].PostCode);
@@ -94,15 +98,16 @@ export class ApplicantInformationComponent implements OnInit {
     FamlilyName:['',Validators.required],
     FirstName:['',Validators.required],
     NickName:[''],
-    Gender:[''],
+    Gender:['',Validators.required],
     DOB:[''],
+    countryId:['',Validators.required],
     IDNumber:['',Validators.required],
     ContactNo:['',Validators.required],
     Email:['',Validators.required],
-    AltEmail:['',Validators.required],
+    //AltEmail:['',Validators.required],
     Address1:[''],
     Address2:[''],
-    Address3:[''],
+    //Address3:[''],
     City:[''],
     State:[''],
     PostCode:[''],
@@ -110,6 +115,16 @@ export class ApplicantInformationComponent implements OnInit {
     Others:['']
 
   });
+
+  ShowOtherName(X){
+    if(X==1){
+      this.ShowName=true;
+    }
+    else{
+      this.ShowName=false;
+    }
+
+  }
 
   SaveApplicant(){
     //console.log(this.applicantForm.getRawValue());

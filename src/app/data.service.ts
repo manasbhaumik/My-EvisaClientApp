@@ -349,13 +349,14 @@ export class DataService {
         "DOB":dob1,
         "Address1":applicant.Address1,
         "Address2":applicant.Address2,
-        "Address3":applicant.Address3,
+        "Address3":"",
         "PostCode":applicant.PostCode,
         "City":applicant.City,
         "State":applicant.State,
         "ContactNo":applicant.ContactNo,
         "Email":applicant.Email,
-        "Photo":""
+        "Photo":"",
+        "CountryID":applicant.countryId
       } ,httpOptions)
       .pipe(
         map(res => res),
@@ -384,13 +385,14 @@ export class DataService {
         "DOB":dob1,
         "Address1":applicant.Address1,
         "Address2":applicant.Address2,
-        "Address3":applicant.Address3,
+        "Address3":"",
         "PostCode":applicant.PostCode,
         "City":applicant.City,
         "State":applicant.State,
         "ContactNo":applicant.ContactNo,
         "Email":applicant.Email,
-        "Photo":""
+        "Photo":"",
+        "CountryID":applicant.countryId
       } ,httpOptions)
       .pipe(
         map(res => res),
@@ -417,7 +419,9 @@ export class DataService {
         "IssuingCountry":travelDocument.IssuingCountry,
         "IssuingAuthority":travelDocument.IssuingAuthority,
         "IssuingDate":issueDate,
-        "ExpiryDate":expiryDate
+        "ExpiryDate":expiryDate,
+        "Name":travelDocument.Name,
+        "IDNumber":travelDocument.IDNumber
       } ,httpOptions)
       .pipe(
         map(res => res),
@@ -445,7 +449,9 @@ export class DataService {
         "IssuingCountry":travelDocument.IssuingCountry,
         "IssuingAuthority":travelDocument.IssuingAuthority,
         "IssuingDate":issueDate,
-        "ExpiryDate":expiryDate
+        "ExpiryDate":expiryDate,
+        "Name":travelDocument.Name,
+        "IDNumber":travelDocument.IDNumber
       } ,httpOptions)
       .pipe(
         map(res => res),

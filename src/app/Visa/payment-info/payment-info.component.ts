@@ -32,7 +32,7 @@ export class PaymentInfoComponent implements OnInit {
 
   payment=new Payment();
 
-  title="Payment Information";
+  title="PAYMENT GATEWAY - VISA FEES";//"Payment Information";
   applicationId:number;
   applicationList:any;
   totalApplicant : number;
@@ -48,6 +48,7 @@ export class PaymentInfoComponent implements OnInit {
   status:string;
   returnUrl : string;
   error : string;
+  processPeriod:number;
 
   // paymentInfoForm =this.fb.group({
   //    payment:['']
@@ -77,7 +78,8 @@ export class PaymentInfoComponent implements OnInit {
           this.processType = this.applicationList[0].ApplicationType;
           this.applicationFees = this.applicationList[0].SubmissionFee;
           this.processFees = this.applicationList[0].ProccesingFee;
-          this.totalFees = this.applicationList[0].TotalFee;          
+          this.totalFees = this.applicationList[0].TotalFee;  
+          this.processPeriod= this.applicationList[0].DurationOfVisit;       
 
         });
 

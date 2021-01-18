@@ -14,7 +14,7 @@ import {ModalComponent} from 'src/app/modal/modal.component';
   providers: [DatePipe]
 })
 export class TravelDocumentComponent implements OnInit {
-  title="PARTICULAR OF PASSPORT / TRAVEL DOCUMENT";
+  title="PARTICULAR PASSPORT / TRAVELER DOCUMENT";
   myDate = new Date();
   dFormat:string;
   returnUrl: string;
@@ -70,6 +70,8 @@ export class TravelDocumentComponent implements OnInit {
             var dayExpiry = Number(this.datePipe.transform(this.travelList[0].ExpiryDate, 'dd'));
             this.traveldocForm.get('ExpiryDate').setValue({year: yearExpiry, month: monthExpiry, day: dayExpiry});
             this.applicationID = this.travelList[0].ApplicationID;
+            this.traveldocForm.get('Name').setValue(this.travelList[0].Name);
+            this.traveldocForm.get('IDNumber').setValue(this.travelList[0].IDNumber);
           },
           error=>{
             this.error="Message: " + error.message + "<br/>Status: " +error.status;
@@ -88,6 +90,8 @@ export class TravelDocumentComponent implements OnInit {
     IssuingAuthority:[''],
     IssuingDate:['',Validators.required],
     ExpiryDate:['',Validators.required],
+    Name:['',Validators.required],
+    IDNumber:['',Validators.required],
     fatherName:[''],
     motherName:[''],
     Applicant:['']

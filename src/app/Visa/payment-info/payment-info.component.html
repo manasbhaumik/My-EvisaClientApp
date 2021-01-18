@@ -35,82 +35,101 @@
                 <div class="col-md-12 order-md-1">
                     <!--<h4 class="mb-3">Personal information</h4>
                     <hr class="mb-4">-->
-                    <form class="needs-validation"  novalidate>
-                    <!-- <form class="needs-validation" [formGroup]="paymentInfoForm" novalidate> -->
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName">No Of Application :</label>
-
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName" > {{totalApplicant}} </label>
-                            </div>
+                    <div class="card  mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary" style="font-size: 16px;">PAYMENT INFORMATION</h6>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName">Proccesing Type :</label>
-
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName"  > {{processType}} </label>
-                            </div>
-                        </div>
-                        <hr class="mb-4">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName">Application/Government Fees :</label>
-
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName" > USD {{applicationFees| number : '1.1-1'}} </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName">Processing Fees :</label>
-
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName"  > USD {{processFees| number : '1.1-1'}} </label>
-                            </div>
-                        </div>
-                        <hr class="mb-4">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName">Total Amount :</label>
-
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName" [(ngModel)]="totalFees" name="totalFees" > USD {{totalFees| number : '1.1-1'}} </label>
-                            </div>
-                        </div>
-                        <hr class="mb-4">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName">Payment Options  :</label>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <div *ngFor="let payMode of paymentModeList"  >
-                                    <!-- <label for="{{payMode.PaymentModeID}}">
-                                        <input id="{{payMode.PaymentModeID}}" class="custom-radio" style="width: 20% !important;" [value]='payMode.PaymentModeID' type="radio" name="payment"  [(ngModel)]="radioSelected">
-                                        {{payMode.PaymentMode1}}
-                                      </label> -->
-                                      <input id="{{payMode.PaymentModeID}}" class="custom-radio" style="width: 10% !important;" [value]='payMode.PaymentModeID' type="radio" name="payment"  [(ngModel)]="radioSelected" name="radioSelected">
-                                        {{payMode.PaymentMode1}}
+                        <div class="card-body">
+                            <form class="needs-validation"  novalidate>
+                                <div class="row">
+                                    <div class="col-md-5 mb-3">
+                                        <label for="firstName">Applied Processing Type</label>        
+                                    </div>
+                                    <div class="col-sm-1">:</div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName"  > {{processType}} </label>
+                                    </div>
                                 </div>
-                            </div>   
-                        </div>  
-                        <!-- <input type="hidden" [(ngModel)]="Payment.ApplicationId" value="{{applicationId}}" >  -->
-                        <!-- <input type="hidden" [(ngModel)]="Payment.TotalAmt" value="{{totalFees}}" > 
-                        <input type="hidden" [(ngModel)]="Payment.PaidAmt" value="{{totalFees}}" > 
-                        <input type="hidden" [(ngModel)]="Payment.PayDate" value="{{dFormat}}" > 
-                        <input type="hidden" [(ngModel)]="Payment.Status" value="{{status}}" >                      -->
-                        <!-- {{payment | json}} -->
-                        <hr class="mb-4">
-                        
-                        <button class="btn btn-primary btn-md" (click)="onSave($event)" type="submit">Save & Continue</button>&nbsp;
-                        <button class="btn btn-danger btn-md" type="submit">Cancel</button>
-                    </form>
+                                <div class="row">
+                                    <div class="col-md-5 mb-3">
+                                        <label for="firstName">Processing Period (In Day / Hours)</label>        
+                                    </div>
+                                    <div class="col-sm-1">:</div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName"  > {{processPeriod}} Days </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5 mb-3">
+                                        <label for="firstName">Total Applicant</label>        
+                                    </div>
+                                    <div class="col-sm-1">:</div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName" > {{totalApplicant}} </label>
+                                    </div>
+                                </div>
+                                
+                                <!-- <hr class="mb-4"> -->
+                                <div class="row">
+                                    <div class="col-md-5 mb-3">
+                                        <label for="firstName">Visa Fee</label>        
+                                    </div>
+                                    <div class="col-sm-1">:</div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName" > USD {{applicationFees| number : '1.1-1'}} </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5 mb-3">
+                                        <label for="firstName">Processing Fee</label>        
+                                    </div>
+                                    <div class="col-sm-1">:</div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName"  > USD {{processFees| number : '1.1-1'}} </label>
+                                    </div>
+                                </div>
+                                <!-- <hr class="mb-4"> -->
+                                <div class="row">
+                                    <div class="col-md-5 mb-3">
+                                        <label for="firstName">Total Fees</label>        
+                                    </div>
+                                    <div class="col-sm-1">:</div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName"  > USD {{totalFees| number : '1.1-1'}} </label>
+                                    </div>
+                                </div>
+                                <!-- <hr class="mb-4"> -->
+                                <div class="row">
+                                    <div class="col-md-5 mb-3">
+                                        <label for="firstName">Payment Options  </label>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-md-6 mb-3">
+                                        <div *ngFor="let payMode of paymentModeList"  >
+                                            <!-- <label for="{{payMode.PaymentModeID}}">
+                                                <input id="{{payMode.PaymentModeID}}" class="custom-radio" style="width: 20% !important;" [value]='payMode.PaymentModeID' type="radio" name="payment"  [(ngModel)]="radioSelected">
+                                                {{payMode.PaymentMode1}}
+                                              </label> -->
+                                              <input id="{{payMode.PaymentModeID}}" class="custom-radio" style="width: 3% !important;" [value]='payMode.PaymentModeID' type="radio" name="payment"  [(ngModel)]="radioSelected" name="radioSelected">
+                                                {{payMode.PaymentMode}}
+                                        </div>
+                                    </div>   
+                                </div>  
+                                <!-- <input type="hidden" [(ngModel)]="Payment.ApplicationId" value="{{applicationId}}" >  -->
+                                <!-- <input type="hidden" [(ngModel)]="Payment.TotalAmt" value="{{totalFees}}" > 
+                                <input type="hidden" [(ngModel)]="Payment.PaidAmt" value="{{totalFees}}" > 
+                                <input type="hidden" [(ngModel)]="Payment.PayDate" value="{{dFormat}}" > 
+                                <input type="hidden" [(ngModel)]="Payment.Status" value="{{status}}" >                      -->
+                                <!-- {{payment | json}} -->
+                                <hr class="mb-4">
+                                
+                                <button class="btn btn-primary btn-md" (click)="onSave($event)" type="submit">Save & Continue</button>&nbsp;
+                                <button class="btn btn-danger btn-md" type="submit">Cancel</button>
+                            </form>
+
+                        </div>
+                    </div>
+                   
                 </div>
             </div>
         </div>
