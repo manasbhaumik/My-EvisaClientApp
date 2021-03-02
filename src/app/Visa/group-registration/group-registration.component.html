@@ -1,0 +1,164 @@
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <div class="row py-5">
+        <div class="col-md-12 order-md-1">
+            <!-- DataTales Example -->
+            <div class="card shadow  mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;text-transform:uppercase">Group Member for registration</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0">
+                            <!-- <thead> -->
+                                <tr>
+                                    <th >Serial No</th>
+                                    <th>Head of the Group Pasport Number</th>
+                                    <th>Passport Number Group's Member</th>
+                                    <th>National RIC Number of the Group</th>
+                                    <th>Name of one of the Group's Member</th>
+                                    <th>Relationship with The Head of the Group</th>
+                                   <th></th>
+
+                                </tr>
+                            <!-- </thead>-->
+                            <tbody>
+                               
+                                <tr>
+                                    <td>{{count}}</td>                                 
+                                    <td>{{primaryPassportNo}}</td>
+                                    <td><input type="text" #txtPassportNo></td>
+                                    <td><input type="text" #txtNRICNO></td>
+                                    <td><input type="text" #txtName></td>                                   
+                                    <td><input type="text" #txtRelationship></td>                                   
+                                    <td>
+                                        <button class="btn btn-primary " type="submit" (click)="onClick($event)">ENTER</button>&nbsp;
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!-- <div class="row" style="text-align: center;">
+        <div class="col-md-12 order-md-4">
+            <div class="mb-4">
+               
+                <button class="btn btn-primary " type="submit" (click)="onClick($event)">ENTER</button>&nbsp;
+               
+            </div>
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col-md-12 order-md-1">
+            <!-- DataTales Example -->
+            <div class="card shadow  mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;text-transform:uppercase">List of New Applicants</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered dataTable" id="dataTable1" width="100%" cellspacing="0">
+                            <!-- <thead>
+                                <tr>
+                                    <th >Serial No</th>
+                                    <th>Head of the Group Pasport Number</th>
+                                    <th>Passport Number Group's Member</th>
+                                    <th>National RIC Number of the Group</th>
+                                    <th>Name of one of the Group's Member</th>
+                                    <th>Relationship with The Head of the Group</th>
+                                   
+
+                                </tr>
+                            </thead>                            -->
+                            <tbody>
+                               
+                                <tr *ngFor="let application of applicationList;">
+                                    <td>{{application.FullName}}</td>                                 
+                                    <td>{{application.IDNumber}}</td>
+                                    <td>{{application.PassportNo}}</td>
+                                    <td>{{application.Relationship}}</td>
+                                    <td>
+                                        <a class="nav-link" [routerLink]="['/travel-document',{applicantId:application.ApplicantID,groupId:1}]"><i class="fas fa-user mr-2"></i>Update Profile</a>
+                                        <!-- <a class="nav-link" (click)="deleteApplicant(application.ApplicantID)" [routerLink]="" ><i class="fas fa-trash mr-2"></i>Delete Profile</a> -->
+                                        <!-- <div *ngIf="application.FamlilyName; else showEmpty">
+                                            <a class="nav-link" [routerLink]="['/travel-document',{applicantId:application.ApplicantID}]">Update Profile</a>
+                                        </div>
+                                        <ng-template #showEmpty>
+                                           
+
+                                        </ng-template> -->
+                                    </td>
+                                    <td>
+                                        <div *ngIf="application.FamlilyName; else showEmpty1">
+                                            <!-- <a class="nav-link" [routerLink]="['/submit-application',{applicationId:application.ApplicationID}]">{{application.MyEVisaRefNo}}</a> -->
+                                            Success
+                                            <input type="hidden" #hdPending value="0"/>
+                                        </div>
+                                        <ng-template #showEmpty1>
+                                            <!-- <a class="nav-link" [routerLink]="['/applicant-information',{applicationId:application.ApplicationID}]">Continue to fillup applicant information</a> -->
+                                            Pending
+                                            <input type="hidden" #hdPending value="1"/>
+                                        </ng-template>
+                                    </td>
+                                    <!-- <td></td>
+                                    <td></td>                                   
+                                    <td></td> -->
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <div class="col-md-12 order-md-2 mb-4">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;text-transform:uppercase" >Visa Fee Details</h6>
+            </div>
+            <div class="card-body">
+                <div class="row">                   
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">Total Applicant</label>        
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">{{totalApplicant}}</label>        
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">Processing Fees</label>        
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">USD {{processingFee| number : '1.1-1'}}</label>        
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">Submission Fees</label>        
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">USD {{submissionFee| number : '1.1-1'}}</label>        
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">Total Fees</label>        
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">USD {{totalFee| number : '1.1-1'}}</label>        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="text-align: center;">
+        <div class="col-md-12 order-md-4">
+            <div class="mb-4">
+                <button class="btn btn-primary" #btnDisable type="submit" (click)="onPaymentClick($event)">PAY VISA FEES</button>&nbsp;
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Main Content -->
+<router-outlet></router-outlet>

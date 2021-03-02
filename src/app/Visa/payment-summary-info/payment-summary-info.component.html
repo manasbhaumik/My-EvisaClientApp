@@ -5,29 +5,29 @@
             <!-- DataTales Example -->
             <div class="card shadow  mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;">Applicant Summary Information</h6>
+                    <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;">Payment Summary</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Applicant Reference Number</th>
-                                    <th>Application Date</th>
-                                    <th>Processing Type</th>
-                                    <th>Purpose of Journey</th>
-                                    <th>Number Of Applicant</th>
-                                    <th>Duration of Stay(In day)</th>
+                                    <th>Applicant Reference No.</th>
+                                    <th>Applicants Passport No.</th>
+                                    <th>Name of Applicant</th>
+                                    <th>Visa Fees (USD)</th>
+                                    <th>Processing Fees (USD)</th>
+                                    <th>Total Fees (USD)</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>Applicant Reference Number</th>
-                                    <th>Application Date</th>
-                                    <th>Processing Type</th>
-                                    <th>Purpose of Journey</th>
-                                    <th>Number Of Applicant</th>
-                                    <th>Duration of Stay(In day)</th>
+                                    <th>Total Payment</th>
+                                    <th>{{totalApplicant}}</th>
+                                    <th>{{totalApplicant}}</th>
+                                    <th>{{ttlVisaFee| number : '1.1-1'}}</th>
+                                    <th>{{ttlProcessFee| number : '1.1-1'}}</th>
+                                    <th>{{TotalFee| number : '1.1-1'}}</th>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -59,11 +59,12 @@
                                             <a class="nav-link" [routerLink]="['/applicant-information',{applicationId:application.ApplicationID}]">Continue to fillup applicant information</a>
                                         </ng-template>
                                     </td>      
-                                    <td>{{application.SubmissionDate | date : 'dd/MM/yyyy'}}</td>                                
-                                    <td>{{application.ApplicationType}}</td>
-                                    <td>{{application.PurposeOfVisit}}</td>
-                                    <td>{{application.TotalApplicant}}</td>
-                                    <td>{{application.DurationOfVisit}}</td>
+                                    <!-- <td>{{application.SubmissionDate | date : 'dd/MM/yyyy'}}</td>                                 -->
+                                    <td>{{application.PassportNo}}</td>
+                                    <td>{{application.FullName}}</td>
+                                    <td>{{application.SubmissionFee}}</td>
+                                    <td>{{application.ProccesingFee}}</td>
+                                    <td>{{application.TotalFee}}</td>
                                     
                                 </tr>
                             </tbody>

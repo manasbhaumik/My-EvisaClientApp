@@ -44,6 +44,27 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataService.getAllCountries().subscribe(res => {this.CountryList = res});
+    this.dataService.getCenter().subscribe(res => 
+      {
+        // alert("1");
+        // console.log("qq");
+        this.centerList = res;
+        
+      },
+      error=>{
+        this.error=error.error.Message;
+        console.log(error.error.Message);
+        // var dialogRef =this.dialog.open(ModalComponent,{ data: {
+        //   message : this.error,
+        //   title : "Alert!",
+        //   buttonText : "Cancel"
+        // }});
+        // dialogRef.afterClosed().subscribe(result => {
+        //   this.returnUrl = result;
+        //   result ? this.router.navigate(['/registration']): this.router.navigate(['/registration',{agentId:this.AgencyID,countryId:this.countryId,contactId:this.contactID}]);
+        // });
+
+      });
     this.activeRouter.params.subscribe(params => {
       var agencyId = params['agentId'];
       var Country=params['countryId'];
@@ -52,36 +73,22 @@ export class RegistrationComponent implements OnInit {
       this.strAgencyId=agencyId;
       this.countryId=Country;  
       this.contactID =  contactId;
-    });    
-
-    // if(this.AgencyID!=0){
-    //   this.dataService.getCenterByCountryId(this.countryId).subscribe(res => {this.centerList = res});
-    //   this.userRegisterForm.get('Country').disable();
-    //   this.userRegisterForm.get('Country').setValue(this.countryId);
-    //   this.userRegisterForm.get('Agency').setValue(this.strAgencyId);
-    // }
-    // else{
-    //   this.dataService.getCenter().subscribe(res => {this.centerList = res});
-    //   this.userRegisterForm.get('Country').enable();
-    //   //this.agencyContactForm.get('Agency').setValue(0);
-    // }
+    });  
 
     if(this.contactID !== undefined){
       this.dataService.getContactById(this.contactID).subscribe(res=>{
         this.contactList = res;
         this.isEdited=true;
         this.buttonTitle = "Update contact information";
+
+        this.dataService.getCenterByCountryId_V01(this.contactList.CountryID).subscribe(res => {this.centerList = res});
   
         this.userRegisterForm.get('Name').setValue(this.contactList.Name);
-        this.userRegisterForm.get('Country').setValue(this.contactList.CountryID);
+        this.userRegisterForm.get('CountryId').setValue(this.contactList.CountryID);
         this.userRegisterForm.get('centerId').setValue(this.contactList.CenterID);
         this.userRegisterForm.get('idNo').setValue(this.contactList.IDNumber);
         this.userRegisterForm.get('Email').setValue(this.contactList.Email);
         this.userRegisterForm.get('ContactNo').setValue(this.contactList.ContactNo);
-        //this.agencyContactForm.get('AltContactNo').setValue(this.contactList.AltContactNo);
-        //this.agencyContactForm.get('Address').setValue(this.contactList.Address);
-        //this.agencyContactForm.get('City').setValue(this.contactList.City);
-        //this.agencyContactForm.get('State').setValue(this.contactList.State);
       });
     }
   }
@@ -95,7 +102,7 @@ export class RegistrationComponent implements OnInit {
 
     Name:['',Validators.required],
     Email:['',[Validators.required,Validators.email]],
-    idNo:['',Validators.required],
+    idNo:['',[Validators.required,Validators.maxLength(20),Validators.minLength(8)]],
     ContactNo:['',Validators.required],
     CountryId:['',Validators.required],  
     centerId:['',Validators.required],
@@ -133,7 +140,7 @@ export class RegistrationComponent implements OnInit {
           //console.log('The dialog was closed',result);
           this.returnUrl = result;
           //this.ngOnInit();
-          this.router.navigate(['/agency-contact-detail',{agentId:this.AgencyID,countryId:this.countryId,contactId:this.contactID}]);
+          this.router.navigate(['/registration',{agentId:this.AgencyID,countryId:this.countryId,contactId:this.contactID}]);
         }); 
       },
       error=>{
@@ -147,7 +154,7 @@ export class RegistrationComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
          // console.log('The dialog was closed',result);
           this.returnUrl = result;
-          result ? this.router.navigate(['/agency-details']): this.router.navigate(['/registration',{agentId:this.AgencyID,countryId:this.countryId,contactId:this.contactID}]);
+          result ? this.router.navigate(['/registration']): this.router.navigate(['/registration',{agentId:this.AgencyID,countryId:this.countryId,contactId:this.contactID}]);
         });
 
       });
@@ -181,7 +188,7 @@ export class RegistrationComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
           //console.log('The dialog was closed',result);
           this.returnUrl = result;
-          result ? this.router.navigate(['/agency-details']): this.router.navigate(['/registration',{agentId:this.AgencyID,countryId:this.countryId}]);
+          result ? this.router.navigate(['/registration']): this.router.navigate(['/registration',{agentId:this.AgencyID,countryId:this.countryId}]);
         });
 
       });

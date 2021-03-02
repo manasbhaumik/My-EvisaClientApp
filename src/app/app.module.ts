@@ -53,6 +53,10 @@ import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { RegistrationComponent } from './User/registration/registration.component';
 import { ApplicantSummaryInfoComponent } from './Visa/applicant-summary-info/applicant-summary-info.component';
+import { GroupApplicantInformationComponent } from './Visa/group-applicant-information/group-applicant-information.component';
+import { GroupRegistrationComponent } from './Visa/group-registration/group-registration.component';
+import { GroupVisaFormComponent } from './Visa/group-visa-form/group-visa-form.component';
+import { PaymentSummaryInfoComponent } from './Visa/payment-summary-info/payment-summary-info.component';
 
 const openCVConfig: OpenCVOptions = {
   scriptUrl: `assets/opencv/wasm/3.4/opencv.js`,
@@ -92,7 +96,11 @@ const openCVConfig: OpenCVOptions = {
     RegisterIndividualApplicantComponent,
     IndividualApplicationComponent,
     RegistrationComponent,
-    ApplicantSummaryInfoComponent
+    ApplicantSummaryInfoComponent,
+    GroupApplicantInformationComponent,
+    GroupRegistrationComponent,
+    GroupVisaFormComponent,
+    PaymentSummaryInfoComponent
   ],
   imports: [
     BrowserModule,

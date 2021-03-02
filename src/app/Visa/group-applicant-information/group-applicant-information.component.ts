@@ -9,16 +9,14 @@ import {ModalComponent} from 'src/app/modal/modal.component';
 import { NgbDateCustomParserFormatter } from 'src/app/_helpers/dateformat';
 
 @Component({
-  selector: 'app-applicant-information',
-  templateUrl: './applicant-information.component.html',
-  styleUrls: ['./applicant-information.component.css'],
+  selector: 'app-group-applicant-information',
+  templateUrl: './group-applicant-information.component.html',
+  styleUrls: ['./group-applicant-information.component.css'],
   providers: [DatePipe]
-   // ,{provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter}]
 })
+export class GroupApplicantInformationComponent implements OnInit {
 
-export class ApplicantInformationComponent implements OnInit {
-
-  title="Registration of New Applicant";
+  title="REGISTRATION OF THE CHEIF/HEAD OF THE GROUP";
   myDate = new Date();
   dFormat:string;
   returnUrl: string;
@@ -32,7 +30,6 @@ export class ApplicantInformationComponent implements OnInit {
   countryList:any;
   ShowName:boolean;
   rdoSelect:number;
-  groupID:number;
 
   constructor(
     private fb: FormBuilder,
@@ -42,16 +39,13 @@ export class ApplicantInformationComponent implements OnInit {
     private  dialog:  MatDialog,
     private calendar: NgbCalendar, public formatter: NgbDateParserFormatter,
     private activeRouter:ActivatedRoute
-  ) {
+  ) { 
     this.dobDate = calendar.getToday();
-   }
-
-  
+  }
 
   get f(){ return this.applicantForm.controls; }
 
   ngOnInit(): void {
-    //this.applicantForm.controls['DOB'].setValue(this.datePipe.transform(this.dobDate, 'dd-MM-yyyy'));
     this.dataService.getAllCountries().subscribe(res => {this.countryList = res});
     this.dataService.getContact().subscribe((data:any)=>{
       this.applicantForm.get('FullName').setValue(data.Name); 
@@ -63,13 +57,10 @@ export class ApplicantInformationComponent implements OnInit {
     this.activeRouter.params.subscribe(params => {
       var applicationId = params['applicationId'];
       var applicantId = params['applicantId'];
-      var groupID = params['groupId'];
       this.applicationId=applicationId; 
       this.applicantId = applicantId;
-      this.groupID=groupID;
       });  
       this.applicantForm.get('Application').setValue(this.applicationId);
-      
 
       if(this.applicantId !== undefined){
 
@@ -79,13 +70,7 @@ export class ApplicantInformationComponent implements OnInit {
             this.isEdited = true;
             this.applicationId = this.applicantsList[0].ApplicationID;
             this.applicantForm.get('FullName').setValue(this.applicantsList[0].FullName);
-            if(this.applicantsList[0].FamlilyName !=''){
-              this.applicantForm.get('FamlilyName').setValue(this.applicantsList[0].FamlilyName);
-            }
-            else{
-              this.applicantForm.get('FamlilyName').setValue(this.dataService.FatherName);
-            }
-            //this.applicantForm.get('FamlilyName').setValue(this.applicantsList[0].FamlilyName);
+            this.applicantForm.get('FamlilyName').setValue(this.applicantsList[0].FamlilyName);
             this.applicantForm.get('FirstName').setValue(this.applicantsList[0].FirstName);
             this.applicantForm.get('NickName').setValue(this.applicantsList[0].NickName);
             this.applicantForm.get('Gender').setValue(this.applicantsList[0].Gender);
@@ -103,7 +88,7 @@ export class ApplicantInformationComponent implements OnInit {
             this.applicantForm.get('City').setValue(this.applicantsList[0].City);
             this.applicantForm.get('State').setValue(this.applicantsList[0].State);
             this.applicantForm.get('PostCode').setValue(this.applicantsList[0].PostCode);
-            this.applicantForm.get('Relationship').setValue(this.applicantsList[0].Relationship);
+
           });
       }
   }
@@ -116,12 +101,12 @@ export class ApplicantInformationComponent implements OnInit {
     FirstName:['',Validators.required],
     NickName:[''],
     Gender:['',Validators.required],
-    DOB:['',Validators.required],
+    DOB:[''],
     countryId:['',Validators.required],
     IDNumber:['',[Validators.required,Validators.maxLength(20),Validators.minLength(8)]],
     ContactNo:['',Validators.required],
     Email:['',Validators.required],
-    //AltEmail:['',Validators.required],
+    AltEmail:['',Validators.required],
     Address1:[''],
     Address2:[''],
     //Address3:[''],
@@ -130,7 +115,9 @@ export class ApplicantInformationComponent implements OnInit {
     PostCode:[''],
     Application:[''],
     Others:[''],
-    Relationship:['']
+    PassportNo:['',Validators.required],
+    Relationship:[]
+
   });
 
   ShowOtherName(X){
@@ -147,15 +134,11 @@ export class ApplicantInformationComponent implements OnInit {
     //console.log(this.applicantForm.getRawValue());
     // console.log('date:'+this.dobDate);
     //console.log(this.dobDate.day+"/"+this.dobDate.month+"/"+this.dobDate.year);
-    this.isSubmitted = true;   
+    this.isSubmitted = true;
     if(this.applicantForm.invalid){      
      return;
     }
-
-    this.dataService.Name = this.applicantForm.get('FullName').value;
-    this.dataService.FatherName = this.applicantForm.get('FamlilyName').value;
-    this.dataService.IdNumber = this.applicantForm.get('IDNumber').value;
-    
+    //console.log(this.isEdited);
     if(this.isEdited == true){
       this.dataService.updateAplicant(this.applicantForm.getRawValue(),this.applicantId,this.applicationId).subscribe((data:any)=>{
         var dialogRef= this.dialog.open(ModalComponent,{ data: {
@@ -166,14 +149,7 @@ export class ApplicantInformationComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
           this.returnUrl = result;
           //this.router.navigate(['/applicant-information',{applicantId:data.ApplicantID}]);
-          if(this.groupID !==undefined){
-            this.router.navigate(['/group-visa-form',{applicationId:this.applicationId,applicantId:this.applicantId}]);
-                          
-            }
-            else{
-            this.router.navigate(['/submit-application',{applicationId:this.applicationId}]); 
-            }
-          //this.router.navigate(['/submit-application',{applicationId:this.applicationId}]);
+          this.router.navigate(['/submit-application',{applicationId:this.applicationId}]);
         }); 
       },
       error=>{
@@ -184,17 +160,17 @@ export class ApplicantInformationComponent implements OnInit {
           buttonText : "Cancel"
         }});
         dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed',result);
+         // console.log('The dialog was closed',result);
           this.returnUrl = result;
           result ? this.router.navigate(['/home']): this.router.navigate(['/applicant-information',{applicantId:this.applicantId}]);
         });
       });
     }
     else{
-      this.dataService.saveAplicant(this.applicantForm.getRawValue()).subscribe((data:any)=>{
+      this.dataService.saveGroupAplicant(this.applicantForm.getRawValue()).subscribe((data:any)=>{
         //console.log(data);
         var dialogRef= this.dialog.open(ModalComponent,{ data: {
-          message : "Applicant registered Successfully, Please click Ok to fill travel document",
+          message : "Applicant registered Successfully, Please add another applicant",
           title : "Success",
           buttonText : "Ok"
         }});  
@@ -202,7 +178,7 @@ export class ApplicantInformationComponent implements OnInit {
           //console.log('The dialog was closed',result);
           this.returnUrl = result;
           // this.router.navigate(['/travel-document',{applicantId:data.ApplicantID}]);
-          this.router.navigate(['/travel-document',{applicantId:data.ApplicantID,applicationId:this.applicationId}]);
+          this.router.navigate(['/group-registration',{applicantId:data.ApplicantID,applicationId:this.applicationId}]);
         }); 
       },
       error=>{
@@ -216,9 +192,10 @@ export class ApplicantInformationComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
           console.log('The dialog was closed',result);
           this.returnUrl = result;
-          result ? this.router.navigate(['/home']): this.router.navigate(['/applicant-information',{applicantId:this.applicationId}]);
+          result ? this.router.navigate(['/home']): this.router.navigate(['/group-applicant-information',{applicantId:this.applicationId}]);
         });
       });
     }
   }
+
 }

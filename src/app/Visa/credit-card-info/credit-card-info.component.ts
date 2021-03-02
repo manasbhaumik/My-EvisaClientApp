@@ -14,6 +14,8 @@ import {ModalComponent} from 'src/app/modal/modal.component';
 })
 export class CreditCardInfoComponent implements OnInit {
 
+  applicationId:number;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -24,10 +26,16 @@ export class CreditCardInfoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.activeRouter.params.subscribe(params => {
+      var applicationId = params['applicationId'];
+      this.applicationId=applicationId;
+
+      
+    });
   }
 
   onPaymentClick(event: Event) {
-    this.router.navigate(['/payment-success']);
+    this.router.navigate(['/payment-success',{applicationId:this.applicationId}]);
   }
 
 }

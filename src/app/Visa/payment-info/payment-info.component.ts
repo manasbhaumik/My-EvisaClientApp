@@ -78,7 +78,7 @@ export class PaymentInfoComponent implements OnInit {
           this.processType = this.applicationList[0].ApplicationType;
           this.applicationFees = this.applicationList[0].SubmissionFee;
           this.processFees = this.applicationList[0].ProccesingFee;
-          this.totalFees = this.applicationList[0].TotalFee;  
+          this.totalFees = this.processFees*this.totalApplicant+this.applicationFees*this.totalApplicant;//this.applicationList[0].TotalFee;  
           this.processPeriod= this.applicationList[0].DurationOfVisit;       
 
         });
@@ -119,18 +119,20 @@ export class PaymentInfoComponent implements OnInit {
     // this.payment=new Payment();
     // this.payment.append("Form", JSON.stringify(_this.data.formData));
     this.dataService.savePayment(this.applicationId,this.payment.PaymentModeId,this.payment.TotalAmt,this.payment.PaidAmt,this.payment.DueAmt,this.payment.PayDate,this.payment.Status).subscribe((data:any)=>{
-      var dialogRef= this.dialog.open(ModalComponent,{ data: {
-        message : "Payment Successfull",
-        title : "Success",
-        buttonText : "Ok"
-      }});  
-      dialogRef.afterClosed().subscribe(result => {
-        this.returnUrl = result;
-        this.router.navigate(['/credit-card-info',{applicationId:this.applicationId}]);
-      }); 
+      //alert(data);
+      // var dialogRef= this.dialog.open(ModalComponent,{ data: {
+      //   message : "Payment Successfull",
+      //   title : "Success",
+      //   buttonText : "Ok"
+      // }});  
+      // dialogRef.afterClosed().subscribe(result => {
+      //   this.returnUrl = result;
+      //   this.router.navigate(['/credit-card-info',{applicationId:this.applicationId}]);
+      // }); 
+      this.router.navigate(['/credit-card-info',{applicationId:this.applicationId}]);
     },
     error=>{
-      this.error=error.error.Message;
+      this.error=error.error.Message;//alert(this.error);
       var dialogRef =this.dialog.open(ModalComponent,{ data: {
         message : this.error,
         title : "Alert!",

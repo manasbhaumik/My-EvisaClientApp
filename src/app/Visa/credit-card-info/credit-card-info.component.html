@@ -5,40 +5,21 @@
         <div class="col-md-2 order-md-1">
         </div>
         <div class="col-md-8 order-md-1">
-            <div class="py-2">
-                <!--<img class="d-block mx-auto mb-4" src="assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
+            <div class="py-2">                
                 <h3 class="text-gray-800">Credit Card Information</h3>
                 <hr class="mb-4">
             </div>
             <div class="row">
-                <!-- <div class="col-md-4 order-md-2 mb-4">
-                    <p style="color:#131315 !important;">
-                        Please enter valid information . After passport information is filled up , a My-Evisa Refferenceno will be generated for the visa application rregistartion No.<br />
-                        <b>
-                            My-EVisa RefNo.<br />
-                            CN/20/04/00/0001
-                        </b>
-                    </p>
-                    <p style="color:#131315 !important;">
-                        Note :<br />
-                        <br />
-                        CN  : China<br />
-                        20  : Year<br />
-                        04  : Month<br />
-                        00  : Embasy ID <br />
-                        001 : Visa no.
-                    </p>
-                    <p style="color:#131315 !important;">
-                        My-EVisa Ref No Is for Checking Visa Status , printing visa and further verification.
-
-                    </p>
-                </div> -->
+               
                 <div class="col-md-12 order-md-1">
                     <form class="needs-validation" novalidate>
                         <div class="row">
+                            <img src="assets/img/payment-icon-2.png" width="178px" height="30px"  alt="header-logo">
+                        </div>
+                        <div class="row">
                             <div class="col-md-9 mb-3">
                                 <label for="firstName">Name</label>
-                                <input type="text" class="form-control" id="CardName" placeholder="" value="" required>
+                                <input type="text" class="form-control" id="CardName" placeholder="Ex. John" value="" required>
                                 <div class="invalid-feedback">
                                     Valid CardName is required.
                                 </div>
@@ -47,7 +28,7 @@
                         <div class="row">
                             <div class="col-md-9 mb-3">
                                 <label for="firstName">Card No. :</label>
-                                <input type="text" class="form-control" id="CardName" placeholder="" value="" required>
+                                <input type="text" class="form-control" id="CardName" placeholder="XXXX XXXX XXXX XXXX" value="" required>
                                 <div class="invalid-feedback">
                                     Valid CardName is required.
                                 </div>
@@ -57,7 +38,7 @@
                         <div class="row">
                             <div class="col-md-3 mb-3">
                                 <label for="firstName">CVC</label>
-                                <input type="text" class="form-control" id="cvc" placeholder="" value="" required>
+                                <input type="text" class="form-control" id="cvc" placeholder="***" value="" required>
                                 <div class="invalid-feedback">
                                     Valid cvc is required.
                                 </div>
@@ -65,7 +46,7 @@
                             <div class="col-md-3 mb-3">
                                 <label for="lastName">Expiry Month</label>
                                 <select class="custom-select d-block w-100" id="month" required>
-                                    <option value="">Choose...</option>
+                                    <option value="">Choose Month</option>
                                     <option>January</option>
                                     <option>February</option>
                                     <option>March</option>
@@ -87,7 +68,7 @@
                             <div class="col-md-3 mb-3">
                                 <label for="lastName">Expiry Year</label>
                                 <select class="custom-select d-block w-100" id="year" required>
-                                    <option value="">Choose...</option>
+                                    <option value="">Choose Year</option>
                                     <option>2020</option>
                                     <option>2021</option>
                                     <option>2022</option>
@@ -122,4 +103,7 @@
     <!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->
+
+
+
 <router-outlet></router-outlet>

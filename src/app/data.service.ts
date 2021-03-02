@@ -14,15 +14,17 @@ export class DataService {
   private apiData = new BehaviorSubject<any>(null);
   public apiData$ = this.apiData.asObservable();
 
-  private API_TEST_SERVER1  = "http://192.168.0.10/ARB-Service";
-  private API_TEST_SERVER2 = "https://localhost:44372";
-  private API_TEST_SERVER  = "http://1.9.116.25/ARB-Service";
+  private API_TEST_SERVER  = "http://1.9.116.25/ARB-Service";//"http://192.168.0.10/ARB-Service";
+  private API_TEST_SERVER1 = "https://localhost:44372";
 
 
 
   constructor(private httpClient: HttpClient) { }
   public errorMessage: string = '';
   public AgencyID : 0;
+  public FatherName = '';
+  public Name = '';
+  public IdNumber = 0;
 
   handleError(error: HttpErrorResponse) {
     //console.log(error+"Err");
@@ -72,7 +74,10 @@ export class DataService {
   }
 
   public getCenter() {
-    return this.httpClient.get(this.API_TEST_SERVER+ '/api/Centers').pipe(map(response => response));
+    //return this.httpClient.get(this.API_TEST_SERVER+ '/api/Centers').pipe(map(response => response));
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/Centers').pipe(map(response => response),catchError((error: HttpErrorResponse) => {
+      return throwError(error);
+    }));
   }
 
   public getCountiesByCountryId(countryId){
@@ -392,7 +397,8 @@ export class DataService {
         "ContactNo":applicant.ContactNo,
         "Email":applicant.Email,
         "Photo":"",
-        "CountryID":applicant.countryId
+        "CountryID":applicant.countryId,
+        "Relationship":applicant.Relationship
       } ,httpOptions)
       .pipe(
         map(res => res),
@@ -640,4 +646,101 @@ export class DataService {
       })
     );
   }
+
+  saveGroupAplicant(applicant):Observable<any>{
+    var dob1=applicant.DOB.year+"/"+applicant.DOB.month+"/"+applicant.DOB.day;
+    var httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+
+    return this.httpClient.post(this.API_TEST_SERVER + '/api/PostGroupApplicants',
+      {
+        "ApplicationID":applicant.Application,
+        "FullName":applicant.FullName,
+        "FamlilyName":applicant.FamlilyName,
+        "FirstName":applicant.FirstName,
+        "NickName":applicant.NickName,
+        "Gender":applicant.Gender,
+        "IDNumber":applicant.IDNumber,
+        "DOB":dob1,
+        "Address1":applicant.Address1,
+        "Address2":applicant.Address2,
+        "PostCode":applicant.PostCode,
+        "City":applicant.City,
+        "State":applicant.State,
+        "ContactNo":applicant.ContactNo,
+        "Email":applicant.Email,
+        "Relationship":applicant.Relationship,
+        "PassportNo":applicant.PassportNo,
+        "CountryID":applicant.countryId
+      } ,httpOptions)
+      .pipe(
+        map(res => res),
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
+        })
+      );
+  }
+
+  AddGroupAplicant(applicationId,name,nricNo,passportNo,relationShip,countryId):Observable<any>{
+    var dob1="1900/01/01";
+    var httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+
+    return this.httpClient.post(this.API_TEST_SERVER + '/api/PostGroupApplicants',
+      {
+        "ApplicationID":applicationId,
+        "FullName":name,
+        "FamlilyName":"",
+        "FirstName":"",
+        "NickName":"",
+        "Gender":"",
+        "IDNumber":nricNo,
+        "DOB":"",
+        "Address1":"",
+        "Address2":"",
+        "PostCode":"",
+        "City":"",
+        "State":"",
+        "ContactNo":"",
+        "Email":"",
+        "Relationship":relationShip,
+        "PassportNo":passportNo,
+        "CountryID":countryId
+      } ,httpOptions)
+      .pipe(
+        map(res => res),
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
+        })
+      );
+  }
+
+  public getGroupApplicantById(id,appid){
+    var params=new HttpParams();
+    params=params.append('id',id);
+    params=params.append('appId',appid);
+
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/GroupApplicantById', {params: params}).pipe(map(response => response),catchError((error: HttpErrorResponse) => {
+      return throwError(error);
+    }));
+  } 
+
+  deleteApplicantById(appId):Observable<any>{
+    return this.httpClient.delete(this.API_TEST_SERVER+ '/api/Applicants/'+appId);
+    //.pipe(map(response => response));
+
+  }
+
+  getPaySummaryByApplicationId(applicationId):Observable<any>{
+    var params=new HttpParams();
+    params=params.append('id',applicationId);
+
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/PaymentSummaryByApplicationID', {params: params}).pipe(map(response => response),catchError((error: HttpErrorResponse) => {
+      return throwError(error);
+    }));
+    
+  }
+
 }

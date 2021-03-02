@@ -70,8 +70,8 @@
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="surName">Are you known by any other name?</label>
-                                <input type="radio" [(ngModel)]="rdoSelect" name="Others" class="custom-radio" style="width: 20% !important;" value="1" formControlName="Others"  >Yes
-                                <input type="radio" [(ngModel)]="rdoSelect" name="Others" class="custom-radio" style="width: 20% !important;" value="0" formControlName="Others"  >No
+                                <input type="radio" [(ngModel)]="rdoSelect" name="Others" class="custom-radio" style="width: 20% !important;" value="1" formControlName="Others"  > Yes
+                                <input type="radio" [(ngModel)]="rdoSelect" name="Others" class="custom-radio" style="width: 20% !important;" value="0" formControlName="Others"  > No
                                 <!-- <input type="text" class="form-control" formControlName="FirstName" id="fullName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.FirstName.errors }">
                                 <div class="invalid-feedback">
                                     Please enter surname/family name
@@ -105,7 +105,7 @@
                                 <label for="lastName">Date of Birth</label>
                                 <div class="input-group">
                                     <input class="form-control" formControlName="DOB" placeholder="yyyy-mm-dd"
-                                           name="dob"  ngbDatepicker #d="ngbDatepicker" [minDate]="{year: 1900, month: 1, day: 1}" [ngClass]="{ 'is-invalid': isSubmitted && f.DOB.errors }">
+                                           name="dob"  ngbDatepicker #d="ngbDatepicker" [minDate]="{year: 1900, month: 1, day: 1}">
                                     <div class="input-group-append">
                                       <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">📅</button>
                                     </div>
@@ -130,11 +130,18 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="idnumber">National Registration Identity Card Number</label>
-                                <input type="text" formControlName="IDNumber" minlength="8" maxlength="20" class="form-control" id="idNumber" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.IDNumber.errors }">
+                                <input type="text" formControlName="IDNumber" class="form-control" id="idNumber" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.IDNumber.errors }">
                                 <div *ngIf="isSubmitted && f.IDNumber.errors" class="invalid-feedback">
                                     <div *ngIf="f.IDNumber.errors.required">ID No Required</div>  
                                     <div *ngIf="f.IDNumber.errors.minlength">Please enter at least 8 characters.</div> 
                                     <div *ngIf="f.IDNumber.errors.maxlength">Please enter  not more than 20 characters.</div>                                                                                                       
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="PassportNo">International Passport Number</label>
+                                <input type="text" formControlName="PassportNo" class="form-control" id="PassportNo" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.PassportNo.errors }">
+                                <div class="invalid-feedback">
+                                    please enter International Passport Number
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -152,14 +159,14 @@
                                     <div *ngIf="f.Email.errors.email">Must be a valid email address</div>                                   
                                 </div>
                             </div>
-                            <!-- <div class="col-md-12 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="email">Reconfirm Email Address</label>
                                 <input type="email" formControlName="AltEmail" class="form-control" id="email" placeholder="" [ngClass]="{ 'is-invalid': isSubmitted && f.AltEmail.errors }">
                                 <div *ngIf="isSubmitted && f.AltEmail.errors" class="invalid-feedback">
                                     <div *ngIf="f.AltEmail.errors.required">Email Required</div> 
                                     <div *ngIf="f.AltEmail.errors.email">Must be a valid email address</div>                                   
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="col-md-12 mb-3">
                                 <label for="address">Residential Address</label>
                                 <input type="text" formControlName="Address1" class="form-control" id="address" placeholder="(First Line)" required>
@@ -195,7 +202,6 @@
                                 <label for="zip">Postcode</label>
                                 <input type="text" formControlName="PostCode" class="form-control" id="Pincode" placeholder="" >                               
                                 <input type="hidden" formControlName="Application"  class="form-control"> 
-                                <input type="hidden" formControlName="Relationship"  class="form-control"> 
                             </div>
 
                         </div>    

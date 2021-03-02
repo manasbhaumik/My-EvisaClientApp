@@ -279,6 +279,7 @@ export class BioMetricInfoComponent implements OnInit {
     this.divEvisaDetail = false;
     var blob=this.dataURItoBlob(this.picture);
     console.log(blob);
+    this.localstream.getVideoTracks()[0].stop();
     //var base64 = this.picture.replace(/^data:image\/(png|jpg);base64,/, "");
     //alert(this.visaRefNo);
     //console.log("Image : "+ this.picture.replace(/^data:image\/(png|jpg);base64,/, ""));

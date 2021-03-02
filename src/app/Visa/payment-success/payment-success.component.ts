@@ -15,6 +15,9 @@ import {ModalComponent} from 'src/app/modal/modal.component';
 export class PaymentSuccessComponent implements OnInit {
   contactID : number;
   paymentID : number;
+  applicationId : number;
+  applicationList : any;
+  totalFees : number;
 
   constructor(
     private fb: FormBuilder,
@@ -26,6 +29,22 @@ export class PaymentSuccessComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.activeRouter.params.subscribe(params => {
+      var applicationId = params['applicationId'];
+      this.applicationId=applicationId;
+
+      this.dataService.getPaySummaryByApplicationId(this.applicationId).subscribe(res => 
+        {
+          this.applicationList = res;
+         console.log(this.applicationList);
+          this.totalFees = this.applicationList[0].TotalAmount;   
+
+        });
+
+        
+    });
+
+
     this.dataService.getContact()
     .subscribe((data:any)=>{
       this.contactID=data.ContactID;      
@@ -34,7 +53,8 @@ export class PaymentSuccessComponent implements OnInit {
 
   onBioClick(event: Event) {
     //this.router.navigate(['/notification',{contactId:this.contactID,paymentId:1}]);
-    this.router.navigate(['/applicant-summary-info']);
+    // this.router.navigate(['/applicant-summary-info',{applicationId:this.applicationId}]);
+    this.router.navigate(['/payment-summary-info',{applicationId:this.applicationId}]);
   }
 
 }

@@ -27,6 +27,7 @@ export class TravelDocumentComponent implements OnInit {
   isEdited = false;
   travelDocId : number;
   documentTypeList:any=["Diplomatic Passport","Ordinary/International Passport","Regular/Service Passport","Emergency Passport"];
+  groupID:number;
 
 
   constructor(
@@ -43,10 +44,15 @@ export class TravelDocumentComponent implements OnInit {
     this.activeRouter.params.subscribe(params => {
       var applicantID = params['applicantId'];
       var applicationID = params['applicationId'];
+      var groupID = params['groupId'];
       this.applicantID=applicantID; 
       this.applicationID = applicationID;
+      this.groupID=groupID;
       });  
       this.traveldocForm.get('Applicant').setValue(this.applicantID);
+      this.traveldocForm.get('fatherName').setValue(this.dataService.FatherName);
+      this.traveldocForm.get('Name').setValue(this.dataService.Name);
+      this.traveldocForm.get('IDNumber').setValue(this.dataService.IdNumber);
 
       if(this.applicantID !== undefined){
         this.dataService.getTravelDocumentByApplicantId(this.applicantID).subscribe(res=>
@@ -64,14 +70,33 @@ export class TravelDocumentComponent implements OnInit {
             var yearIssue = Number(this.datePipe.transform(this.travelList[0].IssuingDate, 'yyyy'));
             var monthIssue = Number(this.datePipe.transform(this.travelList[0].IssuingDate, 'MM'));
             var dayIssue = Number(this.datePipe.transform(this.travelList[0].IssuingDate, 'dd'));
-            this.traveldocForm.get('IssuingDate').setValue({year: yearIssue, month: monthIssue, day: dayIssue});
+            this.dFormat = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
+            if(this.travelList[0].IssuingDate == '1900-01-01T00:00:00'){
+             var yearIssue = Number(this.datePipe.transform(this.dFormat, 'yyyy'));
+             var monthIssue = Number(this.datePipe.transform(this.dFormat, 'MM'));
+             var dayIssue = Number(this.datePipe.transform(this.dFormat, 'dd'));
+             this.traveldocForm.get('IssuingDate').setValue({year: yearIssue, month: monthIssue, day: dayIssue});
+            }
+            else{
+              this.traveldocForm.get('IssuingDate').setValue({year: yearIssue, month: monthIssue, day: dayIssue});
+            }
+            
             var yearExpiry = Number(this.datePipe.transform(this.travelList[0].ExpiryDate, 'yyyy'));
             var monthExpiry = Number(this.datePipe.transform(this.travelList[0].ExpiryDate, 'MM'));
             var dayExpiry = Number(this.datePipe.transform(this.travelList[0].ExpiryDate, 'dd'));
-            this.traveldocForm.get('ExpiryDate').setValue({year: yearExpiry, month: monthExpiry, day: dayExpiry});
+            if(this.travelList[0].ExpiryDate == '1900-01-01T00:00:00'){
+              var yearExpiry = Number(this.datePipe.transform(this.dFormat, 'yyyy'));
+              var monthExpiry = Number(this.datePipe.transform(this.dFormat, 'MM'));
+              var dayExpiry = Number(this.datePipe.transform(this.dFormat, 'dd'));
+              this.traveldocForm.get('ExpiryDate').setValue({year: yearExpiry, month: monthExpiry, day: dayExpiry});
+             }
+             else{
+              this.traveldocForm.get('ExpiryDate').setValue({year: yearExpiry, month: monthExpiry, day: dayExpiry});
+             }
+            
             this.applicationID = this.travelList[0].ApplicationID;
             this.traveldocForm.get('Name').setValue(this.travelList[0].Name);
-            this.traveldocForm.get('IDNumber').setValue(this.travelList[0].IDNumber);
+            this.traveldocForm.get('IDNumber').setValue(this.travelList[0].TIDNumber);
           },
           error=>{
             this.error="Message: " + error.message + "<br/>Status: " +error.status;
@@ -108,6 +133,7 @@ export class TravelDocumentComponent implements OnInit {
     }
 
     var passportno = this.traveldocForm.get('PassportNo').value;
+    this.dataService.FatherName = this.traveldocForm.get('fatherName').value;
 
     if(this.isEdited == true){
       this.dataService.updateTravelDocument(this.traveldocForm.getRawValue(),this.travelDocId).subscribe((data:any)=>{      
@@ -121,7 +147,14 @@ export class TravelDocumentComponent implements OnInit {
           //console.log('The dialog was closed',result);
           this.returnUrl = result;
           var travelDoclist:any;    
-          this.router.navigate(['/submit-application',{applicationId:this.applicationID}]);    
+          if(this.groupID !==undefined){
+          this.router.navigate(['/applicant-information',{applicationId:this.applicationID,applicantId:this.applicantID,groupId:2}]);
+                        
+          }
+          else{
+          this.router.navigate(['/submit-application',{applicationId:this.applicationID}]); 
+          }
+             
         // this.router.navigate(['/travel-document',{applicantId:this.applicantID}]);
         }); 
       },

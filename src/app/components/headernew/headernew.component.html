@@ -50,20 +50,20 @@
 						<!-- END DROPDOWN MENU -->
 						<li class="nl-simple" aria-haspopup="true"><a routerLink="/homenew">Home</a></li>
 						<li class="nl-simple">
-							<a routerLink="/Contact" >Contacts</a>
+							<a href="http://1.9.116.25:82/?page_id=2431" >Contacts</a>
 						</li>
 						<li class="nl-simple">
 							<a routerLink="/Information" >Information</a>
 						</li>
 						<li class="nl-simple">
-							<a routerLink="/Faq" >F.A.Q</a>
+							<a href="http://1.9.116.25:82/?page_id=2388" >F.A.Q</a>
 						</li>
 						<!-- <div *ngIf="userName?.length;else none"></div> -->
 						<li aria-haspopup="true" *ngIf="userName?.length;else none" >
 							<a  href="#">User Profile<span class="wsarrow"></span></a>
 							<ul class="sub-menu">
 								<li ><a routerLink="/visa-application-check">Application Status</a></li>
-								<li ><a [routerLink]="['/agency-contact-detail',{agentId:0,countryId:countryID,contactId:contactID}]">View Profile</a></li>
+								<li ><a [routerLink]="['/registration',{agentId:0,countryId:countryID,contactId:contactID}]">View Profile</a></li>
 								<li ><a [routerLink]="['/notification',{contactId:contactID}]">Notifications</a></li>
 								<li ><a href="#" (click)="logOut()">Log Out</a></li>
 							</ul>

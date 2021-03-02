@@ -25,6 +25,7 @@ export class VisaApplicationComponent implements OnInit {
   selectedJourneyType:any=[];
   visaProcessTypeList:any;
   applicationSelectedText:string;
+  applicationSelectedIndex:any;
   contactList:any;
   centerList:any;
   countryId:number;
@@ -111,6 +112,7 @@ export class VisaApplicationComponent implements OnInit {
           this.dataService.getCenterByCountryId_V01(this.applicationList[0].CountryID).subscribe(res => {this.centerList = res;});
           // this.RegionList = Array.of(this.RegionList);
           this.visaTypeForm.get('submissionType').setValue(this.applicationList[0].SubmissionType);
+          this.applicationSelectedIndex = this.applicationList[0].SubmissionType;
           this.visaTypeForm.get('countryId').setValue(this.applicationList[0].CountryID);
           this.visaTypeForm.get('centerId').setValue(this.applicationList[0].CenterID);
           this.visaTypeForm.get('TotalApplicant').setValue(this.applicationList[0].TotalApplicant);
@@ -149,6 +151,7 @@ export class VisaApplicationComponent implements OnInit {
         if(this.embassyID==undefined){
           this.dataService.getCenterByCountryId_V01(localStorage.getItem("SelectedCountry")).subscribe(res => {this.centerList = res;});
           this.visaTypeForm.get('submissionType').setValue(localStorage.getItem("SubmissionType"));
+          this.applicationSelectedIndex = localStorage.getItem("SubmissionType");
           this.visaTypeForm.get('countryId').setValue(localStorage.getItem("SelectedCountry"));
           this.visaTypeForm.get('centerId').setValue(localStorage.getItem("SelectedEmbassy"));
           this.visaTypeForm.get('TotalApplicant').setValue(localStorage.getItem("NoOfTraveller"));
@@ -204,6 +207,7 @@ export class VisaApplicationComponent implements OnInit {
     var selectedIndex = selectedOptions.selectedIndex;
     var selectElementText = selectedOptions[selectedIndex].text;
     this.applicationSelectedText=selectElementText;
+    this.applicationSelectedIndex = selectedIndex;
     if(this.applicationSelectedText=="Individual’s MyE-Visa"){
       this.visaTypeForm.get('TotalApplicant').disable();
       this.visaTypeForm.get('TotalApplicant').setValue(1);
@@ -269,7 +273,13 @@ export class VisaApplicationComponent implements OnInit {
           result => {
           //console.log('The dialog was closed',result);
           this.returnUrl = result;
-          this.router.navigate(['/applicant-information',{applicationId:data.ApplicationID}]);
+          if(this.applicationSelectedIndex==2){
+            this.router.navigate(['/applicant-information',{applicationId:data.ApplicationID}]);
+          }
+          else{
+            this.router.navigate(['/group-applicant-information',{applicationId:data.ApplicationID}]);
+          }
+          
         });      
       },
       error=>{

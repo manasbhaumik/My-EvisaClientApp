@@ -26,6 +26,10 @@ import { RegisterIndividualApplicantComponent } from './Visa/register-individual
 import { IndividualApplicationComponent } from './Individual/individual-application/individual-application.component';
 import { RegistrationComponent } from './User/registration/registration.component';
 import { ApplicantSummaryInfoComponent } from './Visa/applicant-summary-info/applicant-summary-info.component';
+import { GroupApplicantInformationComponent } from './Visa/group-applicant-information/group-applicant-information.component';
+import { GroupRegistrationComponent } from './Visa/group-registration/group-registration.component';
+import { GroupVisaFormComponent } from './Visa/group-visa-form/group-visa-form.component';
+import { PaymentSummaryInfoComponent } from './Visa/payment-summary-info/payment-summary-info.component';
 
 
 const approutes: Routes = [   
@@ -55,6 +59,10 @@ const approutes: Routes = [
   { path: 'individual-application',component:IndividualApplicationComponent},
   { path: 'registration',component:RegistrationComponent},
   { path: 'applicant-summary-info',component:ApplicantSummaryInfoComponent},
+  { path: 'group-applicant-information',component:GroupApplicantInformationComponent},
+  { path: 'group-registration',component:GroupRegistrationComponent},
+  { path: 'group-visa-form',component:GroupVisaFormComponent},
+  { path: 'payment-summary-info',component:PaymentSummaryInfoComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 
