@@ -14,7 +14,7 @@ export class DataService {
   private apiData = new BehaviorSubject<any>(null);
   public apiData$ = this.apiData.asObservable();
 
-  private API_TEST_SERVER  = "http://1.9.116.25/ARB-Service";//"http://192.168.0.10/ARB-Service";
+  private API_TEST_SERVER  = "https://www.midevs.com.my/arb-service";//"https://1.9.116.25/ARB-Service";//"http://192.168.0.10/ARB-Service";
   private API_TEST_SERVER1 = "https://localhost:44372";
 
 
@@ -738,6 +738,16 @@ export class DataService {
     params=params.append('id',applicationId);
 
     return this.httpClient.get(this.API_TEST_SERVER+ '/api/PaymentSummaryByApplicationID', {params: params}).pipe(map(response => response),catchError((error: HttpErrorResponse) => {
+      return throwError(error);
+    }));
+    
+  }
+
+  getInvoiceByApplicationId(applicationId):Observable<any>{
+    var params=new HttpParams();
+    params=params.append('id',applicationId);
+
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/InvoiceByApplicationId', {params: params}).pipe(map(response => response),catchError((error: HttpErrorResponse) => {
       return throwError(error);
     }));
     

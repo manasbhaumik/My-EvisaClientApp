@@ -169,31 +169,32 @@ export class GroupApplicantInformationComponent implements OnInit {
     else{
       this.dataService.saveGroupAplicant(this.applicantForm.getRawValue()).subscribe((data:any)=>{
         //console.log(data);
-        var dialogRef= this.dialog.open(ModalComponent,{ data: {
-          message : "Applicant registered Successfully, Please add another applicant",
-          title : "Success",
-          buttonText : "Ok"
-        }});  
-        dialogRef.afterClosed().subscribe(result => {
-          //console.log('The dialog was closed',result);
-          this.returnUrl = result;
-          // this.router.navigate(['/travel-document',{applicantId:data.ApplicantID}]);
-          this.router.navigate(['/group-registration',{applicantId:data.ApplicantID,applicationId:this.applicationId}]);
-        }); 
+        this.router.navigate(['/group-registration',{applicantId:data.ApplicantID,applicationId:this.applicationId}]);
+        // var dialogRef= this.dialog.open(ModalComponent,{ data: {
+        //   message : "Applicant registered Successfully, Please add another applicant",
+        //   title : "Success",
+        //   buttonText : "Ok"
+        // }});  
+        // dialogRef.afterClosed().subscribe(result => {
+        //   //console.log('The dialog was closed',result);
+        //   this.returnUrl = result;
+        //   // this.router.navigate(['/travel-document',{applicantId:data.ApplicantID}]);
+        //   this.router.navigate(['/group-registration',{applicantId:data.ApplicantID,applicationId:this.applicationId}]);
+        // }); 
       },
       error=>{
         this.error=error.error.Message;
         //console.log(error.error.Message);
-        var dialogRef =this.dialog.open(ModalComponent,{ data: {
-          message : this.error,
-          title : "Alert!",
-          buttonText : "Cancel"
-        }});
-        dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed',result);
-          this.returnUrl = result;
-          result ? this.router.navigate(['/home']): this.router.navigate(['/group-applicant-information',{applicantId:this.applicationId}]);
-        });
+        // var dialogRef =this.dialog.open(ModalComponent,{ data: {
+        //   message : this.error,
+        //   title : "Alert!",
+        //   buttonText : "Cancel"
+        // }});
+        // dialogRef.afterClosed().subscribe(result => {
+        //   console.log('The dialog was closed',result);
+        //   this.returnUrl = result;
+        //   result ? this.router.navigate(['/home']): this.router.navigate(['/group-applicant-information',{applicantId:this.applicationId}]);
+        // });
       });
     }
   }

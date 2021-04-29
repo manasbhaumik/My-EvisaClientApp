@@ -1,42 +1,108 @@
-<div class="container">
-    <div class="wrapper bg-white">
-        <div class="h2 text-center">MY E-VISA</div>
-        <div class="h4 text-muted text-center pt-2">Enter your login details</div>
-        <form class="pt-3" #f="ngForm" (ngSubmit)="f.form.valid && login()" novalidate>
-            <div class="form-group py-2">
-                <div class="input-field"> 
-                    <span class="far fa-user p-2"></span> 
-                    <input type="text" id="txtEmail" name="txtEmail" placeholder="Username or Email Address" 
-                     [(ngModel)]="user.email" #txtEmail="ngModel" [ngClass]="{ 'is-invalid': f.submitted && txtEmail.invalid }" required email class="form-control form-control-user"> 
-                    <div *ngIf="f.submitted && txtEmail.invalid" class="invalid-feedback">
-                        <div *ngIf="txtEmail.errors.required">Email is required</div>
-                        <div *ngIf="txtEmail.errors.email">Must be a valid email address</div>
+<div class="container-fluid">
+    <div class="row py-5">
+        <div class="col-md-2 order-md-1">
+        </div>
+        <div class="col-md-8 order-md-1">
+
+            <div class="wrapper bg-white" style="box-shadow: 0px 0px 2px rgb(206, 206, 206) !important">
+                <div class="h2 text-center" style="Color:#ffffff !important;">MY E-VISA</div>
+                <div class="h4 text-muted text-center pt-2" style="Color:#ffffff !important;">Enter your login details</div>
+                
+                <form class="pt-3" #f="ngForm" (ngSubmit)="f.form.valid && login()" novalidate>
+                    <div *ngIf="divError">
+                        <div class="row d-flex justify-content-center ">
+                            <div class="row">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="card  mb-4 bg-danger text-white shadow">
+                                            <div class="card-body">
+                                                {{error}} 
+                                            </div>
+                                        </div>
+                                        <!-- <p class="text-danger">{{error}}</p> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group py-2">
+                        <div class="input-field"> 
+                            <span class="far fa-user p-2"></span> 
+                            <input type="text" id="txtEmail" name="txtEmail" placeholder="Username or Email Address" 
+                             [(ngModel)]="user.email" #txtEmail="ngModel" [ngClass]="{ 'is-invalid': f.submitted && txtEmail.invalid }" required email class="form-control form-control-user"> 
+                            <div *ngIf="f.submitted && txtEmail.invalid" class="invalid-feedback">
+                                <div *ngIf="txtEmail.errors.required">Please enter Your Email ID</div>
+                                <div *ngIf="txtEmail.errors.email">Please enter valid Email ID</div>
+                            </div> 
+                        </div>
+                        
+                    </div>
+                    <div class="form-group py-1 pb-2">
+                        <div class="input-field">
+                            <span class="fas fa-lock p-2"></span>
+                            <input  [type]="fieldTextType ? 'text' : 'password'" id="txtpassword" name="txtpassword" placeholder="Enter your Password"
+                            [(ngModel)]="user.password" #txtpassword="ngModel" [ngClass]="{ 'is-invalid': f.submitted && txtpassword.invalid }" required password class="form-control form-control-user">
+                            <div *ngIf="f.submitted && txtpassword.invalid" class="invalid-feedback">
+                                <div *ngIf="txtpassword.errors.required">Please enter your password</div>
+                            </div>
+                            <div class="btn bg-white text-muted"  (click)="toggleFieldTextType()"> 
+                                <span class="far fa-eye-slash" [ngClass]="{'fa-eye-slash': !fieldTextType,'fa-eye': fieldTextType}"></span>
+                            </div>
+                        </div>
+                        
+                    </div> -->
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input type="text" id="txtEmail" name="txtEmail" placeholder="Username or Email Address"
+                        [(ngModel)]="user.email" #txtEmail="ngModel" [ngClass]="{ 'is-invalid': f.submitted && txtEmail.invalid }" required email class="form-control form-control-user" >
+                        <div *ngIf="f.submitted && txtEmail.invalid" class="invalid-feedback">
+                            <div *ngIf="txtEmail.errors.required">Please enter Your Email ID</div>
+                            <div *ngIf="txtEmail.errors.email">Please enter valid Email ID</div>
+                        </div> 
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input  [type]="fieldTextType ? 'text' : 'password'" id="txtpassword" name="txtpassword" placeholder="Enter your Password"
+                        [(ngModel)]="user.password" #txtpassword="ngModel" [ngClass]="{ 'is-invalid': f.submitted && txtpassword.invalid }" required password class="form-control">
+                        <!-- <div class="input-group-btn bg-white text-muted"  (click)="toggleFieldTextType()"> 
+                            <span class="far fa-eye-slash" [ngClass]="{'fa-eye-slash': !fieldTextType,'fa-eye': fieldTextType}"></span>
+                        </div> -->
+                        <div class="input-group-append" (click)="toggleFieldTextType()">
+                            <span class="input-group-text">
+                              <i class="fa fa-eye" [ngClass]="{'fa-eye-slash': !fieldTextType,'fa-eye': fieldTextType}"></i>
+                            </span>
+                        </div> 
+                        <div *ngIf="f.submitted && txtpassword.invalid" class="invalid-feedback">
+                           <div *ngIf="txtpassword.errors.required">Please enter your password</div>
+                        </div>
+                        
+                    </div>           
+                    <div class="d-flex align-items-start">
+                        <div class="remember"> <label class="option text-muted" style="Color:#ffffff !important;"> Remember me <input type="radio" name="radio"> <span class="checkmark"></span> </label> </div>
+                        <div class="ml-auto"> <a [routerLink]="['/forgot-password']" id="forgot" style="Color:#ffffff !important;">Forgot Password?</a> </div>
                     </div> 
-                </div>
+                    <button type="submit" class="btn btn-block text-center my-3" style="Color:#ffffff !important;" >Log in</button>
+                    <div class="text-center pt-3 text-muted" style="Color:#ffffff !important;">Not a member? <a [routerLink]="['/registration',{agentId:0,countryId:0}]" style="Color:#ffffff !important;">Sign up</a></div>
+                </form>
+              
+                
             </div>
-            <div class="form-group py-1 pb-2">
-                <div class="input-field">
-                    <span class="fas fa-lock p-2"></span>
-                    <input  [type]="fieldTextType ? 'text' : 'password'" id="txtpassword" name="txtpassword" placeholder="Enter your Password"
-                    [(ngModel)]="user.password" #txtpassword="ngModel" [ngClass]="{ 'is-invalid': f.submitted && txtpassword.invalid }" required password class="form-control form-control-user">
-                    <div *ngIf="f.submitted && txtpassword.invalid" class="invalid-feedback">
-                        <div *ngIf="txtpassword.errors.required">Password is required</div>
-                    </div>
-                    <div class="btn bg-white text-muted"  (click)="toggleFieldTextType()"> 
-                        <span class="far fa-eye-slash" [ngClass]="{'fa-eye-slash': !fieldTextType,'fa-eye': fieldTextType}"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex align-items-start">
-                <div class="remember"> <label class="option text-muted"> Remember me <input type="radio" name="radio"> <span class="checkmark"></span> </label> </div>
-                <div class="ml-auto"> <a [routerLink]="['/forgot-password']" id="forgot">Forgot Password?</a> </div>
-            </div> 
-            <button type="submit" class="btn btn-block text-center my-3" >Log in</button>
-            <div class="text-center pt-3 text-muted">Not a member? <a [routerLink]="['/registration',{agentId:0,countryId:0}]">Sign up</a></div>
-        </form>
-      
-        
-      </div>
+
+        </div>
+
+       
+
+    </div>
+   
+    <!-- <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+        <p style="color: white">Please Wait. </p>  
+    </ngx-spinner>  -->
+    <app-spinner></app-spinner>
 </div>
+
 
 <router-outlet></router-outlet>

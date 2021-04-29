@@ -14,6 +14,7 @@ import {ModalComponent} from 'src/app/modal/modal.component';
 })
 export class CreditCardInfoComponent implements OnInit {
 
+  title ="Credit Card Information";
   applicationId:number;
 
   constructor(

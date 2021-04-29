@@ -8,7 +8,7 @@
         <div class="col-md-8 order-md-1">
             <div class="py-2">
                 <!--<img class="d-block mx-auto mb-4" src="assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
-                <h3 class="text-gray-800">{{title}}</h3>
+                <h2 class="text-gray-800">{{title}}</h2>
                 <hr class="mb-4">
             </div>
             <div class="row">
@@ -49,21 +49,21 @@
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <label for="fullName">Full Name (As Passport)</label>
-                                <input type="text" class="form-control" formControlName="FullName" id="fullName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.FullName.errors }" style="text-transform:uppercase">
+                                <input type="text" class="form-control" formControlName="FullName" id="fullName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.FullName.errors }" oninput="this.value = this.value.toUpperCase()">
                                 <div class="invalid-feedback">
                                     Please enter full name as per passport
                                 </div>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="surName">Surname / Father Name</label>
-                                <input type="text" class="form-control" formControlName="FamlilyName" id="fullName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.FamlilyName.errors }" style="text-transform:uppercase">
+                                <input type="text" class="form-control" formControlName="FamlilyName" id="fullName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.FamlilyName.errors }" oninput="this.value = this.value.toUpperCase()">
                                 <div class="invalid-feedback">
                                     Please enter Surname / Father Name
                                 </div>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="surName">Given Name / First Name</label>
-                                <input type="text" class="form-control" formControlName="FirstName" id="fullName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.FirstName.errors }" style="text-transform:uppercase">
+                                <input type="text" class="form-control" formControlName="FirstName" id="fullName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.FirstName.errors }" oninput="this.value = this.value.toUpperCase()">
                                 <div class="invalid-feedback">
                                     Please enter Given Name / First Name
                                 </div>
@@ -204,11 +204,16 @@
                                 <input type="hidden" formControlName="Application"  class="form-control"> 
                             </div>
 
-                        </div>    
+                        </div>  
+                        <hr class="mb-4">
+                        <div class="row" style="float:right;">
+                            <button class="btn btn-primary" style="float:right" type="submit">Save & Continue</button>&nbsp;
+                            <button class="btn btn-danger" style="float:right" type="submit">Cancel</button>
+                        </div>  
                         
 
-                        <button class="btn btn-primary btn-md" type="submit">Save & Continue</button>&nbsp;
-                        <button class="btn btn-danger btn-md" type="submit">Cancel</button>
+                        <!-- <button class="btn btn-primary" type="submit">Save & Continue</button>&nbsp;
+                        <button class="btn btn-danger" type="submit">Cancel</button> -->
                     </form>
                 </div>
             </div>

@@ -33,6 +33,7 @@ export class ApplicantInformationComponent implements OnInit {
   ShowName:boolean;
   rdoSelect:number;
   groupID:number;
+  divError : boolean =false;
 
   constructor(
     private fb: FormBuilder,
@@ -53,13 +54,7 @@ export class ApplicantInformationComponent implements OnInit {
   ngOnInit(): void {
     //this.applicantForm.controls['DOB'].setValue(this.datePipe.transform(this.dobDate, 'dd-MM-yyyy'));
     this.dataService.getAllCountries().subscribe(res => {this.countryList = res});
-    this.dataService.getContact().subscribe((data:any)=>{
-      this.applicantForm.get('FullName').setValue(data.Name); 
-      this.applicantForm.get('IDNumber').setValue(data.IDNumber);
-      this.applicantForm.get('ContactNo').setValue(data.ContactNo);
-      this.applicantForm.get('Email').setValue(data.Email);
-      this.applicantForm.get('countryId').setValue(data.CountryID);     
-    });
+    
     this.activeRouter.params.subscribe(params => {
       var applicationId = params['applicationId'];
       var applicantId = params['applicantId'];
@@ -67,45 +62,54 @@ export class ApplicantInformationComponent implements OnInit {
       this.applicationId=applicationId; 
       this.applicantId = applicantId;
       this.groupID=groupID;
-      });  
-      this.applicantForm.get('Application').setValue(this.applicationId);
+    });  
+    this.applicantForm.get('Application').setValue(this.applicationId);
       
 
-      if(this.applicantId !== undefined){
+    if(this.applicantId !== undefined){
+      this.dataService.getApplicantsById(this.applicantId).subscribe(res=>
+      {
+        this.applicantsList = res;
+        this.isEdited = true;
+        this.applicationId = this.applicantsList[0].ApplicationID;
+        this.applicantForm.get('FullName').setValue(this.applicantsList[0].FullName);
+        if(this.applicantsList[0].FamlilyName !=''){
+          this.applicantForm.get('FamlilyName').setValue(this.applicantsList[0].FamlilyName);
+        }
+        else{
+          this.applicantForm.get('FamlilyName').setValue(this.dataService.FatherName);
+        }
+        //this.applicantForm.get('FamlilyName').setValue(this.applicantsList[0].FamlilyName);
+        this.applicantForm.get('FirstName').setValue(this.applicantsList[0].FirstName);
+        this.applicantForm.get('NickName').setValue(this.applicantsList[0].NickName);
+        this.applicantForm.get('Gender').setValue(this.applicantsList[0].Gender);
+        var year = Number(this.datePipe.transform(this.applicantsList[0].DOB, 'yyyy'));
+        var month = Number(this.datePipe.transform(this.applicantsList[0].DOB, 'MM'));
+        var day = Number(this.datePipe.transform(this.applicantsList[0].DOB, 'dd'));
+        this.applicantForm.get('DOB').setValue({year: year, month: month, day: day});
+        this.applicantForm.get('IDNumber').setValue(this.applicantsList[0].IDNumber);
+        this.applicantForm.get('ContactNo').setValue(this.applicantsList[0].ContactNo);
+        this.applicantForm.get('Email').setValue(this.applicantsList[0].Email);
+        this.applicantForm.get('countryId').setValue(this.applicantsList[0].CountryID);
+        this.applicantForm.get('Address1').setValue(this.applicantsList[0].Address1);
+        this.applicantForm.get('Address2').setValue(this.applicantsList[0].Address2);
+        //this.applicantForm.get('Address3').setValue(this.applicantsList[0].Address3);
+        this.applicantForm.get('City').setValue(this.applicantsList[0].City);
+        this.applicantForm.get('State').setValue(this.applicantsList[0].State);
+        this.applicantForm.get('PostCode').setValue(this.applicantsList[0].PostCode);
+        this.applicantForm.get('Relationship').setValue(this.applicantsList[0].Relationship);
+      });
+    }
+    else{
+      this.dataService.getContact().subscribe((data:any)=>{
+      this.applicantForm.get('FullName').setValue(data.Name); 
+      this.applicantForm.get('IDNumber').setValue(data.IDNumber);
+      this.applicantForm.get('ContactNo').setValue(data.ContactNo);
+      this.applicantForm.get('Email').setValue(data.Email);
+      this.applicantForm.get('countryId').setValue(data.CountryID);     
+    });
 
-        this.dataService.getApplicantsById(this.applicantId).subscribe(res=>
-          {
-            this.applicantsList = res;
-            this.isEdited = true;
-            this.applicationId = this.applicantsList[0].ApplicationID;
-            this.applicantForm.get('FullName').setValue(this.applicantsList[0].FullName);
-            if(this.applicantsList[0].FamlilyName !=''){
-              this.applicantForm.get('FamlilyName').setValue(this.applicantsList[0].FamlilyName);
-            }
-            else{
-              this.applicantForm.get('FamlilyName').setValue(this.dataService.FatherName);
-            }
-            //this.applicantForm.get('FamlilyName').setValue(this.applicantsList[0].FamlilyName);
-            this.applicantForm.get('FirstName').setValue(this.applicantsList[0].FirstName);
-            this.applicantForm.get('NickName').setValue(this.applicantsList[0].NickName);
-            this.applicantForm.get('Gender').setValue(this.applicantsList[0].Gender);
-            var year = Number(this.datePipe.transform(this.applicantsList[0].DOB, 'yyyy'));
-            var month = Number(this.datePipe.transform(this.applicantsList[0].DOB, 'MM'));
-            var day = Number(this.datePipe.transform(this.applicantsList[0].DOB, 'dd'));
-            this.applicantForm.get('DOB').setValue({year: year, month: month, day: day});
-            this.applicantForm.get('IDNumber').setValue(this.applicantsList[0].IDNumber);
-            this.applicantForm.get('ContactNo').setValue(this.applicantsList[0].ContactNo);
-            this.applicantForm.get('Email').setValue(this.applicantsList[0].Email);
-            this.applicantForm.get('countryId').setValue(this.applicantsList[0].CountryID);
-            this.applicantForm.get('Address1').setValue(this.applicantsList[0].Address1);
-            this.applicantForm.get('Address2').setValue(this.applicantsList[0].Address2);
-            //this.applicantForm.get('Address3').setValue(this.applicantsList[0].Address3);
-            this.applicantForm.get('City').setValue(this.applicantsList[0].City);
-            this.applicantForm.get('State').setValue(this.applicantsList[0].State);
-            this.applicantForm.get('PostCode').setValue(this.applicantsList[0].PostCode);
-            this.applicantForm.get('Relationship').setValue(this.applicantsList[0].Relationship);
-          });
-      }
+    }
   }
 
   applicantForm=this.fb.group({
@@ -144,7 +148,7 @@ export class ApplicantInformationComponent implements OnInit {
   }
 
   SaveApplicant(){
-    //console.log(this.applicantForm.getRawValue());
+    //console.log(this.applicantForm.getRawValue());return;
     // console.log('date:'+this.dobDate);
     //console.log(this.dobDate.day+"/"+this.dobDate.month+"/"+this.dobDate.year);
     this.isSubmitted = true;   
@@ -158,66 +162,76 @@ export class ApplicantInformationComponent implements OnInit {
     
     if(this.isEdited == true){
       this.dataService.updateAplicant(this.applicantForm.getRawValue(),this.applicantId,this.applicationId).subscribe((data:any)=>{
-        var dialogRef= this.dialog.open(ModalComponent,{ data: {
-          message : "Applicant information updated Successfully",
-          title : "Success",
-          buttonText : "Ok"
-        }});  
-        dialogRef.afterClosed().subscribe(result => {
-          this.returnUrl = result;
-          //this.router.navigate(['/applicant-information',{applicantId:data.ApplicantID}]);
-          if(this.groupID !==undefined){
-            this.router.navigate(['/group-visa-form',{applicationId:this.applicationId,applicantId:this.applicantId}]);
+        if(this.groupID !==undefined){
+          this.router.navigate(['/group-visa-form',{applicationId:this.applicationId,applicantId:this.applicantId}]);
+                        
+        }
+        else{
+          this.router.navigate(['/submit-application',{applicationId:this.applicationId}]); 
+        }
+        // var dialogRef= this.dialog.open(ModalComponent,{ data: {
+        //   message : "Applicant information updated Successfully",
+        //   title : "Success",
+        //   buttonText : "Ok"
+        // }});  
+        // dialogRef.afterClosed().subscribe(result => {
+        //   this.returnUrl = result;
+        //   //this.router.navigate(['/applicant-information',{applicantId:data.ApplicantID}]);
+        //   if(this.groupID !==undefined){
+        //     this.router.navigate(['/group-visa-form',{applicationId:this.applicationId,applicantId:this.applicantId}]);
                           
-            }
-            else{
-            this.router.navigate(['/submit-application',{applicationId:this.applicationId}]); 
-            }
-          //this.router.navigate(['/submit-application',{applicationId:this.applicationId}]);
-        }); 
+        //   }
+        //   else{
+        //     this.router.navigate(['/submit-application',{applicationId:this.applicationId}]); 
+        //   }
+        //   //this.router.navigate(['/submit-application',{applicationId:this.applicationId}]);
+        // }); 
       },
       error=>{
         this.error=error.error.Message;
-        var dialogRef =this.dialog.open(ModalComponent,{ data: {
-          message : this.error,
-          title : "Alert!",
-          buttonText : "Cancel"
-        }});
-        dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed',result);
-          this.returnUrl = result;
-          result ? this.router.navigate(['/home']): this.router.navigate(['/applicant-information',{applicantId:this.applicantId}]);
-        });
+        this.divError=true;
+        // var dialogRef =this.dialog.open(ModalComponent,{ data: {
+        //   message : this.error,
+        //   title : "Alert!",
+        //   buttonText : "Cancel"
+        // }});
+        // dialogRef.afterClosed().subscribe(result => {
+        //   //console.log('The dialog was closed',result);
+        //   this.returnUrl = result;
+        //   result ? this.router.navigate(['/home']): this.router.navigate(['/applicant-information',{applicantId:this.applicantId}]);
+        // });
       });
     }
     else{
       this.dataService.saveAplicant(this.applicantForm.getRawValue()).subscribe((data:any)=>{
         //console.log(data);
-        var dialogRef= this.dialog.open(ModalComponent,{ data: {
-          message : "Applicant registered Successfully, Please click Ok to fill travel document",
-          title : "Success",
-          buttonText : "Ok"
-        }});  
-        dialogRef.afterClosed().subscribe(result => {
-          //console.log('The dialog was closed',result);
-          this.returnUrl = result;
-          // this.router.navigate(['/travel-document',{applicantId:data.ApplicantID}]);
-          this.router.navigate(['/travel-document',{applicantId:data.ApplicantID,applicationId:this.applicationId}]);
-        }); 
+        this.router.navigate(['/travel-document',{applicantId:data.ApplicantID,applicationId:this.applicationId}]);
+        // var dialogRef= this.dialog.open(ModalComponent,{ data: {
+        //   message : "Applicant registered Successfully, Please click Ok to fill travel document",
+        //   title : "Success",
+        //   buttonText : "Ok"
+        // }});  
+        // dialogRef.afterClosed().subscribe(result => {
+        //   //console.log('The dialog was closed',result);
+        //   this.returnUrl = result;
+        //   // this.router.navigate(['/travel-document',{applicantId:data.ApplicantID}]);
+        //   this.router.navigate(['/travel-document',{applicantId:data.ApplicantID,applicationId:this.applicationId}]);
+        // }); 
       },
       error=>{
         this.error=error.error.Message;
         //console.log(error.error.Message);
-        var dialogRef =this.dialog.open(ModalComponent,{ data: {
-          message : this.error,
-          title : "Alert!",
-          buttonText : "Cancel"
-        }});
-        dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed',result);
-          this.returnUrl = result;
-          result ? this.router.navigate(['/home']): this.router.navigate(['/applicant-information',{applicantId:this.applicationId}]);
-        });
+        this.divError =true;
+        // var dialogRef =this.dialog.open(ModalComponent,{ data: {
+        //   message : this.error,
+        //   title : "Alert!",
+        //   buttonText : "Cancel"
+        // }});
+        // dialogRef.afterClosed().subscribe(result => {
+        //   //console.log('The dialog was closed',result);
+        //   this.returnUrl = result;
+        //   result ? this.router.navigate(['/home']): this.router.navigate(['/applicant-information',{applicantId:this.applicationId}]);
+        // });
       });
     }
   }

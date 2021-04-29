@@ -5,30 +5,33 @@
         </div>
         <div class="col-md-8 order-md-1">
             <div class="py-2">
-                <h3 class="text-gray-800">{{title}}</h3>
+                <h2 class="text-gray-800">{{title}}</h2>
                 <hr class="mb-4">
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card  mb-4 alert-info">
+                    <div class="card  mb-4 bg-info text-white shadow">
                         <div class="card-body">
                             Applicant reference Number : {{visaRegNo}} 
                         </div>
                     </div>
-                    <div *ngIf="divPending" class="card  mb-4 alert-warning">                        
+                    <div *ngIf="divPending" class="card  mb-4 bg-warning text-white shadow">                        
                         <div class="card-body">
-                           Application submission pending for payment
+                           <!-- Application submission pending for payment -->
+                           {{PendingMessage}}
                         </div>
                     </div>
-                    <div *ngIf="divSucess" class="card  mb-4 alert-success">                        
+                    <div *ngIf="divSucess" class="card  mb-4 bg-success text-white shadow">                        
                         <div class="card-body">
-                           Application submission sucess and you are required  to do for Biometric Enrollment
+                           <!-- Application submission sucess and you are required  to do for Biometric Enrollment -->
+                           {{SuccessMessage}}
                         </div>
                     </div>
-                    <div *ngIf="divAlert" class="card  mb-4 alert-danger">                        
+                    <div *ngIf="divAlert" class="card  mb-4 bg-danger text-white shadow">                        
                         <div class="card-body">
-                           The application has not been submitted, <a routerLink="/visa-application">Please submit the application</a>
+                           <!-- The application has not been submitted, <a routerLink="/visa-application">Please submit the application</a> -->
+                           {{AlertMessage}}
                         </div>
                     </div>
                 </div>

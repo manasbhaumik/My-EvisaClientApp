@@ -94,7 +94,7 @@ export class VisaApplicationComponent implements OnInit {
       this.embassyID = localStorage.getItem("SelectedEmbassy");      
       this.visaTypeForm.get('ContactID').setValue(this.contactID);
       this.visaTypeForm.get('SubmitedBy').setValue(this.contactName);
-      this.dFormat = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
+      this.dFormat = this.datePipe.transform(this.myDate, 'yyyy-MM-dd hh:mm:ss');
       this.visaTypeForm.get('SubmisisionDate').setValue(this.dFormat);
      
     });
@@ -123,7 +123,7 @@ export class VisaApplicationComponent implements OnInit {
           this.visaTypeForm.get('VisaTypeID').setValue(this.applicationList[0].VisaTypeID);
           if(this.applicationList[0].SubmissionDate==null)
           {
-            this.dFormat = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
+            this.dFormat = this.datePipe.transform(this.myDate, 'yyyy-MM-dd hh:mm:ss');
             this.visaTypeForm.get('ContactID').setValue(this.contactID);
             this.visaTypeForm.get('SubmitedBy').setValue(this.contactName);
             this.visaTypeForm.get('SubmisisionDate').setValue(this.dFormat);
@@ -131,7 +131,7 @@ export class VisaApplicationComponent implements OnInit {
             this.visaTypeForm.get('UpdatedDate').setValue(this.dFormat);
           }
           else{
-            this.dFormat = this.datePipe.transform(this.applicationList[0].SubmissionDate, 'yyyy-MM-dd');
+            this.dFormat = this.datePipe.transform(this.applicationList[0].SubmissionDate, 'yyyy-MM-dd hh:mm:ss');
             this.visaTypeForm.get('ContactID').setValue(this.applicationList[0].ContactID);
             this.visaTypeForm.get('SubmitedBy').setValue(this.applicationList[0].SubmitedBy);
             this.visaTypeForm.get('SubmisisionDate').setValue(this.dFormat);
@@ -263,39 +263,45 @@ export class VisaApplicationComponent implements OnInit {
     else{
       this.dataService.saveAplication(this.visaTypeForm.getRawValue())
       .subscribe((data:any)=>{
-        //console.log(data);     
-        var dialogRef= this.dialog.open(ModalComponent,{ data: {
-        message : "Application registered Successfully, please click Ok to fill applicant information",
-        title : "Success",
-        buttonText : "Ok"
-        }});  
-        dialogRef.afterClosed().subscribe(
-          result => {
-          //console.log('The dialog was closed',result);
-          this.returnUrl = result;
-          if(this.applicationSelectedIndex==2){
-            this.router.navigate(['/applicant-information',{applicationId:data.ApplicationID}]);
-          }
-          else{
-            this.router.navigate(['/group-applicant-information',{applicationId:data.ApplicationID}]);
-          }
+        //console.log(data);
+        if(this.applicationSelectedIndex==2){
+          this.router.navigate(['/applicant-information',{applicationId:data.ApplicationID}]);
+        }
+        else{
+          this.router.navigate(['/group-applicant-information',{applicationId:data.ApplicationID}]);
+        }     
+        // var dialogRef= this.dialog.open(ModalComponent,{ data: {
+        // message : "Application registered Successfully, please click Ok to fill applicant information",
+        // title : "Success",
+        // buttonText : "Ok"
+        // }});  
+        // dialogRef.afterClosed().subscribe(
+        //   result => {
+        //   //console.log('The dialog was closed',result);
+        //   this.returnUrl = result;
+        //   if(this.applicationSelectedIndex==2){
+        //     this.router.navigate(['/applicant-information',{applicationId:data.ApplicationID}]);
+        //   }
+        //   else{
+        //     this.router.navigate(['/group-applicant-information',{applicationId:data.ApplicationID}]);
+        //   }
           
-        });      
+        // });      
       },
       error=>{
         //console.log("error :"+error);
         this.error=error.error.Message;
         //console.log(error.error.Message);
-        var dialogRef =this.dialog.open(ModalComponent,{ data: {
-          message : this.error,
-          title : "Alert!",
-          buttonText : "Cancel"
-        }});
-        dialogRef.afterClosed().subscribe(result => {
-          //console.log('The dialog was closed',result);
-          this.returnUrl = result;
-          result ? this.router.navigate(['/home']): this.router.navigate(['/visa-application']);
-        });    
+        // var dialogRef =this.dialog.open(ModalComponent,{ data: {
+        //   message : this.error,
+        //   title : "Alert!",
+        //   buttonText : "Cancel"
+        // }});
+        // dialogRef.afterClosed().subscribe(result => {
+        //   //console.log('The dialog was closed',result);
+        //   this.returnUrl = result;
+        //   result ? this.router.navigate(['/home']): this.router.navigate(['/visa-application']);
+        // });    
       });
 
     }

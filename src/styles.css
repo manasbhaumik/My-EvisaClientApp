@@ -8,12 +8,36 @@
 @import "assets/css/sb-admin-2.css";
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import "assets/vendor/fontawesome-free/css/all.min.css";
+@import "~datatables.net-dt/css/jquery.dataTables.css";
 /* @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins&display=swap'); */
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 h1, h2, h3, h4, h5 {
    font-size: 1.75rem !important;
+}
+
+.mat-h3, .mat-subheading-2, .mat-typography h3{
+   font:400 16px/28px Roboto, "Helvetica Neue", sans-serif !important;
+
+}
+.mat-h2, .mat-title, .mat-typography h2{
+   font:400 20px/32px Roboto, "Helvetica Neue", sans-serif !important;
+   color: #0241c1 !important;/*#122855 !important;*/
+   font-size: 18px !important;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option{
+   color:#504d4d !important;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-disabled{
+   color:#ccc !important;
+}
+.ng-select .ng-select-container .ng-value-container .ng-input>input{
+   color:#000000 !important;
+}
+.ng-select .ng-select-container .ng-value-container .ng-placeholder{
+   color:#000000 !important;
 }
 
 footer.sticky-footer{
@@ -46,7 +70,7 @@ body {
 
 .h2 {
    font-family: 'arial', cursive;
-   font-size: 2.5rem;
+   font-size: 1.5rem;
    font-weight: bold;
    color: #11133a;
    font-style: normal
@@ -62,7 +86,8 @@ body {
    display: flex;
    align-items: center;
    cursor: pointer;
-   border: 1px solid #0f72dc;
+   /* border: 1px solid #0f72dc; */
+   border: 1px solid #173371;
    color: #0f72dc
 }
 
@@ -88,7 +113,8 @@ input {
 
 a {
    text-decoration: none;
-   color: #0f72dc;
+   /* color: #0f72dc; */
+   color:#173371;
    font-weight: 700
 }
 
@@ -415,4 +441,8 @@ p {
 .fit-image {
    width: 100%;
    object-fit: cover
+}
+
+.header-title{
+   text-align: center !important;
 }

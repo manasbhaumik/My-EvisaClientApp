@@ -3,6 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient,HttpErrorResponse } from '@angular/common/http';
 import { DataService } from 'src/app/data.service';
 import { DatePipe } from '@angular/common';
+import { NgxSpinnerService } from "ngx-spinner";  
+
+declare var $: any;
 
 @Component({
   selector: 'app-payment-summary-info',
@@ -28,33 +31,45 @@ export class PaymentSummaryInfoComponent implements OnInit {
     private http: HttpClient,
     private dataService:DataService,
     private datePipe: DatePipe,
-    private activeRouter:ActivatedRoute
+    private activeRouter:ActivatedRoute,
+    private SpinnerService: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
+    this.SpinnerService.show();
     this.activeRouter.params.subscribe(params => {
       var applicationId = params['applicationId'];
       this.applicationId=applicationId;
 
       this.dataService.getPaySummaryByApplicationId(this.applicationId).subscribe(res => 
-        {
-          this.applicationsList = res;
-          this.totalApplicant = this.applicationsList[0].TotalApplicant;
-          var visaFee = 0;
-          var processFee = 0;
-          var TotalFee = 0;
-          for(let i =0;i<this.totalApplicant;i++){
-            visaFee = visaFee + this.applicationsList[i].SubmissionFee;
-            processFee = processFee + this.applicationsList[i].ProccesingFee;
-            TotalFee = TotalFee + this.applicationsList[i].TotalFee;
-            this.ttlVisaFee = visaFee;
-            this.ttlProcessFee = processFee;
-            this.TotalFee = TotalFee;
+      {
+        this.applicationsList = res;
+        setTimeout(()=>{                          
+         $('#datatable').DataTable( {
+           pagingType: 'simple_numbers',
+            pageLength: 10,
+            processing: true,
+            //lengthMenu : [5, 10, 25],
+            order:[[1,"desc"]]
+          }) ;
+        },1);
+        this.totalApplicant = this.applicationsList[0].TotalApplicant;
+        var visaFee = 0;
+        var processFee = 0;
+        var TotalFee = 0;
+        for(let i =0;i<this.totalApplicant;i++){
+          visaFee = visaFee + this.applicationsList[i].SubmissionFee;
+          processFee = processFee + this.applicationsList[i].ProccesingFee;
+          TotalFee = TotalFee + this.applicationsList[i].TotalFee;
+          this.ttlVisaFee = visaFee;
+          this.ttlProcessFee = processFee;
+          this.TotalFee = TotalFee;
 
-          }
-         console.log(this.applicationsList);   
+        }
+        //console.log(this.applicationsList); 
+        this.SpinnerService.hide();  
 
-        });
+      });
 
         
     });

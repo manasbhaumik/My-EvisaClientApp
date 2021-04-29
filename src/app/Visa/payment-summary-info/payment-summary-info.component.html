@@ -1,79 +1,101 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <div class="row py-5">
-        <div class="col-md-12 order-md-1">
-            <!-- DataTales Example -->
-            <div class="card shadow  mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;">Payment Summary</h6>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Applicant Reference No.</th>
-                                    <th>Applicants Passport No.</th>
-                                    <th>Name of Applicant</th>
-                                    <th>Visa Fees (USD)</th>
-                                    <th>Processing Fees (USD)</th>
-                                    <th>Total Fees (USD)</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Total Payment</th>
-                                    <th>{{totalApplicant}}</th>
-                                    <th>{{totalApplicant}}</th>
-                                    <th>{{ttlVisaFee| number : '1.1-1'}}</th>
-                                    <th>{{ttlProcessFee| number : '1.1-1'}}</th>
-                                    <th>{{TotalFee| number : '1.1-1'}}</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                               
-                                <tr *ngFor="let application of applicationsList; let i = index">
-                                    <td>
-                                        <!-- <div *ngIf="application.Applicants[0] && application.Applicants[0].VisaApplications[0]; else showFirstName">
-                                            <a class="nav-link" [routerLink]="['/submit-application',{applicationId:application.ApplicationID}]">{{application.Applicants[0].VisaApplications[0].MyEVisaRefNo}}</a>
-                                        </div>                                         -->
-                                        <div *ngIf="application.ApplicantID && application.MyEVisaRefNo; else showFirstName">
-                                            <a class="nav-link" [routerLink]="['/submit-application',{applicationId:application.ApplicationID}]">{{application.MyEVisaRefNo}}</a>
-                                        </div> 
-                                        <!-- <ng-template #showFirstName> 
-                                            <div *ngIf="application.Applicants[0];else showEmpty">
-                                                <a class="nav-link" [routerLink]="['/travel-document',{applicantId:application.Applicants[0].ApplicantID}]">Continue to fillup travel information</a>
-                                            </div>
-                                            
-                                        </ng-template> -->
-                                        <ng-template #showFirstName> 
-                                            <div *ngIf="application.ApplicantID;else showEmpty">
-                                                <a class="nav-link" [routerLink]="['/travel-document',{applicantId:application.ApplicantID}]">Continue to fillup travel information</a>
-                                            </div>
-                                            
-                                        </ng-template>
-                                        <!-- <ng-template #showEmpty>
-                                            <a class="nav-link" [routerLink]="['/applicant-information',{applicationId:application.ApplicationID}]">Continue to fillup applicant information</a>
-                                        </ng-template> -->
-                                        <ng-template #showEmpty>
-                                            <a class="nav-link" [routerLink]="['/applicant-information',{applicationId:application.ApplicationID}]">Continue to fillup applicant information</a>
-                                        </ng-template>
-                                    </td>      
-                                    <!-- <td>{{application.SubmissionDate | date : 'dd/MM/yyyy'}}</td>                                 -->
-                                    <td>{{application.PassportNo}}</td>
-                                    <td>{{application.FullName}}</td>
-                                    <td>{{application.SubmissionFee}}</td>
-                                    <td>{{application.ProccesingFee}}</td>
-                                    <td>{{application.TotalFee}}</td>
-                                    
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+        <div class="col-md-2 order-md-1">
+        </div>
+        <div class="col-md-10 order-md-1">
+            <div class="py-1">                
+                <h2 class="text-gray-800">Payment Summary</h2>
+                <hr class="mb-4">
             </div>
-        </div>       
+            <div class="row">
+                <div class="col-md-12 order-md-1">
+                    <!-- DataTales Example -->
+                    <div class="card mb-4">
+                        <!-- <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;">Payment Summary</h6>
+                        </div> -->
+                        <div class="card-body">
+                            <form>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-sm row-border hover" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Applicant Reference No.</th>
+                                                <th>Applicants Passport No.</th>
+                                                <th>Name of Applicant</th>
+                                                <th>Visa Fees (USD)</th>
+                                                <th>Processing Fees (USD)</th>
+                                                <th>Total Fees (USD)</th>
+                                                <th>View Receipt</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Total Payment</th>
+                                                <th>{{totalApplicant}}</th>
+                                                <th>{{totalApplicant}}</th>
+                                                <th>{{ttlVisaFee| number : '1.1-1'}}</th>
+                                                <th>{{ttlProcessFee| number : '1.1-1'}}</th>
+                                                <th>{{TotalFee| number : '1.1-1'}}</th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                           
+                                            <tr *ngFor="let application of applicationsList; let i = index">
+                                                <td>
+                                                    <!-- <div *ngIf="application.Applicants[0] && application.Applicants[0].VisaApplications[0]; else showFirstName">
+                                                        <a class="nav-link" [routerLink]="['/submit-application',{applicationId:application.ApplicationID}]">{{application.Applicants[0].VisaApplications[0].MyEVisaRefNo}}</a>
+                                                    </div>                                         -->
+                                                    <div *ngIf="application.ApplicantID && application.MyEVisaRefNo; else showFirstName">
+                                                        <!-- <a class="nav-link" [routerLink]="['/submit-application',{applicationId:application.ApplicationID}]">{{application.MyEVisaRefNo}}</a> -->
+                                                        {{application.MyEVisaRefNo}}
+                                                    </div> 
+                                                    <!-- <ng-template #showFirstName> 
+                                                        <div *ngIf="application.Applicants[0];else showEmpty">
+                                                            <a class="nav-link" [routerLink]="['/travel-document',{applicantId:application.Applicants[0].ApplicantID}]">Continue to fillup travel information</a>
+                                                        </div>
+                                                        
+                                                    </ng-template> -->
+                                                    <ng-template #showFirstName> 
+                                                        <div *ngIf="application.ApplicantID;else showEmpty">
+                                                            <a class="nav-link" [routerLink]="['/travel-document',{applicantId:application.ApplicantID}]">Continue to fillup travel information</a>
+                                                        </div>
+                                                        
+                                                    </ng-template>
+                                                    <!-- <ng-template #showEmpty>
+                                                        <a class="nav-link" [routerLink]="['/applicant-information',{applicationId:application.ApplicationID}]">Continue to fillup applicant information</a>
+                                                    </ng-template> -->
+                                                    <ng-template #showEmpty>
+                                                        <a class="nav-link" [routerLink]="['/applicant-information',{applicationId:application.ApplicationID}]">Continue to fillup applicant information</a>
+                                                    </ng-template>
+                                                </td>      
+                                                <!-- <td>{{application.SubmissionDate | date : 'dd/MM/yyyy'}}</td>                                 -->
+                                                <td>{{application.PassportNo}}</td>
+                                                <td>{{application.FullName}}</td>
+                                                <td>{{application.SubmissionFee | number : '1.1-1'}}</td>
+                                                <td>{{application.ProccesingFee | number : '1.1-1'}}</td>
+                                                <td>{{application.TotalFee | number : '1.1-1'}}</td>
+                                                <td>
+                                                    <a class="nav-link" [routerLink]="['/view-receipt',{applicationId:application.ApplicantID}]">View Receipt</a>
+                                                </td>
+                                                
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                           
+                        </div>
+                    </div>
+                </div>  
+
+            </div>
+        </div>
+            
     </div>
+    <app-spinner></app-spinner>
    
 </div>
 <!-- End of Main Content -->

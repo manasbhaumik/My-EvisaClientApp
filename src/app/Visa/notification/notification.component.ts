@@ -22,6 +22,10 @@ export class NotificationComponent implements OnInit {
   divSucess : boolean = false;
   divAlert : boolean = false;
 
+  PendingMessage : any;
+  SuccessMessage : any;
+  AlertMessage : any;
+
 
   constructor( private fb: FormBuilder,
     private router: Router,
@@ -47,10 +51,40 @@ export class NotificationComponent implements OnInit {
           this.divSucess = false;
           this.divAlert = true;
           this.visaRegNo = "N/A"
+          this.AlertMessage = "The application has not been submitted, <a routerLink='/visa-application'>Please submit the application</a>"
         }
         else{
           // this.visaRegNo = this.contactList.Applications[0].Applicants[0].VisaApplications[0].MyEVisaRefNo;
           this.visaRegNo = this.contactList[0].MYEVISAREFNO;
+          if(this.contactList[0].Status == "B")
+          {
+            this.divPending = true;
+            this.PendingMessage = "Application submission success and you are required  to do for mandatory Biometric Enrollment";
+            this.divSucess = false;
+            this.divAlert = false;
+          }
+          if(this.contactList[0].Status == "S")
+          {
+            this.divPending = true;
+            this.PendingMessage = "Biometric Enrollment submitted, Pending for Approval";
+            this.divSucess = false;
+            this.divAlert = false;
+          }
+          if(this.contactList[0].Status == "A")
+          {
+            this.divPending = false;
+            this.divSucess = true;
+            this.SuccessMessage = "Application Approved";            
+            this.divAlert = false;
+          }
+          if(this.contactList[0].Status == "R")
+          {
+            this.divPending = false;
+            this.divSucess = false;
+            this.divAlert = true;
+            this.AlertMessage = "Application Rejected";        
+            
+          }
         }
         
         //alert(this.contactList.Applications[0]);

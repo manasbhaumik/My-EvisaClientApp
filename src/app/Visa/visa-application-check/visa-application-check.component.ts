@@ -18,6 +18,7 @@ export class VisaApplicationCheckComponent implements OnInit {
   isSubmitted=false;
   returnUrl: string;
   error : string;
+  divError : boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -47,52 +48,58 @@ export class VisaApplicationCheckComponent implements OnInit {
     var refNo =  this.visaApplicationCheckForm.controls['visaRefNo'].value;
     //console.log(refNo);
     this.dataService.getApplicantStatusByVisaRefNo(refNo).subscribe(res=>{
+      this.applicantStatusList=res;
+      console.log(this.applicantStatusList);
+      if(res == null){
+        this.applicantStatusList = null;
+        this.divError = true;
+        this.error = "Reference number does not exists";
+        // var dialogRef =this.dialog.open(ModalComponent,{ data: {
+        //   message : "Reference number does not exists",
+        //   title : "Alert!",
+        //   buttonText : "Cancel"
+        // }});
+        // dialogRef.afterClosed().subscribe(result => {
+        //   console.log('The dialog was closed',result);
+        //   this.returnUrl = result;
+        //   result ? this.router.navigate(['/agency-details']): this.router.navigate(['/visa-application-check']);
+        // });
+      }
+      else{
         this.applicantStatusList=res;
-        console.log(this.applicantStatusList+"1");
-        if(res == null){
-          this.applicantStatusList = null;
-          var dialogRef =this.dialog.open(ModalComponent,{ data: {
-            message : "Reference number does not exists",
-            title : "Alert!",
-            buttonText : "Cancel"
-          }});
-          dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed',result);
-            this.returnUrl = result;
-            result ? this.router.navigate(['/agency-details']): this.router.navigate(['/visa-application-check']);
-          });
+        if(!this.applicantStatusList?.length){
+          this.divError = true;
+          this.error = "Reference number does not exists";
+          // var dialogRef =this.dialog.open(ModalComponent,{ data: {
+          //   message : "Reference number does not exists",
+          //   title : "Alert!",
+          //   buttonText : "Cancel"
+          // }});
+          // dialogRef.afterClosed().subscribe(result => {
+          //   console.log('The dialog was closed',result);
+          //   this.returnUrl = result;
+          //   result ? this.router.navigate(['/agency-details']): this.router.navigate(['/visa-application-check']);
+          // });
         }
         else{
           this.applicantStatusList=res;
-          if(!this.applicantStatusList?.length){
-            var dialogRef =this.dialog.open(ModalComponent,{ data: {
-              message : "Reference number does not exists",
-              title : "Alert!",
-              buttonText : "Cancel"
-            }});
-            dialogRef.afterClosed().subscribe(result => {
-              console.log('The dialog was closed',result);
-              this.returnUrl = result;
-              result ? this.router.navigate(['/agency-details']): this.router.navigate(['/visa-application-check']);
-            });
-          }
-          else{
-            this.applicantStatusList=res;
-          }
-          console.log(this.applicantStatusList);
         }
+        //console.log(this.applicantStatusList);
+      }
     },
     error =>{
-      var dialogRef =this.dialog.open(ModalComponent,{ data: {
-        message : "Not found",
-        title : "Alert!",
-        buttonText : "Cancel"
-      }});
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed',result);
-        this.returnUrl = result;
-        result ? this.router.navigate(['/agency-details']): this.router.navigate(['/visa-application-check']);
-      });
+      this.divError = true;
+      this.error = "Record Not Found";
+      // var dialogRef =this.dialog.open(ModalComponent,{ data: {
+      //   message : "Not found",
+      //   title : "Alert!",
+      //   buttonText : "Cancel"
+      // }});
+      // dialogRef.afterClosed().subscribe(result => {
+      //   console.log('The dialog was closed',result);
+      //   this.returnUrl = result;
+      //   result ? this.router.navigate(['/agency-details']): this.router.navigate(['/visa-application-check']);
+      // });
     });
 
   }
@@ -107,12 +114,20 @@ export class VisaApplicationCheckComponent implements OnInit {
     if(applicationStatus == "Y"||applicationStatus =="P"){
       message = "This application is pending for payment";
     }
-    else if(applicationStatus == "M"){
+    else if(applicationStatus == "B"){
       message = "This application is pending for Biometric Enrollment";
 
     }
     else if(applicationStatus == "S"){
-      message = "This application is pending for submission";
+      message = "This application is pending for Approval";
+
+    }
+    else if(applicationStatus == "A"){
+      message = "This application is Approved";
+
+    }
+    else if(applicationStatus == "R"){
+      message = "This application is Rejected";
 
     }
     else if(applicationStatus == "C"){
@@ -149,10 +164,18 @@ export class VisaApplicationCheckComponent implements OnInit {
 
   }
 
-  popupVisaStatus(visaStatus){
+  popupVisaStatus(visaStatus,applicationStatus){
     var message = "";
     if(visaStatus == "P"){
-      message = "Your visa is pending for approval";
+      if(applicationStatus == "Y"||applicationStatus =="P"){
+        message = "Your visa is pending for payment";
+      }
+      else if(applicationStatus == "B"){
+        message = "Your visa is pending for Mandatory Biometric Appointment";
+      }
+      else if(applicationStatus == "S"){
+        message = "Your visa is pending for Approval";
+      }
     }
     else if(visaStatus == "A"){
       message = "Your visa is Approved";

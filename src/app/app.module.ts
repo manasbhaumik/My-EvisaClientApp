@@ -9,6 +9,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NgOpenCVModule } from 'ng-open-cv';
 import { OpenCVOptions } from 'ng-open-cv/public_api.d';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { DataTablesModule} from 'angular-datatables';
+import { NgxSpinnerModule } from "ngx-spinner"; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -57,6 +59,8 @@ import { GroupApplicantInformationComponent } from './Visa/group-applicant-infor
 import { GroupRegistrationComponent } from './Visa/group-registration/group-registration.component';
 import { GroupVisaFormComponent } from './Visa/group-visa-form/group-visa-form.component';
 import { PaymentSummaryInfoComponent } from './Visa/payment-summary-info/payment-summary-info.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { ViewReceiptComponent } from './Visa/view-receipt/view-receipt.component';
 
 const openCVConfig: OpenCVOptions = {
   scriptUrl: `assets/opencv/wasm/3.4/opencv.js`,
@@ -100,11 +104,14 @@ const openCVConfig: OpenCVOptions = {
     GroupApplicantInformationComponent,
     GroupRegistrationComponent,
     GroupVisaFormComponent,
-    PaymentSummaryInfoComponent
+    PaymentSummaryInfoComponent,
+    SpinnerComponent,
+    ViewReceiptComponent
   ],
   imports: [
     BrowserModule,
     NgOpenCVModule.forRoot(openCVConfig),
+    DataTablesModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
@@ -119,7 +126,8 @@ const openCVConfig: OpenCVOptions = {
     MatStepperModule,
     MatInputModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    NgxSpinnerModule
   ],
   providers: [
     {

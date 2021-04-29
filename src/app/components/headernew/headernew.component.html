@@ -27,7 +27,7 @@
 	     		<!-- Contacts -->
 			    <div class="headertopright header-contacts">						    	
 			    	<a href="tel:123456789" class="callusbtn txt-400"><i class="fas fa-phone"></i>+603 5689452</a>
-			    	<a href="mailto:yourdomain@mail.com" class="txt-400"><i class="far fa-envelope-open"></i>info@evisamalaysia.com</a>
+			    	<a href="mailto:info@midevs.com.my" class="txt-400"><i class="far fa-envelope-open"></i>info@midevs.com.my</a>
 		      	</div>
 		    </div>
    	  </div>	
@@ -39,8 +39,8 @@
 			<div class="wsmainwp clearfix">
   				<!-- LOGO IMAGE -->
    				<!-- For Retina Ready displays take a image with double the amount of pixels that your image will be displayed (e.g 360 x 90 pixels) -->
-   				<div class="desktoplogo"><a href="#hero-1" class="logo-black"><img src="assets/images/logo-black.png" width="180" height="45" alt="header-logo"></a></div>
-   				<div class="desktoplogo"><a href="#hero-1" class="logo-white"><img src="assets/images/logo-black.png" width="180" height="45" alt="header-logo"></a></div>
+   				<div class="desktoplogo"><a href="http://midevs.com.my:82/" class="logo-black"><img src="assets/images/logo-black.png" width="180" height="45" alt="header-logo"></a></div>
+   				<!-- <div class="desktoplogo"><a routerLink="/homenew" class="logo-white"><img src="assets/images/logo-black.png" width="180" height="45" alt="header-logo"></a></div> -->
 
 				<!-- MAIN MENU -->
 				<nav class="wsmenu clearfix blue-header">
@@ -49,18 +49,18 @@
 			        	<!-- <li aria-haspopup="true"><a href="#">Home <span class="wsarrow"></span></a></li>	 -->
 						<!-- END DROPDOWN MENU -->
 						<li class="nl-simple" aria-haspopup="true"><a routerLink="/homenew">Home</a></li>
-						<li class="nl-simple">
+						<!-- <li class="nl-simple">
 							<a href="http://1.9.116.25:82/?page_id=2431" >Contacts</a>
-						</li>
-						<li class="nl-simple">
+						</li> -->
+						<!-- <li class="nl-simple">
 							<a routerLink="/Information" >Information</a>
-						</li>
+						</li> -->
 						<li class="nl-simple">
 							<a href="http://1.9.116.25:82/?page_id=2388" >F.A.Q</a>
 						</li>
 						<!-- <div *ngIf="userName?.length;else none"></div> -->
 						<li aria-haspopup="true" *ngIf="userName?.length;else none" >
-							<a  href="#">User Profile<span class="wsarrow"></span></a>
+							<a  href="#">Accounts<span class="wsarrow"></span></a>
 							<ul class="sub-menu">
 								<li ><a routerLink="/visa-application-check">Application Status</a></li>
 								<li ><a [routerLink]="['/registration',{agentId:0,countryId:countryID,contactId:contactID}]">View Profile</a></li>

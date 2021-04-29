@@ -5,7 +5,7 @@
             <!-- DataTales Example -->
             <div class="card shadow  mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;text-transform:uppercase">Group Member for registration</h6>
+                    <h2 class="m-0 font-weight-bold text-primary" style="font-size: 15px;text-transform:uppercase">Group Member for registration</h2>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -29,7 +29,7 @@
                                     <td>{{primaryPassportNo}}</td>
                                     <td><input type="text" #txtPassportNo></td>
                                     <td><input type="text" #txtNRICNO></td>
-                                    <td><input type="text" #txtName></td>                                   
+                                    <td><input type="text" #txtName oninput="this.value = this.value.toUpperCase()"></td>                                   
                                     <td><input type="text" #txtRelationship></td>                                   
                                     <td>
                                         <button class="btn btn-primary " type="submit" (click)="onClick($event)">ENTER</button>&nbsp;
@@ -57,7 +57,7 @@
             <!-- DataTales Example -->
             <div class="card shadow  mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;text-transform:uppercase">List of New Applicants</h6>
+                    <h2 class="m-0 font-weight-bold text-primary" style="font-size: 15px;text-transform:uppercase">List of New Applicants</h2>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -120,7 +120,7 @@
     <div class="col-md-12 order-md-2 mb-4">
         <div class="card shadow-sm mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;text-transform:uppercase" >Visa Fee Details</h6>
+                <h2 class="m-0 font-weight-bold text-primary" style="font-size: 15px;text-transform:uppercase" >Visa Fee Details</h2>
             </div>
             <div class="card-body">
                 <div class="row">                   

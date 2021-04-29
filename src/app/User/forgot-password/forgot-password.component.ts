@@ -43,20 +43,20 @@ export class ForgotPasswordComponent implements OnInit {
 
     this.dataService.forgotPassword(this.forgotPasswordForm.getRawValue())
     .subscribe((data:any)=>{
-      console.log(data);
+      //console.log(data);
       var dialogRef= this.dialog.open(ModalComponent,{ data: {
         message : data,//"Contact agent registered Successfully",
         title : "Success",
         buttonText : "Ok"
       }});  
-      dialogRef.afterClosed().subscribe(
-        result => {
-         console.log('The dialog was closed',result);
-         this.returnUrl = result;
-         //this.ngOnInit();
-          this.router.navigate(['/']);
-        }
-      ); 
+      // dialogRef.afterClosed().subscribe(
+      //   result => {
+      //    console.log('The dialog was closed',result);
+      //    this.returnUrl = result;
+      //    //this.ngOnInit();
+      //     this.router.navigate(['/']);
+      //   }
+      // ); 
     },
     error=>{
       this.error=error.error.Message;

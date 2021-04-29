@@ -2,11 +2,12 @@
  <!-- Begin Page Content -->
  <div class="container-fluid">
     <div class="row py-5">
-        <div class="col-md-2 order-md-1">
+        <div class="col-md-4 order-md-1">
         </div>
-        <div class="col-md-8 order-md-1">
+        <div class="col-md-5 order-md-1">
             <div class="py-2">                
-                <h3 class="text-gray-800">Credit Card Information</h3>
+                <!-- <h2 class="text-gray-800">Credit Card Information</h2> -->
+                <h2 class="m-0 text-primary" >{{title}}</h2>
                 <hr class="mb-4">
             </div>
             <div class="row">
@@ -28,7 +29,7 @@
                         <div class="row">
                             <div class="col-md-9 mb-3">
                                 <label for="firstName">Card No. :</label>
-                                <input type="text" class="form-control" id="CardName" placeholder="XXXX XXXX XXXX XXXX" value="" required>
+                                <input type="text" class="form-control" minlength="16" maxlength="16" id="CardName" placeholder="XXXX XXXX XXXX XXXX" value="" required>
                                 <div class="invalid-feedback">
                                     Valid CardName is required.
                                 </div>
@@ -38,7 +39,7 @@
                         <div class="row">
                             <div class="col-md-3 mb-3">
                                 <label for="firstName">CVC</label>
-                                <input type="text" class="form-control" id="cvc" placeholder="***" value="" required>
+                                <input type="text" class="form-control" minlength="3" maxlength="3" id="cvc" placeholder="***" value="" required>
                                 <div class="invalid-feedback">
                                     Valid cvc is required.
                                 </div>
@@ -92,9 +93,12 @@
                                 </div>
                             </div>
                         </div>
-                        <hr class="mb-4">                       
-                        <button class="btn btn-primary btn-md" (click)="onPaymentClick($event)" type="submit">Pay & Continue</button>&nbsp;
-                        <button class="btn btn-danger btn-md" type="submit">Cancel</button>
+                        <hr class="mb-4">
+                        <div class="row" style="float: right;">
+                            <button class="btn btn-primary" (click)="onPaymentClick($event)" type="submit">Pay & Continue</button>&nbsp;
+                            <button class="btn btn-danger" type="submit">Cancel</button>
+                        </div>                       
+                        
                     </form>
                 </div>
             </div>

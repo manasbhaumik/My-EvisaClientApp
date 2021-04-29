@@ -8,7 +8,8 @@
         <div class="col-md-8 order-md-1">
             <div class="py-2">
                 <!--<img class="d-block mx-auto mb-4" src="assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
-                <h3 class="text-gray-800">{{title}}</h3>
+                <!-- <h2 class="text-gray-800">{{title}}</h2> -->
+                <h2 class="m-0  text-primary" >{{title}}</h2>
                 <hr class="mb-4">
             </div>
             <div class="row">
@@ -46,32 +47,43 @@
                                 </div>
                             </div>
                         </div> -->
+                        <div *ngIf="divError">
+                            <div class="row d-flex justify-content-center ">
+                                <div class="row">
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <p class="text-danger">{{error}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <label for="fullName">Full Name (As Passport)</label>
-                                <input type="text" class="form-control" formControlName="FullName" id="fullName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.FullName.errors }" style="text-transform:uppercase">
+                                <input type="text" class="form-control" formControlName="FullName" id="fullName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.FullName.errors }" oninput="this.value = this.value.toUpperCase()">
                                 <div class="invalid-feedback">
                                     Please enter full name as per passport
                                 </div>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="surName">Surname / Father Name</label>
-                                <input type="text" class="form-control" formControlName="FamlilyName" id="fullName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.FamlilyName.errors }" style="text-transform:uppercase">
+                                <input type="text" class="form-control" formControlName="FamlilyName" id="fullName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.FamlilyName.errors }" oninput="this.value = this.value.toUpperCase()">
                                 <div class="invalid-feedback">
                                     Please enter Surname / Father Name
                                 </div>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="surName">Given Name / First Name</label>
-                                <input type="text" class="form-control" formControlName="FirstName" id="fullName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.FirstName.errors }" style="text-transform:uppercase">
+                                <input type="text" class="form-control" formControlName="FirstName" id="fullName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.FirstName.errors }" oninput="this.value = this.value.toUpperCase()">
                                 <div class="invalid-feedback">
                                     Please enter Given Name / First Name
                                 </div>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="surName">Are you known by any other name?</label>
-                                <input type="radio" [(ngModel)]="rdoSelect" name="Others" class="custom-radio" style="width: 20% !important;" value="1" formControlName="Others"  >Yes
-                                <input type="radio" [(ngModel)]="rdoSelect" name="Others" class="custom-radio" style="width: 20% !important;" value="0" formControlName="Others"  >No
+                                <input type="radio" [(ngModel)]="rdoSelect" name="Others" class="custom-radio" style="width: 4% !important;" value="1" formControlName="Others"  >Yes
+                                <input type="radio" [(ngModel)]="rdoSelect" name="Others" class="custom-radio" style="width: 4% !important;" value="0" formControlName="Others"  >No
                                 <!-- <input type="text" class="form-control" formControlName="FirstName" id="fullName" placeholder="" value="" [ngClass]="{ 'is-invalid': isSubmitted && f.FirstName.errors }">
                                 <div class="invalid-feedback">
                                     Please enter surname/family name
@@ -109,7 +121,16 @@
                                     <div class="input-group-append">
                                       <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">📅</button>
                                     </div>
+                                    <!-- <span class="input-group-append">
+                                        <button class="btn border border-left-0 calendar" type="button" (click)="d.toggle()"><i class="fa fa-calendar"></i></button>
+                                    </span> -->
                                 </div>
+                                <!-- <div class="input-group mt-4">
+                                    <input class="form-control border-right-0">
+                                    <span class="input-group-append bg-white">
+                                        <button class="btn border border-left-0" type="button"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                </div> -->
                                 <!-- <input type="text" formControlName="DOB" class="form-control" id="dob" placeholder="dd-mm-yyyy" value="" ngbDatepicker #d="ngbDatepicker">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">📅</button>
@@ -198,11 +219,15 @@
                                 <input type="hidden" formControlName="Relationship"  class="form-control"> 
                             </div>
 
-                        </div>    
-                        
+                        </div>  
+                        <hr class="mb-4">
+                        <div class="row" style="float:right;">
+                            <button class="btn btn-primary" style="float:right" type="submit">Save & Continue</button>&nbsp;
+                            <button class="btn btn-danger" style="float:right" type="submit">Cancel</button>
+                        </div>
 
-                        <button class="btn btn-primary btn-md" type="submit">Save & Continue</button>&nbsp;
-                        <button class="btn btn-danger btn-md" type="submit">Cancel</button>
+                        <!-- <button class="btn btn-primary" type="submit">Save & Continue</button>&nbsp;
+                        <button class="btn btn-danger" type="submit">Cancel</button> -->
                     </form>
                 </div>
             </div>

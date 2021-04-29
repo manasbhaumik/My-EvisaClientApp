@@ -69,7 +69,7 @@ export class GroupRegistrationComponent implements OnInit {
     this.dataService.getApplicationsPreviewById(applicationID).subscribe(res => 
       {
        this.applicationList = res;
-       console.log(res);
+       //console.log(res);
        this.primaryPassportNo = this.applicationList[0].PassportNo;
        var count = this.applicationList.length;
        this.count = count+1;

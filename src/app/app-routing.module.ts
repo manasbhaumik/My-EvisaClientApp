@@ -30,11 +30,14 @@ import { GroupApplicantInformationComponent } from './Visa/group-applicant-infor
 import { GroupRegistrationComponent } from './Visa/group-registration/group-registration.component';
 import { GroupVisaFormComponent } from './Visa/group-visa-form/group-visa-form.component';
 import { PaymentSummaryInfoComponent } from './Visa/payment-summary-info/payment-summary-info.component';
+import { ViewReceiptComponent } from './Visa/view-receipt/view-receipt.component';
 
 
 const approutes: Routes = [   
   // { path: '',   redirectTo: '/home', pathMatch: 'full' }
-  { path: '',   component: HomenewComponent, pathMatch: 'full' },
+  { path: '', redirectTo: 'homenew',  pathMatch: 'full' },
+  { path: 'homenew',component:HomenewComponent},
+ // { path: '',   component: HomenewComponent, pathMatch: 'full' },
   { path: 'home',   component: HomeComponent },
   { path: 'visa-application', component: VisaApplicationComponent },
   { path: 'agency-menu', component: AgencyMenuComponent },
@@ -52,8 +55,7 @@ const approutes: Routes = [
   { path: 'notification',component:NotificationComponent},
   { path: 'payment-info',component:PaymentInfoComponent},
   { path: 'credit-card-info',component:CreditCardInfoComponent},
-  { path: 'payment-success',component:PaymentSuccessComponent},
-  { path: 'homenew',component:HomenewComponent},
+  { path: 'payment-success',component:PaymentSuccessComponent}, 
   { path: 'login',component:LoginComponent},
   { path: 'register-individual',component:RegisterIndividualApplicantComponent},
   { path: 'individual-application',component:IndividualApplicationComponent},
@@ -63,6 +65,7 @@ const approutes: Routes = [
   { path: 'group-registration',component:GroupRegistrationComponent},
   { path: 'group-visa-form',component:GroupVisaFormComponent},
   { path: 'payment-summary-info',component:PaymentSummaryInfoComponent},
+  { path: 'view-receipt',component:ViewReceiptComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 

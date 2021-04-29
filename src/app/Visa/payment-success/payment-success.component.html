@@ -2,109 +2,131 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <div class="row py-5">
-        <div class="col-md-4 order-md-1">
+        <div class="col-md-2 order-md-1">
         </div>
         <div class="col-md-8 order-md-1">
             <div class="py-1">                
-                <h3 class="text-gray-800">PAYMENT STATUS</h3>
-                <!-- <hr class="mb-4"> -->
+                <!-- <h2 class="text-gray-800">{{title}}</h2> -->
+                <h2 class="m-0 text-primary" >{{title}}</h2>
+                <hr class="mb-4">
+            </div>
+            <div class="row">
+                <div class="col-md-12 order-md-1">
+                    <!-- DataTales Example -->
+                    <div class="card  mb-4">
+                        <!-- <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary" style="font-size: 16px;text-align: center;">PAYMENT INFORMATION</h6>
+                        </div> -->
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group row">
+                                    <label class="col-sm-5" style="text-align: right;">Transaction Status</label>
+                                    <div class="col-sm-1">:</div>
+                                    <div class="col-sm-6">
+                                        Successful
+                                        <!-- <label><a  [routerLink]="['/visa-application',{applicationId:applicationList?.Applicants[0].ApplicationID}]">{{applicationDesc}}</a></label>                                 -->
+                                    </div>                            
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-5" style="text-align: right;">Reference Number</label>
+                                    <div class="col-sm-1">:</div>
+                                    <div class="col-sm-6">
+                                        <label>1234567</label>                                
+                                    </div>                            
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-5" style="text-align: right;">Date & Time</label>
+                                    <div class="col-sm-1">:</div>
+                                    <div class="col-sm-6">
+                                        <label>{{dFormat}}</label>
+                                        <!-- <label>25-December-2020 15:30:00</label>                                 -->
+                                    </div>                            
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-5" style="text-align: right;">Total Amount</label>
+                                    <div class="col-sm-1">:</div>
+                                    <div class="col-sm-6">
+                                        <label>MYR {{totalFees| number : '1.1-1'}}</label>                                
+                                    </div>                            
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-5" style="text-align: right;">Recipient Banker</label>
+                                    <div class="col-sm-1">:</div>
+                                    <div class="col-sm-6">
+                                        <label>HONG LEONG BANK</label>
+                                    </div>                            
+                                </div>
+                                <!-- <div class="form-group row">
+                                    <div class="col-sm-5">Account Type</div>
+                                    <div class="col-sm-1">:</div>
+                                    <div class="col-sm-6">
+                                        <label>Current/Savings</label>
+                                    </div>                            
+                                </div>     -->
+                                <div class="form-group row">
+                                    <div class="col-sm-5" style="text-align: right;">Account Number</div>
+                                    <div class="col-sm-1">:</div>
+                                    <div class="col-sm-6">
+                                        <label>23476890465</label>
+                                    </div>                            
+                                </div> 
+                                <div class="form-group row">
+                                    <div class="col-sm-5" style="text-align: right;">Account Name</div>
+                                    <div class="col-sm-1">:</div>
+                                    <div class="col-sm-6">
+                                        <label>IMMIGRATION MALAYSIA</label>
+                                    </div>                            
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-5" style="text-align: right;">Transaction Date</div>
+                                    <div class="col-sm-1">:</div>
+                                    <div class="col-sm-6">
+                                        <label>{{transactionDate}}</label>
+                                    </div>                            
+                                </div> 
+                                <!-- <p style="font-weight: bold;text-align: center;color: red;font-style: italic;">Note : Please check your Inbox/Spam for mandatory appointment</p>                                    -->
+                                <hr class="mb-4">
+                                <div class="row" style="text-align: center;">
+                                    <div class="col-md-12 order-md-4">
+                                        <div class="mb-4">
+                                           
+                                            <button class="btn btn-primary " type="submit" (click)="onBioClick($event)">Continue</button> &nbsp;
+                                            <!-- <button class="btn btn-primary " type="submit" >Print</button>  -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- <div class="row" style="text-align: center;">
+                                <div class="col-md-12 order-md-4">
+                                    <div class="mb-4">
+                                       
+                                        <button class="btn btn-primary " type="submit" (click)="onBioClick($event)">Continue</button> &nbsp;
+                                        <button class="btn btn-primary " type="submit" >Print</button> 
+                                    </div>
+                                </div>
+                            </div> -->
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                     
             </div>
         </div>        
     </div>
-    <div class="row">
-        <div class="col-md-12 order-md-1">
-            <!-- DataTales Example -->
-            <div class="card  mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary" style="font-size: 16px;">PAYMENT INFORMATION</h6>
-                </div>
-                <div class="card-body">
-                    <form>
-                        <div class="form-group row">
-                            <label class="col-sm-5" style="text-align: right;">Transaction Status</label>
-                            <div class="col-sm-1">:</div>
-                            <div class="col-sm-6">
-                                Successful
-                                <!-- <label><a  [routerLink]="['/visa-application',{applicationId:applicationList?.Applicants[0].ApplicationID}]">{{applicationDesc}}</a></label>                                 -->
-                            </div>                            
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-5" style="text-align: right;">Reference Number</label>
-                            <div class="col-sm-1">:</div>
-                            <div class="col-sm-6">
-                                <label>1234567</label>                                
-                            </div>                            
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-5" style="text-align: right;">Date & Time</label>
-                            <div class="col-sm-1">:</div>
-                            <div class="col-sm-6">
-                                <label>25-December-2020 15:30:00</label>                                
-                            </div>                            
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-5" style="text-align: right;">Total Amount</label>
-                            <div class="col-sm-1">:</div>
-                            <div class="col-sm-6">
-                                <label>MYR {{totalFees| number : '1.1-1'}}</label>                                
-                            </div>                            
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-5" style="text-align: right;">Recipient Banker</label>
-                            <div class="col-sm-1">:</div>
-                            <div class="col-sm-6">
-                                <label>HONG LEONG BANK</label>
-                            </div>                            
-                        </div>
-                        <!-- <div class="form-group row">
-                            <div class="col-sm-5">Account Type</div>
-                            <div class="col-sm-1">:</div>
-                            <div class="col-sm-6">
-                                <label>Current/Savings</label>
-                            </div>                            
-                        </div>     -->
-                        <div class="form-group row">
-                            <div class="col-sm-5" style="text-align: right;">Account Number</div>
-                            <div class="col-sm-1">:</div>
-                            <div class="col-sm-6">
-                                <label>23476890465</label>
-                            </div>                            
-                        </div> 
-                        <div class="form-group row">
-                            <div class="col-sm-5" style="text-align: right;">Account Name</div>
-                            <div class="col-sm-1">:</div>
-                            <div class="col-sm-6">
-                                <label>IMMIGRATION MALAYSIA</label>
-                            </div>                            
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-5" style="text-align: right;">Transaction Date</div>
-                            <div class="col-sm-1">:</div>
-                            <div class="col-sm-6">
-                                <label>08/10/2020</label>
-                            </div>                            
-                        </div>                                    
-                    </form>
-                    
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-             
-    </div>
+    
     <!-- Page Heading -->
     <!-- /.container-fluid -->
    
-    <div class="row" style="text-align: center;">
+    <!-- <div class="row" style="text-align: center;">
         <div class="col-md-12 order-md-4">
             <div class="mb-4">
                
                 <button class="btn btn-primary " type="submit" (click)="onBioClick($event)">Continue</button> 
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 <!-- End of Main Content -->
 <!-- /.container-fluid -->

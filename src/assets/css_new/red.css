@@ -1401,7 +1401,7 @@ span.id-color {
 .lightgrey-menu .wsmainfull,
 .aqua-menu .wsmainfull,
 .blue-menu .wsmainfull {
-  padding: 10px 0;
+  /*padding: 10px 0;*/
   -webkit-box-shadow: 0 2px 3px rgba(96, 96, 96, .1);
   -moz-box-shadow: 0 2px 3px rgba(96, 96, 96, .1);
   box-shadow: 0 2px 3px rgba(96, 96, 96, .1);
@@ -1745,7 +1745,7 @@ a.header-button {
 .header-contacts a, 
 .header-contacts span {
   color: #fff;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 39px;
 }
 
@@ -1753,7 +1753,7 @@ a.header-button {
 .header-contacts i {
   position: relative;
   color: #fff;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 1;
   top: -1px;
   margin-right: 7px;
@@ -1772,7 +1772,7 @@ a.header-button {
 .bg-white .header-contacts i,
 .bg-lightgrey .header-info i,
 .bg-lightgrey .header-contacts i {
-  color: #575757;
+  color: #ffffff;/*#575757;*/
 }
 
 .header-contacts a.primary-color,

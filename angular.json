@@ -29,6 +29,7 @@
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
+              "node_modules/datatables.net/js/jquery.dataTables.js",
               "src/assets/js_new/jquery-3.3.1.min.js",
               "src/assets/js_new/bootstrap.min.js",
               "src/assets/js_new/modernizr.custom.js",

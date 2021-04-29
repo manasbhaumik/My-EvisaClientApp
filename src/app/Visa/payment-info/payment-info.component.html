@@ -9,8 +9,8 @@
         <div class="col-md-8 order-md-1">
             <div class="py-2">
                 <!--<img class="d-block mx-auto mb-4" src="assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
-                <h3 class="text-gray-800">{{title}}</h3>
-                <hr class="mb-4">
+                <h1 class="text-gray-800 header-title">{{title}}</h1>
+                <!-- <hr class="mb-4"> -->
             </div>
             <div class="row">
                 <!-- <div class="col-md-4 order-md-2 mb-4">
@@ -37,10 +37,21 @@
                     <hr class="mb-4">-->
                     <div class="card  mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary" style="font-size: 16px;">PAYMENT INFORMATION</h6>
+                            <h2 class="m-0 text-primary" >{{subTitle}}</h2>
                         </div>
                         <div class="card-body">
                             <form class="needs-validation"  novalidate>
+                                <div *ngIf="divError">
+                                    <div class="row d-flex justify-content-center ">
+                                        <div class="row">
+                                            <div class="form-group row">
+                                                <div class="col-md-12">
+                                                    <p class="text-danger">{{error}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-5 mb-3" style="text-align: right;">
                                         <label for="firstName">Applied Processing Type</label>        
@@ -111,8 +122,8 @@
                                                 {{payMode.PaymentMode1}}
                                               </label> -->
                                               <input id="{{payMode.PaymentModeID}}" class="custom-radio" style="width: 3% !important;" [value]='payMode.PaymentModeID' type="radio" name="payment"  [(ngModel)]="radioSelected" name="radioSelected">
-                                                <!-- {{payMode.PaymentMode}} -->
-                                                <img src="assets/img/payment-icon-1.jpg"  alt="header-logo">
+                                                {{payMode.PaymentMode}}
+                                                <!-- <img src="assets/img/payment-icon-1.jpg"  alt="header-logo"> -->
                                         </div>
                                     </div>   
                                 </div>  
@@ -123,10 +134,10 @@
                                 <input type="hidden" [(ngModel)]="Payment.Status" value="{{status}}" >                      -->
                                 <!-- {{payment | json}} -->
                                 <hr class="mb-4">
-                                <div class="row" style="margin: auto;">
-                                    <div style="margin: auto;">
-                                        <button class="btn btn-primary btn-md"  (click)="onSave($event)" type="submit">Make Payment</button>&nbsp;
-                                        <button class="btn btn-danger btn-md" type="submit">Cancel</button>
+                                <div class="row" style="margin: auto;float: right;">
+                                    <div style="margin: auto;float:right">
+                                        <button class="btn btn-primary"  (click)="onSave($event)" type="submit">Make Payment</button>&nbsp;
+                                        <button class="btn btn-danger" type="submit">Cancel</button>
                                     </div>
                                     
                                 </div>

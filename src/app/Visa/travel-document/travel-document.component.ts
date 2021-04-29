@@ -14,7 +14,7 @@ import {ModalComponent} from 'src/app/modal/modal.component';
   providers: [DatePipe]
 })
 export class TravelDocumentComponent implements OnInit {
-  title="PARTICULAR PASSPORT / TRAVELER DOCUMENT";
+  title= "Particular Passport / Traveler Document";
   myDate = new Date();
   dFormat:string;
   returnUrl: string;
@@ -28,6 +28,7 @@ export class TravelDocumentComponent implements OnInit {
   travelDocId : number;
   documentTypeList:any=["Diplomatic Passport","Ordinary/International Passport","Regular/Service Passport","Emergency Passport"];
   groupID:number;
+  divError:boolean = false;
 
 
   constructor(
@@ -137,71 +138,81 @@ export class TravelDocumentComponent implements OnInit {
 
     if(this.isEdited == true){
       this.dataService.updateTravelDocument(this.traveldocForm.getRawValue(),this.travelDocId).subscribe((data:any)=>{      
-        var dialogRef= this.dialog.open(ModalComponent,{ data: {
-          message : "Travel document updated Successfully",
-          title : "Success",
-          buttonText : "Ok"
-        }});  
-        dialogRef.afterClosed().subscribe(
-          result => {
-          //console.log('The dialog was closed',result);
-          this.returnUrl = result;
-          var travelDoclist:any;    
-          if(this.groupID !==undefined){
+        if(this.groupID !==undefined){
           this.router.navigate(['/applicant-information',{applicationId:this.applicationID,applicantId:this.applicantID,groupId:2}]);
                         
-          }
-          else{
+        }
+        else{
           this.router.navigate(['/submit-application',{applicationId:this.applicationID}]); 
-          }
+        }
+        // var dialogRef= this.dialog.open(ModalComponent,{ data: {
+        //   message : "Travel document updated Successfully",
+        //   title : "Success",
+        //   buttonText : "Ok"
+        // }});  
+        // dialogRef.afterClosed().subscribe(
+        //   result => {
+        //   //console.log('The dialog was closed',result);
+        //   this.returnUrl = result;
+        //   var travelDoclist:any;    
+        //   if(this.groupID !==undefined){
+        //   this.router.navigate(['/applicant-information',{applicationId:this.applicationID,applicantId:this.applicantID,groupId:2}]);
+                        
+        //   }
+        //   else{
+        //   this.router.navigate(['/submit-application',{applicationId:this.applicationID}]); 
+        //   }
              
-        // this.router.navigate(['/travel-document',{applicantId:this.applicantID}]);
-        }); 
+        // // this.router.navigate(['/travel-document',{applicantId:this.applicantID}]);
+        // }); 
       },
       error=>{
         this.error=error.error.Message;
+        this.divError = true;
         //console.log(error.error.Message);
-        var dialogRef =this.dialog.open(ModalComponent,{ data: {
-          message : this.error,
-          title : "Alert!",
-          buttonText : "Cancel"
-        }});
-        dialogRef.afterClosed().subscribe(result => {
-          //console.log('The dialog was closed',result);
-          this.returnUrl = result;
-          result ? this.router.navigate(['/home']): this.router.navigate(['/travel-document',{applicantId:this.applicantID}]);
-        });
+        // var dialogRef =this.dialog.open(ModalComponent,{ data: {
+        //   message : this.error,
+        //   title : "Alert!",
+        //   buttonText : "Cancel"
+        // }});
+        // dialogRef.afterClosed().subscribe(result => {
+        //   //console.log('The dialog was closed',result);
+        //   this.returnUrl = result;
+        //   result ? this.router.navigate(['/home']): this.router.navigate(['/travel-document',{applicantId:this.applicantID}]);
+        // });
       });
     }
     else{
-      this.dataService.saveTravelDocument(this.traveldocForm.getRawValue()).subscribe((data:any)=>{      
-        var dialogRef= this.dialog.open(ModalComponent,{ data: {
-          message : "Applicant registered Successfully",
-          title : "Success",
-          buttonText : "Ok"
-        }});  
-        dialogRef.afterClosed().subscribe(
-          result => {
-          //console.log('The dialog was closed',result);
-          this.returnUrl = result;
-          var travelDoclist:any;        
-         // this.router.navigate(['/member-list']);
-          this.router.navigate(['/submit-application',{applicationId:this.applicationID}]);
-        }); 
+      this.dataService.saveTravelDocument(this.traveldocForm.getRawValue()).subscribe((data:any)=>{  
+        this.router.navigate(['/submit-application',{applicationId:this.applicationID}]);    
+        // var dialogRef= this.dialog.open(ModalComponent,{ data: {
+        //   message : "Applicant registered Successfully",
+        //   title : "Success",
+        //   buttonText : "Ok"
+        // }});  
+        // dialogRef.afterClosed().subscribe(
+        //   result => {
+        //   //console.log('The dialog was closed',result);
+        //   this.returnUrl = result;
+        //   var travelDoclist:any;        
+        //  // this.router.navigate(['/member-list']);
+        //   this.router.navigate(['/submit-application',{applicationId:this.applicationID}]);
+        // }); 
       },
       error=>{
         this.error=error.error.Message;
         //console.log(error.error.Message);
-        var dialogRef =this.dialog.open(ModalComponent,{ data: {
-          message : this.error,
-          title : "Alert!",
-          buttonText : "Cancel"
-        }});
-        dialogRef.afterClosed().subscribe(result => {
-          //console.log('The dialog was closed',result);
-          this.returnUrl = result;
-          result ? this.router.navigate(['/home']): this.router.navigate(['/travel-document',{applicantId:this.applicantID}]);
-        });
+        this.divError = true;
+        // var dialogRef =this.dialog.open(ModalComponent,{ data: {
+        //   message : this.error,
+        //   title : "Alert!",
+        //   buttonText : "Cancel"
+        // }});
+        // dialogRef.afterClosed().subscribe(result => {
+        //   //console.log('The dialog was closed',result);
+        //   this.returnUrl = result;
+        //   result ? this.router.navigate(['/home']): this.router.navigate(['/travel-document',{applicantId:this.applicantID}]);
+        // });
       });
     }
   }

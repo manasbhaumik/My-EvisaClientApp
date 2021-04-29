@@ -14,7 +14,11 @@ import {ModalComponent} from 'src/app/modal/modal.component';
 })
 export class SubmitApplicationComponent implements OnInit {
 
-  title="VISA APPLICATION FORM (IM 47 – PIN 1/97)";//"Application Submission - Preview (IM 47 –Pin 1/97)"
+  title="Visa Application Form (IM 47 – PIN 1/97)";
+  applicationTitle = "A. Detail Information Of Application";
+  applicationPayTitle = "Charges & Cost Details";
+  applicantTitle = "B. Detail Information Of Applicant";
+  travelapplicantTitle = "C. Particular Of Passport / Travel Document";
   applicationId:number;
   applicationList:any;
   myDate = new Date();
@@ -23,6 +27,14 @@ export class SubmitApplicationComponent implements OnInit {
   issueDate:string;
   expiryDate:string;
   applicationDesc:string;
+
+  totalApplicant : number;
+  processPeriod:number;
+  processType:any;
+  applicationFees : number;
+  processFees : number;
+  totalFees : number;
+  paymentList : any;
 
   constructor(
     private fb: FormBuilder,
@@ -39,22 +51,35 @@ export class SubmitApplicationComponent implements OnInit {
       this.applicationId=applicationId;
 
       this.dataService.getApplicationsPreviewById(this.applicationId).subscribe(res => 
-        {
-          this.applicationList = res;
-          this.dob=this.applicationList[0].DOB;
-          this.dFormat = this.datePipe.transform(this.dob, 'dd/MM/yyyy');
-          this.issueDate=this.datePipe.transform(this.applicationList[0].IssuingDate, 'dd/MM/yyyy')
-          this.expiryDate=this.datePipe.transform(this.applicationList[0].ExpiryDate, 'dd/MM/yyyy')
-          var submissionType:number;
-          submissionType=this.applicationList[0].SubmissionType;
-          if(submissionType == 1){
-            this.applicationDesc="Group of My E-Visa";
-          }
-          else{
-            this.applicationDesc="Individual’s MyE-Visa";
-          }
+      {
+        this.applicationList = res;
+        this.dob=this.applicationList[0].DOB;
+        this.dFormat = this.datePipe.transform(this.dob, 'dd/MM/yyyy');
+        this.issueDate=this.datePipe.transform(this.applicationList[0].IssuingDate, 'dd/MM/yyyy')
+        this.expiryDate=this.datePipe.transform(this.applicationList[0].ExpiryDate, 'dd/MM/yyyy')
+        var submissionType:number;
+        submissionType=this.applicationList[0].SubmissionType;
+        if(submissionType == 1){
+          this.applicationDesc="Group of My E-Visa";
+        }
+        else{
+          this.applicationDesc="Individual’s MyE-Visa";
+        }
 
-        });
+      });
+
+      this.dataService.getPayInfoByApplicationId(this.applicationId).subscribe(res => 
+      {
+        this.paymentList = res;
+        this.totalApplicant = this.paymentList[0].TotalApplicant;
+        this.processType = this.paymentList[0].ApplicationType;
+        this.applicationFees = this.paymentList[0].SubmissionFee;
+        this.processFees = this.paymentList[0].ProccesingFee;
+        this.totalFees = this.processFees*this.totalApplicant+this.applicationFees*this.totalApplicant;//this.applicationList[0].TotalFee;  
+        this.processPeriod= this.paymentList[0].DurationOfVisit;       
+
+      });
+
     });
   }
 

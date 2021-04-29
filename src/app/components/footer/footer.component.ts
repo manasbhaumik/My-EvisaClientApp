@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
     <footer class="sticky-footer bg-white">
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
-          <span><strong style="font-size: 16px;">Copyright &copy; Red Connection Sdn. Bhd. 2022</strong></span>
+          <span style="font-size: 12px;color:#ffffff !important;">Copyright &copy; Red Connection Sdn. Bhd. 2022</span>
         </div>
       </div>
     </footer>

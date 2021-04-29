@@ -32,7 +32,8 @@ export class PaymentInfoComponent implements OnInit {
 
   payment=new Payment();
 
-  title="PAYMENT GATEWAY - VISA FEES";//"Payment Information";
+  title= "Payment Gateway - Visa Fees";//"Payment Information";
+  subTitle = "Payment Information";
   applicationId:number;
   applicationList:any;
   totalApplicant : number;
@@ -49,6 +50,7 @@ export class PaymentInfoComponent implements OnInit {
   returnUrl : string;
   error : string;
   processPeriod:number;
+  divError:boolean=false;
 
   // paymentInfoForm =this.fb.group({
   //    payment:['']
@@ -86,7 +88,7 @@ export class PaymentInfoComponent implements OnInit {
         this.dataService.getPaymentMode().subscribe(res =>
           {
 
-            this.paymentModeList =res;//console.log(this.paymentModeList);
+            this.paymentModeList =res;console.log(this.paymentModeList);
 
         });
     });
@@ -133,15 +135,16 @@ export class PaymentInfoComponent implements OnInit {
     },
     error=>{
       this.error=error.error.Message;//alert(this.error);
-      var dialogRef =this.dialog.open(ModalComponent,{ data: {
-        message : this.error,
-        title : "Alert!",
-        buttonText : "Cancel"
-      }});
-      dialogRef.afterClosed().subscribe(result => {
-        this.returnUrl = result;
-        result ? this.router.navigate(['/home']): this.router.navigate(['/payment-info',{applicationId:this.applicationId}]);
-      });
+      this.divError=true;
+      // var dialogRef =this.dialog.open(ModalComponent,{ data: {
+      //   message : this.error,
+      //   title : "Alert!",
+      //   buttonText : "Cancel"
+      // }});
+      // dialogRef.afterClosed().subscribe(result => {
+      //   this.returnUrl = result;
+      //   result ? this.router.navigate(['/home']): this.router.navigate(['/payment-info',{applicationId:this.applicationId}]);
+      // });
     });
   }
 
